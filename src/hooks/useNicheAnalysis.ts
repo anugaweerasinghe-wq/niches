@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 
 export interface NicheScorecard {
   marketSaturation: number;
@@ -223,8 +224,10 @@ interface UseNicheAnalysisReturn {
   isLoading: boolean;
   progress: number;
   error: string | null;
-  analyze: (query: string, platform: string, style: string) => Promise<void>;
+  analyze: (query: string, platform: string, style: string, useAI?: boolean) => Promise<void>;
   reset: () => void;
+  useAI: boolean;
+  setUseAI: (value: boolean) => void;
 }
 
 export const useNicheAnalysis = (): UseNicheAnalysisReturn => {
@@ -232,31 +235,54 @@ export const useNicheAnalysis = (): UseNicheAnalysisReturn => {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [useAI, setUseAI] = useState(true);
 
-  const analyze = useCallback(async (query: string, platform: string, style: string) => {
+  const analyze = useCallback(async (query: string, platform: string, style: string, useAIOverride?: boolean) => {
+    const shouldUseAI = useAIOverride ?? useAI;
     setIsLoading(true);
     setProgress(0);
     setError(null);
     setData(null);
 
     try {
-      // Simulate progressive loading
-      const progressSteps = [15, 35, 55, 75, 90, 100];
-      
-      for (const step of progressSteps) {
-        await new Promise(resolve => setTimeout(resolve, 600));
-        setProgress(step);
-      }
+      if (shouldUseAI) {
+        // Use real AI analysis via edge function
+        setProgress(20);
+        
+        const { data: responseData, error: fetchError } = await supabase.functions.invoke('analyze-niche', {
+          body: { query, platform, style }
+        });
 
-      // Generate mock data
-      const result = generateMockData(query, platform, style);
-      setData(result);
+        if (fetchError) {
+          console.error('Edge function error:', fetchError);
+          throw new Error(fetchError.message || 'Failed to analyze niche');
+        }
+
+        if (responseData.error) {
+          throw new Error(responseData.error);
+        }
+
+        setProgress(100);
+        setData(responseData as NicheAnalysisResult);
+      } else {
+        // Use mock data for demo/development
+        const progressSteps = [15, 35, 55, 75, 90, 100];
+        
+        for (const step of progressSteps) {
+          await new Promise(resolve => setTimeout(resolve, 600));
+          setProgress(step);
+        }
+
+        const result = generateMockData(query, platform, style);
+        setData(result);
+      }
     } catch (err) {
-      setError('Failed to analyze niche. Please try again.');
+      console.error('Analysis error:', err);
+      setError(err instanceof Error ? err.message : 'Failed to analyze niche. Please try again.');
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [useAI]);
 
   const reset = useCallback(() => {
     setData(null);
@@ -271,6 +297,8 @@ export const useNicheAnalysis = (): UseNicheAnalysisReturn => {
     progress,
     error,
     analyze,
-    reset
+    reset,
+    useAI,
+    setUseAI
   };
 };
