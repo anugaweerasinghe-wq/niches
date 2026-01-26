@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { Search, Sparkles } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import SearchSuggestions from './SearchSuggestions';
+import { useSearchSuggestions } from '@/hooks/useSearchSuggestions';
 
 interface SearchInputProps {
   value: string;
@@ -11,11 +13,44 @@ interface SearchInputProps {
 
 const SearchInput = ({ value, onChange, onSubmit, placeholder = "I love fitness and tech..." }: SearchInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const blurTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && value.trim()) {
+  const handleSelect = (suggestion: string) => {
+    onChange(suggestion);
+    setShowSuggestions(false);
+    inputRef.current?.focus();
+  };
+
+  const { suggestions, selectedIndex, handleKeyDown, selectSuggestion } = useSearchSuggestions(
+    value,
+    handleSelect,
+    showSuggestions
+  );
+
+  const handleInputKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && value.trim() && selectedIndex === -1) {
       onSubmit();
+      setShowSuggestions(false);
+    } else {
+      handleKeyDown(e);
     }
+  };
+
+  const handleFocus = () => {
+    if (blurTimeoutRef.current) {
+      clearTimeout(blurTimeoutRef.current);
+    }
+    setIsFocused(true);
+    setShowSuggestions(true);
+  };
+
+  const handleBlur = () => {
+    blurTimeoutRef.current = setTimeout(() => {
+      setIsFocused(false);
+      setShowSuggestions(false);
+    }, 200);
   };
 
   return (
@@ -44,12 +79,13 @@ const SearchInput = ({ value, onChange, onSubmit, placeholder = "I love fitness 
           <Search className="w-6 h-6 text-muted-foreground flex-shrink-0" />
           
           <input
+            ref={inputRef}
             type="text"
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            onKeyDown={handleKeyDown}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
+            onKeyDown={handleInputKeyDown}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             placeholder={placeholder}
             className="flex-1 bg-transparent text-lg text-foreground placeholder:text-muted-foreground focus:outline-none tracking-apple"
           />
@@ -66,6 +102,14 @@ const SearchInput = ({ value, onChange, onSubmit, placeholder = "I love fitness 
           </motion.button>
         </div>
       </div>
+
+      {/* Suggestions Dropdown */}
+      <SearchSuggestions
+        suggestions={suggestions}
+        isVisible={showSuggestions && suggestions.length > 0}
+        onSelect={selectSuggestion}
+        selectedIndex={selectedIndex}
+      />
       
       <p className="text-center text-sm text-muted-foreground mt-4 tracking-apple">
         Describe your passions and interests in natural language

@@ -25,6 +25,8 @@ export interface ViralContent {
   likes: number;
   comments: number;
   duration: string;
+  videoUrl?: string;
+  previewGif?: string;
 }
 
 export interface ContentIdea {
