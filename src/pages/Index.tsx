@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import SearchInput from '@/components/SearchInput';
 import PlatformCard from '@/components/PlatformCard';
@@ -10,17 +11,36 @@ import ScorecardGrid from '@/components/ScorecardGrid';
 import OutlierCard from '@/components/OutlierCard';
 import VideoCard from '@/components/VideoCard';
 import ContentBlueprint from '@/components/ContentBlueprint';
+import ThemeToggle from '@/components/ThemeToggle';
+import ExportMenu from '@/components/ExportMenu';
 import { useNicheAnalysis } from '@/hooks/useNicheAnalysis';
 
 type Step = 'search' | 'platform' | 'style' | 'loading' | 'results';
 
 const Index = () => {
+  const [searchParams] = useSearchParams();
   const [step, setStep] = useState<Step>('search');
   const [query, setQuery] = useState('');
   const [platform, setPlatform] = useState<'youtube' | 'tiktok' | 'instagram' | null>(null);
   const [style, setStyle] = useState<'faceless' | 'persona' | null>(null);
+  const dashboardRef = useRef<HTMLDivElement>(null);
   
   const { data, isLoading, progress, analyze, reset } = useNicheAnalysis();
+
+  // Handle shared link parameters
+  useEffect(() => {
+    const q = searchParams.get('q');
+    const p = searchParams.get('p') as 'youtube' | 'tiktok' | 'instagram' | null;
+    const s = searchParams.get('s') as 'faceless' | 'persona' | null;
+    
+    if (q && p && s) {
+      setQuery(q);
+      setPlatform(p);
+      setStyle(s);
+      setStep('loading');
+      analyze(q, p, s);
+    }
+  }, [searchParams, analyze]);
 
   const handleSearch = () => {
     if (query.trim()) {
@@ -88,19 +108,27 @@ const Index = () => {
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <Logo />
           
-          {step !== 'search' && step !== 'loading' && (
-            <motion.button
-              onClick={handleReset}
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <RotateCcw className="w-4 h-4" />
-              <span>Start Over</span>
-            </motion.button>
-          )}
+          <div className="flex items-center gap-3">
+            {step === 'results' && data && (
+              <ExportMenu data={data} dashboardRef={dashboardRef} />
+            )}
+            
+            {step !== 'search' && step !== 'loading' && (
+              <motion.button
+                onClick={handleReset}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <RotateCcw className="w-4 h-4" />
+                <span>Start Over</span>
+              </motion.button>
+            )}
+            
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
@@ -293,6 +321,7 @@ const Index = () => {
           {step === 'results' && data && (
             <motion.div
               key="results"
+              ref={dashboardRef}
               className="container mx-auto px-6 py-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
