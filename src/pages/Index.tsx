@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react';
+import { ArrowLeft, ArrowRight, RotateCcw, Search, Flame } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import SearchInput from '@/components/SearchInput';
@@ -13,12 +13,15 @@ import VideoCard from '@/components/VideoCard';
 import ContentBlueprint from '@/components/ContentBlueprint';
 import ThemeToggle from '@/components/ThemeToggle';
 import ExportMenu from '@/components/ExportMenu';
+import ViralIdeasSection from '@/components/ViralIdeasSection';
 import { useNicheAnalysis } from '@/hooks/useNicheAnalysis';
 
 type Step = 'search' | 'platform' | 'style' | 'loading' | 'results';
+type ActiveTab = 'niche' | 'viral';
 
 const Index = () => {
   const [searchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState<ActiveTab>('niche');
   const [step, setStep] = useState<Step>('search');
   const [query, setQuery] = useState('');
   const [platform, setPlatform] = useState<'youtube' | 'tiktok' | 'instagram' | null>(null);
@@ -27,12 +30,10 @@ const Index = () => {
   
   const { data, isLoading, progress, analyze, reset } = useNicheAnalysis();
 
-  // Handle shared link parameters
   useEffect(() => {
     const q = searchParams.get('q');
     const p = searchParams.get('p') as 'youtube' | 'tiktok' | 'instagram' | null;
     const s = searchParams.get('s') as 'faceless' | 'persona' | null;
-    
     if (q && p && s) {
       setQuery(q);
       setPlatform(p);
@@ -42,63 +43,30 @@ const Index = () => {
     }
   }, [searchParams, analyze]);
 
-  const handleSearch = () => {
-    if (query.trim()) {
-      setStep('platform');
-    }
-  };
-
-  const handlePlatformSelect = (p: 'youtube' | 'tiktok' | 'instagram') => {
-    setPlatform(p);
-  };
-
-  const handleStyleSelect = (s: 'faceless' | 'persona') => {
-    setStyle(s);
-  };
+  const handleSearch = () => { if (query.trim()) setStep('platform'); };
+  const handlePlatformSelect = (p: 'youtube' | 'tiktok' | 'instagram') => setPlatform(p);
+  const handleStyleSelect = (s: 'faceless' | 'persona') => setStyle(s);
 
   const handleNext = () => {
-    if (step === 'platform' && platform) {
-      setStep('style');
-    } else if (step === 'style' && style) {
-      setStep('loading');
-      analyze(query, platform!, style);
-    }
+    if (step === 'platform' && platform) setStep('style');
+    else if (step === 'style' && style) { setStep('loading'); analyze(query, platform!, style); }
   };
 
   const handleBack = () => {
-    if (step === 'platform') {
-      setStep('search');
-    } else if (step === 'style') {
-      setStep('platform');
-    }
+    if (step === 'platform') setStep('search');
+    else if (step === 'style') setStep('platform');
   };
 
   const handleReset = () => {
-    setStep('search');
-    setQuery('');
-    setPlatform(null);
-    setStyle(null);
-    reset();
+    setStep('search'); setQuery(''); setPlatform(null); setStyle(null); reset();
   };
 
-  // Show results when data is ready
-  if (data && step === 'loading') {
-    setStep('results');
-  }
+  if (data && step === 'loading') setStep('results');
 
   const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0
-    }),
-    center: {
-      x: 0,
-      opacity: 1
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 300 : -300,
-      opacity: 0
-    })
+    enter: (direction: number) => ({ x: direction > 0 ? 300 : -300, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (direction: number) => ({ x: direction < 0 ? 300 : -300, opacity: 0 })
   };
 
   return (
@@ -108,12 +76,56 @@ const Index = () => {
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <Logo />
           
+          {/* Tab Navigation */}
+          <nav className="hidden md:flex items-center bg-muted/50 rounded-xl p-1" aria-label="Main navigation">
+            <button
+              onClick={() => setActiveTab('niche')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                activeTab === 'niche'
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Search className="w-4 h-4" />
+              Niche Finder
+            </button>
+            <button
+              onClick={() => setActiveTab('viral')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                activeTab === 'viral'
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Flame className="w-4 h-4" />
+              Viral Ideas
+            </button>
+          </nav>
+
           <div className="flex items-center gap-3">
-            {step === 'results' && data && (
+            {/* Mobile Tab Toggle */}
+            <div className="md:hidden flex items-center bg-muted/50 rounded-lg p-0.5">
+              <button
+                onClick={() => setActiveTab('niche')}
+                className={`p-2 rounded-md transition-all ${activeTab === 'niche' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground'}`}
+                aria-label="Niche Finder"
+              >
+                <Search className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setActiveTab('viral')}
+                className={`p-2 rounded-md transition-all ${activeTab === 'viral' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground'}`}
+                aria-label="Viral Ideas"
+              >
+                <Flame className="w-4 h-4" />
+              </button>
+            </div>
+
+            {activeTab === 'niche' && step === 'results' && data && (
               <ExportMenu data={data} dashboardRef={dashboardRef} />
             )}
             
-            {step !== 'search' && step !== 'loading' && (
+            {activeTab === 'niche' && step !== 'search' && step !== 'loading' && (
               <motion.button
                 onClick={handleReset}
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -123,7 +135,7 @@ const Index = () => {
                 whileTap={{ scale: 0.98 }}
               >
                 <RotateCcw className="w-4 h-4" />
-                <span>Start Over</span>
+                <span className="hidden sm:inline">Start Over</span>
               </motion.button>
             )}
             
@@ -134,245 +146,147 @@ const Index = () => {
 
       {/* Main Content */}
       <main className="pt-24 pb-16">
-        <AnimatePresence mode="wait" custom={1}>
-          {/* Search Step */}
-          {step === 'search' && (
+        <AnimatePresence mode="wait">
+          {activeTab === 'viral' ? (
             <motion.div
-              key="search"
-              className="container mx-auto px-6 py-20"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
+              key="viral-tab"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="text-center mb-12">
-                <motion.h1 
-                  className="text-5xl md:text-6xl font-bold tracking-apple-tight mb-6 text-gradient"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                >
-                  Discover Your Niche
-                </motion.h1>
-                <motion.p 
-                  className="text-xl text-muted-foreground max-w-2xl mx-auto tracking-apple"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  AI-powered analysis to find untapped content opportunities and viral strategies
-                </motion.p>
-              </div>
-              
-              <SearchInput
-                value={query}
-                onChange={setQuery}
-                onSubmit={handleSearch}
-              />
+              <ViralIdeasSection />
             </motion.div>
-          )}
-
-          {/* Platform Selection */}
-          {step === 'platform' && (
+          ) : (
             <motion.div
-              key="platform"
-              className="container mx-auto px-6 py-20"
-              variants={slideVariants}
-              custom={1}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.4 }}
+              key="niche-tab"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="text-center mb-12">
-                <motion.p className="text-sm text-primary mb-3 tracking-widest uppercase">
-                  Step 1 of 2
-                </motion.p>
-                <motion.h2 className="text-3xl md:text-4xl font-bold tracking-apple-tight mb-4 text-gradient">
-                  Choose Your Platform
-                </motion.h2>
-                <motion.p className="text-muted-foreground tracking-apple">
-                  Select the platform you want to create content for
-                </motion.p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-12">
-                {(['youtube', 'tiktok', 'instagram'] as const).map((p, i) => (
+              <AnimatePresence mode="wait" custom={1}>
+                {step === 'search' && (
                   <motion.div
-                    key={p}
+                    key="search"
+                    className="container mx-auto px-6 py-20"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4 }}
                   >
-                    <PlatformCard
-                      platform={p}
-                      isSelected={platform === p}
-                      onClick={() => handlePlatformSelect(p)}
-                    />
+                    <div className="text-center mb-12">
+                      <motion.h1 
+                        className="text-5xl md:text-6xl font-bold tracking-apple-tight mb-6 text-gradient"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                      >
+                        Discover Your Niche
+                      </motion.h1>
+                      <motion.p 
+                        className="text-xl text-muted-foreground max-w-2xl mx-auto tracking-apple"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        AI-powered analysis to find untapped content opportunities and viral strategies
+                      </motion.p>
+                    </div>
+                    <SearchInput value={query} onChange={setQuery} onSubmit={handleSearch} />
                   </motion.div>
-                ))}
-              </div>
+                )}
 
-              <div className="flex justify-center gap-4">
-                <motion.button
-                  onClick={handleBack}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:border-muted-foreground transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Back
-                </motion.button>
-                
-                <motion.button
-                  onClick={handleNext}
-                  disabled={!platform}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium disabled:opacity-40 disabled:cursor-not-allowed"
-                  whileHover={{ scale: platform ? 1.02 : 1 }}
-                  whileTap={{ scale: platform ? 0.98 : 1 }}
-                >
-                  Continue
-                  <ArrowRight className="w-4 h-4" />
-                </motion.button>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Style Selection */}
-          {step === 'style' && (
-            <motion.div
-              key="style"
-              className="container mx-auto px-6 py-20"
-              variants={slideVariants}
-              custom={1}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.4 }}
-            >
-              <div className="text-center mb-12">
-                <motion.p className="text-sm text-primary mb-3 tracking-widest uppercase">
-                  Step 2 of 2
-                </motion.p>
-                <motion.h2 className="text-3xl md:text-4xl font-bold tracking-apple-tight mb-4 text-gradient">
-                  Your Content Style
-                </motion.h2>
-                <motion.p className="text-muted-foreground tracking-apple">
-                  How do you want to present your content?
-                </motion.p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12">
-                {(['faceless', 'persona'] as const).map((s, i) => (
-                  <motion.div
-                    key={s}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                  >
-                    <StyleCard
-                      style={s}
-                      isSelected={style === s}
-                      onClick={() => handleStyleSelect(s)}
-                    />
+                {step === 'platform' && (
+                  <motion.div key="platform" className="container mx-auto px-6 py-20" variants={slideVariants} custom={1} initial="enter" animate="center" exit="exit" transition={{ duration: 0.4 }}>
+                    <div className="text-center mb-12">
+                      <p className="text-sm text-primary mb-3 tracking-widest uppercase">Step 1 of 2</p>
+                      <h2 className="text-3xl md:text-4xl font-bold tracking-apple-tight mb-4 text-gradient">Choose Your Platform</h2>
+                      <p className="text-muted-foreground tracking-apple">Select the platform you want to create content for</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-12">
+                      {(['youtube', 'tiktok', 'instagram'] as const).map((p, i) => (
+                        <motion.div key={p} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
+                          <PlatformCard platform={p} isSelected={platform === p} onClick={() => handlePlatformSelect(p)} />
+                        </motion.div>
+                      ))}
+                    </div>
+                    <div className="flex justify-center gap-4">
+                      <motion.button onClick={handleBack} className="flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:border-muted-foreground transition-colors" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                        <ArrowLeft className="w-4 h-4" /> Back
+                      </motion.button>
+                      <motion.button onClick={handleNext} disabled={!platform} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium disabled:opacity-40 disabled:cursor-not-allowed" whileHover={{ scale: platform ? 1.02 : 1 }} whileTap={{ scale: platform ? 0.98 : 1 }}>
+                        Continue <ArrowRight className="w-4 h-4" />
+                      </motion.button>
+                    </div>
                   </motion.div>
-                ))}
-              </div>
+                )}
 
-              <div className="flex justify-center gap-4">
-                <motion.button
-                  onClick={handleBack}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:border-muted-foreground transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Back
-                </motion.button>
-                
-                <motion.button
-                  onClick={handleNext}
-                  disabled={!style}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium disabled:opacity-40 disabled:cursor-not-allowed"
-                  whileHover={{ scale: style ? 1.02 : 1 }}
-                  whileTap={{ scale: style ? 0.98 : 1 }}
-                >
-                  Analyze My Niche
-                  <ArrowRight className="w-4 h-4" />
-                </motion.button>
-              </div>
-            </motion.div>
-          )}
+                {step === 'style' && (
+                  <motion.div key="style" className="container mx-auto px-6 py-20" variants={slideVariants} custom={1} initial="enter" animate="center" exit="exit" transition={{ duration: 0.4 }}>
+                    <div className="text-center mb-12">
+                      <p className="text-sm text-primary mb-3 tracking-widest uppercase">Step 2 of 2</p>
+                      <h2 className="text-3xl md:text-4xl font-bold tracking-apple-tight mb-4 text-gradient">Your Content Style</h2>
+                      <p className="text-muted-foreground tracking-apple">How do you want to present your content?</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12">
+                      {(['faceless', 'persona'] as const).map((s, i) => (
+                        <motion.div key={s} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
+                          <StyleCard style={s} isSelected={style === s} onClick={() => handleStyleSelect(s)} />
+                        </motion.div>
+                      ))}
+                    </div>
+                    <div className="flex justify-center gap-4">
+                      <motion.button onClick={handleBack} className="flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:border-muted-foreground transition-colors" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                        <ArrowLeft className="w-4 h-4" /> Back
+                      </motion.button>
+                      <motion.button onClick={handleNext} disabled={!style} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium disabled:opacity-40 disabled:cursor-not-allowed" whileHover={{ scale: style ? 1.02 : 1 }} whileTap={{ scale: style ? 0.98 : 1 }}>
+                        Analyze My Niche <ArrowRight className="w-4 h-4" />
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                )}
 
-          {/* Loading State */}
-          {step === 'loading' && (
-            <motion.div
-              key="loading"
-              className="container mx-auto px-6 py-20"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <LoadingState progress={progress} />
-            </motion.div>
-          )}
+                {step === 'loading' && (
+                  <motion.div key="loading" className="container mx-auto px-6 py-20" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <LoadingState progress={progress} />
+                  </motion.div>
+                )}
 
-          {/* Results Dashboard */}
-          {step === 'results' && data && (
-            <motion.div
-              key="results"
-              ref={dashboardRef}
-              className="container mx-auto px-6 py-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              {/* Results Header */}
-              <motion.div 
-                className="text-center mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <p className="text-sm text-primary mb-3 tracking-widest uppercase">Analysis Complete</p>
-                <h2 className="text-3xl md:text-4xl font-bold tracking-apple-tight mb-4 text-gradient">
-                  Your Niche Insights
-                </h2>
-                <p className="text-muted-foreground tracking-apple">
-                  Based on "{query}" for {platform} with {style} content style
-                </p>
-              </motion.div>
-
-              {/* Scorecard */}
-              <section className="mb-12">
-                <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Niche Scorecard</h3>
-                <ScorecardGrid scorecard={data.scorecard} />
-              </section>
-
-              {/* Outliers */}
-              <section className="mb-12">
-                <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Outlier Creators</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {data.outliers.map((creator, index) => (
-                    <OutlierCard key={creator.name} creator={creator} index={index} />
-                  ))}
-                </div>
-              </section>
-
-              {/* Viral Content */}
-              <section className="mb-12">
-                <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Viral Content Feed</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {data.viralContent.map((video, index) => (
-                    <VideoCard key={video.id} video={video} index={index} />
-                  ))}
-                </div>
-              </section>
-
-              {/* Content Blueprint */}
-              <section>
-                <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Content Blueprint</h3>
-                <ContentBlueprint ideas={data.contentIdeas} hooks={data.viralHooks} />
-              </section>
+                {step === 'results' && data && (
+                  <motion.div key="results" ref={dashboardRef} className="container mx-auto px-6 py-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+                    <motion.div className="text-center mb-12" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                      <p className="text-sm text-primary mb-3 tracking-widest uppercase">Analysis Complete</p>
+                      <h2 className="text-3xl md:text-4xl font-bold tracking-apple-tight mb-4 text-gradient">Your Niche Insights</h2>
+                      <p className="text-muted-foreground tracking-apple">Based on "{query}" for {platform} with {style} content style</p>
+                    </motion.div>
+                    <section className="mb-12">
+                      <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Niche Scorecard</h3>
+                      <ScorecardGrid scorecard={data.scorecard} />
+                    </section>
+                    <section className="mb-12">
+                      <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Outlier Creators</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {data.outliers.map((creator, index) => (
+                          <OutlierCard key={creator.name} creator={creator} index={index} />
+                        ))}
+                      </div>
+                    </section>
+                    <section className="mb-12">
+                      <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Viral Content Feed</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {data.viralContent.map((video, index) => (
+                          <VideoCard key={video.id} video={video} index={index} />
+                        ))}
+                      </div>
+                    </section>
+                    <section>
+                      <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Content Blueprint</h3>
+                      <ContentBlueprint ideas={data.contentIdeas} hooks={data.viralHooks} />
+                    </section>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>
