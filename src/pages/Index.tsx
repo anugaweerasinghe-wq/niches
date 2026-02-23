@@ -194,6 +194,28 @@ const Index = () => {
                       </motion.p>
                     </div>
                     <SearchInput value={query} onChange={setQuery} onSubmit={handleSearch} />
+
+                    {/* CTA to Viral Ideas */}
+                    <motion.div
+                      className="flex justify-center mt-10"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <button
+                        onClick={() => setActiveTab('viral')}
+                        className="group flex items-center gap-3 px-6 py-3.5 rounded-2xl border border-border bg-muted/30 hover:bg-muted/60 hover:border-primary/30 transition-all duration-300"
+                      >
+                        <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                          <Flame className="w-4 h-4 text-primary" />
+                        </div>
+                        <div className="text-left">
+                          <p className="text-sm font-medium text-foreground">Viral Video Ideas</p>
+                          <p className="text-xs text-muted-foreground">AI-predicted ideas for your next hit</p>
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+                      </button>
+                    </motion.div>
                   </motion.div>
                 )}
 
