@@ -26,9 +26,18 @@ serve(async (req) => {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    const prompt = `You are an elite viral content strategist and data analyst. Given the niche "${query}" on ${platform}, generate exactly 10 video ideas that have the highest probability of going viral based on current trends, audience psychology, and platform algorithms.
+    const prompt = `You are an elite data-driven viral content analyst. Your predictions are grounded in real engagement statistics, platform algorithm behavior, and historical performance data.
 
-For each idea, provide a comprehensive breakdown. Return a JSON array (no markdown, pure JSON only) with this exact structure:
+Analyze the niche "${query}" on ${platform} and generate exactly 10 video ideas ranked by viral probability.
+
+Your analysis must be deeply rooted in statistics and data:
+- Reference real engagement rate benchmarks for ${platform} (e.g., average engagement rates, watch-through rates, share rates)
+- Cite specific algorithmic signals that boost distribution (watch time, saves, shares, comments-to-views ratio)
+- Base virality scores on quantifiable factors: search volume trends, content gap analysis, audience demand signals
+- Include specific retention curve insights (e.g., "videos with this hook pattern retain 78% past the 3-second mark")
+- Reference platform-specific performance metrics (YouTube CTR benchmarks, TikTok completion rates, Instagram save rates)
+
+Return a JSON array (no markdown, pure JSON only) with this exact structure:
 
 [
   {
@@ -38,20 +47,23 @@ For each idea, provide a comprehensive breakdown. Return a JSON array (no markdo
     "thumbnailConcept": "<detailed description of an attention-grabbing thumbnail>",
     "bestPostingTime": "<optimal day and time like 'Tuesday 2PM EST'>",
     "hashtags": ["<hashtag1>", "<hashtag2>", "<hashtag3>", "<hashtag4>", "<hashtag5>"],
-    "estimatedViews": "<realistic view range like '500K-2M'>",
-    "viralityScore": <number 1-100 representing probability of going viral>,
-    "trendAlignment": "<what current trend this taps into>",
-    "targetEmotion": "<primary emotion this triggers: curiosity, shock, inspiration, humor, fear, awe>",
-    "contentFormat": "<format type: storytime, tutorial, challenge, reaction, comparison, expose, transformation>",
+    "viralityScore": <number 1-100 based on quantifiable data signals>,
+    "engagementRate": "<predicted engagement rate like '8.2%' based on niche benchmarks>",
+    "retentionInsight": "<specific retention/watch-time insight, e.g. 'Pattern interrupt at 0:03 drives 82% retention past hook'>",
+    "algorithmSignal": "<the primary algorithm signal this exploits, e.g. 'High save-to-view ratio (3.1x niche avg) triggers Explore page distribution'>",
+    "trendAlignment": "<what current trend this taps into with data context>",
+    "targetEmotion": "<primary emotion: curiosity, shock, inspiration, humor, fear, awe>",
+    "contentFormat": "<format: storytime, tutorial, challenge, reaction, comparison, expose, transformation>",
     "scriptOutline": "<3-4 sentence outline of the video structure>",
-    "whyItWorks": "<1-2 sentence analysis of why this will perform well>",
+    "whyItWorks": "<2-3 sentence data-backed analysis referencing specific metrics and patterns>",
     "competitionLevel": "<Low|Medium|High>",
+    "searchVolume": "<relative search demand like 'Rising +340%' or 'Steady High'>",
     "estimatedProductionTime": "<time to produce like '2-3 hours'>",
     "callToAction": "<suggested CTA for the video>"
   }
 ]
 
-Sort by viralityScore descending (highest first). Make all data realistic, actionable, and based on real platform dynamics for ${platform}. Each idea should feel unique and tap into different audience segments or content formats.`;
+Sort by viralityScore descending. Every insight must feel data-backed and quantitative, not generic. Each idea should exploit a different algorithmic signal or audience behavior pattern.`;
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -62,10 +74,10 @@ Sort by viralityScore descending (highest first). Make all data realistic, actio
       body: JSON.stringify({
         model: 'google/gemini-3-flash-preview',
         messages: [
-          { role: 'system', content: 'You are an expert viral content strategist. Always respond with valid JSON only, no markdown formatting or code blocks.' },
+          { role: 'system', content: 'You are a data-driven viral content analyst. Ground every recommendation in specific metrics, engagement benchmarks, and algorithm behavior patterns. Always respond with valid JSON only, no markdown formatting or code blocks.' },
           { role: 'user', content: prompt }
         ],
-        temperature: 0.8,
+        temperature: 0.7,
       }),
     });
 

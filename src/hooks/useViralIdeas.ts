@@ -8,14 +8,17 @@ export interface ViralIdea {
   thumbnailConcept: string;
   bestPostingTime: string;
   hashtags: string[];
-  estimatedViews: string;
   viralityScore: number;
+  engagementRate: string;
+  retentionInsight: string;
+  algorithmSignal: string;
   trendAlignment: string;
   targetEmotion: string;
   contentFormat: string;
   scriptOutline: string;
   whyItWorks: string;
   competitionLevel: 'Low' | 'Medium' | 'High';
+  searchVolume: string;
   estimatedProductionTime: string;
   callToAction: string;
 }
