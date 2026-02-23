@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ArrowRight, Flame, Loader2, AlertCircle, RotateCcw } from 'lucide-react';
+import { Sparkles, ArrowRight, Flame, Loader2, AlertCircle, RotateCcw, Zap } from 'lucide-react';
 import ViralIdeaCard from '@/components/ViralIdeaCard';
 import { useViralIdeas } from '@/hooks/useViralIdeas';
 
@@ -36,46 +36,56 @@ const ViralIdeasSection = () => {
     <section className="container mx-auto px-6 py-12 md:py-20">
       {/* Hero Header */}
       <motion.div
-        className="text-center mb-12 md:mb-16"
+        className="text-center mb-14 md:mb-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <motion.div
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 backdrop-blur-sm border border-primary/15 text-primary text-sm font-medium mb-8"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
         >
-          <Flame className="w-4 h-4" />
-          AI-Powered Viral Prediction
+          <Zap className="w-3.5 h-3.5" />
+          Viral Idea Generator
         </motion.div>
 
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-apple-tight mb-5 text-gradient">
+        <motion.h2
+          className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-apple-tight mb-5 text-gradient leading-[1.1]"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.5 }}
+        >
           Find Your Next Viral Video
-        </h2>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto tracking-apple leading-relaxed">
-          AI analyzes millions of data points to predict which video ideas will go viral in your niche
-        </p>
+        </motion.h2>
+        <motion.p
+          className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto tracking-apple leading-relaxed"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.5 }}
+        >
+          Data-driven AI analyzes engagement metrics, algorithm signals, and retention patterns to predict your next viral hit
+        </motion.p>
       </motion.div>
 
       {/* Search Interface */}
       <motion.div
-        className="max-w-2xl mx-auto mb-12 md:mb-16"
+        className="max-w-2xl mx-auto mb-14 md:mb-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
+        transition={{ delay: 0.3 }}
       >
         {/* Platform Selector */}
-        <div className="flex justify-center gap-2 mb-5">
+        <div className="flex justify-center gap-1.5 mb-5">
           {platforms.map((p) => (
             <button
               key={p.id}
               onClick={() => setSelectedPlatform(p.id)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
                 selectedPlatform === p.id
-                  ? 'bg-primary text-primary-foreground shadow-md'
-                  : 'bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80'
+                  ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
+                  : 'bg-muted/40 backdrop-blur-sm text-muted-foreground hover:text-foreground hover:bg-muted/60 border border-border/30'
               }`}
             >
               <span className="mr-1.5">{p.icon}</span>
@@ -86,23 +96,24 @@ const ViralIdeasSection = () => {
 
         {/* Search Input */}
         <div className="relative">
-          <div className="glass-card p-2 flex items-center gap-2">
+          <div className="relative rounded-2xl bg-card/40 backdrop-blur-xl border border-border/50 p-2 flex items-center gap-2 shadow-lg shadow-background/50">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-primary/[0.02] to-transparent pointer-events-none" />
             <div className="flex-1 relative">
-              <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+              <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/60 pointer-events-none" />
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Enter your niche (e.g., fitness tech, cooking tips, crypto)"
-                className="w-full bg-transparent pl-12 pr-4 py-3.5 text-foreground placeholder:text-muted-foreground outline-none text-base tracking-apple"
+                className="w-full bg-transparent pl-12 pr-4 py-3.5 text-foreground placeholder:text-muted-foreground/50 outline-none text-base tracking-apple"
                 disabled={isLoading}
               />
             </div>
             <button
               onClick={handleGenerate}
               disabled={!query.trim() || isLoading}
-              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-primary text-primary-foreground font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed transition-all hover:shadow-lg hover:shadow-primary/20"
+              className="relative flex items-center gap-2 px-5 py-3 rounded-xl bg-primary text-primary-foreground font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:brightness-110"
             >
               {isLoading ? (
                 <>
@@ -111,7 +122,7 @@ const ViralIdeasSection = () => {
                 </>
               ) : (
                 <>
-                  Generate Ideas
+                  Generate
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
@@ -127,23 +138,28 @@ const ViralIdeasSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="max-w-2xl mx-auto"
+            className="max-w-3xl mx-auto"
           >
-            <div className="space-y-4">
+            {/* Loading label */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <p className="text-sm text-muted-foreground">Analyzing niche data and predicting viral potential...</p>
+            </div>
+            <div className="space-y-3">
               {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} className="card-elevated p-6 animate-pulse">
+                <div key={i} className="rounded-2xl bg-card/30 backdrop-blur-sm border border-border/30 p-6 animate-pulse" style={{ animationDelay: `${i * 100}ms` }}>
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-muted" />
+                    <div className="w-11 h-11 rounded-2xl bg-muted/50" />
                     <div className="flex-1 space-y-3">
                       <div className="flex gap-2">
-                        <div className="h-5 w-16 bg-muted rounded-full" />
-                        <div className="h-5 w-20 bg-muted rounded-full" />
+                        <div className="h-5 w-16 bg-muted/40 rounded-full" />
+                        <div className="h-5 w-20 bg-muted/40 rounded-full" />
                       </div>
-                      <div className="h-5 w-3/4 bg-muted rounded-lg" />
+                      <div className="h-5 w-3/4 bg-muted/40 rounded-lg" />
                       <div className="flex gap-4">
-                        <div className="h-4 w-16 bg-muted rounded" />
-                        <div className="h-4 w-20 bg-muted rounded" />
-                        <div className="h-4 w-14 bg-muted rounded" />
+                        <div className="h-4 w-16 bg-muted/30 rounded" />
+                        <div className="h-4 w-20 bg-muted/30 rounded" />
+                        <div className="h-4 w-14 bg-muted/30 rounded" />
                       </div>
                     </div>
                   </div>
@@ -159,17 +175,17 @@ const ViralIdeasSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="max-w-2xl mx-auto"
+          className="max-w-3xl mx-auto"
         >
-          <div className="card-elevated p-6 flex items-center gap-4 border-destructive/30">
+          <div className="rounded-2xl bg-destructive/5 backdrop-blur-sm border border-destructive/20 p-5 flex items-center gap-4">
             <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0" />
             <div className="flex-1">
               <p className="text-sm font-medium text-foreground">Something went wrong</p>
-              <p className="text-sm text-muted-foreground">{error}</p>
+              <p className="text-sm text-muted-foreground mt-0.5">{error}</p>
             </div>
             <button
               onClick={handleGenerate}
-              className="px-4 py-2 rounded-lg bg-muted text-sm font-medium text-foreground hover:bg-muted/80 transition-colors"
+              className="px-4 py-2 rounded-xl bg-muted/50 backdrop-blur-sm text-sm font-medium text-foreground hover:bg-muted/70 transition-colors border border-border/30"
             >
               Retry
             </button>
@@ -182,22 +198,22 @@ const ViralIdeasSection = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto"
         >
           {/* Results Header */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-8">
             <div>
               <h3 className="text-xl font-semibold tracking-apple text-foreground">
-                {ideas.length} Viral Ideas Found
+                {ideas.length} Viral Ideas
               </h3>
               <p className="text-sm text-muted-foreground mt-1">
-                Ranked by virality probability · Click to expand
+                Ranked by virality probability · Click to expand for deep analysis
               </p>
             </div>
             <button
               onClick={handleReset}
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
             >
               <RotateCcw className="w-4 h-4" />
               New Search
@@ -223,13 +239,13 @@ const ViralIdeasSection = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-center py-12"
+          transition={{ delay: 0.4 }}
+          className="text-center py-16"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-muted/50 mb-4">
-            <Sparkles className="w-7 h-7 text-muted-foreground" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-muted/30 backdrop-blur-sm border border-border/30 mb-5">
+            <Flame className="w-7 h-7 text-muted-foreground/50" />
           </div>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground/70 text-sm tracking-apple">
             Enter your niche above to discover viral video opportunities
           </p>
         </motion.div>
