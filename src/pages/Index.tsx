@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, RotateCcw, Search, Flame } from 'lucide-react';
+import { ArrowLeft, ArrowRight, RotateCcw, Search, Flame, Sparkles, TrendingUp } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import SearchInput from '@/components/SearchInput';
@@ -14,6 +14,9 @@ import ContentBlueprint from '@/components/ContentBlueprint';
 import ThemeToggle from '@/components/ThemeToggle';
 import ExportMenu from '@/components/ExportMenu';
 import ViralIdeasSection from '@/components/ViralIdeasSection';
+import AnimatedBackground from '@/components/AnimatedBackground';
+import HeroVisual from '@/components/HeroVisual';
+import Footer from '@/components/Footer';
 import { useNicheAnalysis } from '@/hooks/useNicheAnalysis';
 
 type Step = 'search' | 'platform' | 'style' | 'loading' | 'results';
@@ -69,83 +72,133 @@ const Index = () => {
     exit: (direction: number) => ({ x: direction < 0 ? 300 : -300, opacity: 0 })
   };
 
-  return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Logo />
-          
-          {/* Tab Navigation */}
-          <nav className="hidden md:flex items-center bg-muted/50 rounded-xl p-1" aria-label="Main navigation">
-            <button
-              onClick={() => setActiveTab('niche')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                activeTab === 'niche'
-                  ? 'bg-background text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              <Search className="w-4 h-4" />
-              Niche Finder
-            </button>
-            <button
-              onClick={() => setActiveTab('viral')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                activeTab === 'viral'
-                  ? 'bg-background text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              <Flame className="w-4 h-4" />
-              Viral Ideas
-            </button>
-          </nav>
+  // Dynamic page title based on active tab
+  const pageTitle = activeTab === 'niche' ? 'Niche Finder' : 'Viral Idea Generator';
+  const pageSubtitle = activeTab === 'niche'
+    ? 'AI-powered content niche analysis'
+    : 'Data-driven viral video predictions';
 
-          <div className="flex items-center gap-3">
-            {/* Mobile Tab Toggle */}
-            <div className="md:hidden flex items-center bg-muted/50 rounded-lg p-0.5">
+  return (
+    <div className="min-h-screen bg-background relative">
+      <AnimatedBackground />
+
+      {/* Premium Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-2xl bg-background/70 border-b border-border/40">
+        <div className="container mx-auto px-6">
+          {/* Top row: Logo + Nav + Actions */}
+          <div className="flex items-center justify-between h-16">
+            <Logo />
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center bg-muted/40 backdrop-blur-sm rounded-2xl p-1 border border-border/30" aria-label="Main navigation">
               <button
                 onClick={() => setActiveTab('niche')}
-                className={`p-2 rounded-md transition-all ${activeTab === 'niche' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground'}`}
-                aria-label="Niche Finder"
+                className={`relative flex items-center gap-2.5 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
+                  activeTab === 'niche'
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
               >
-                <Search className="w-4 h-4" />
+                {activeTab === 'niche' && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-background rounded-xl shadow-sm border border-border/50"
+                    transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
+                  />
+                )}
+                <Search className="w-4 h-4 relative z-10" />
+                <span className="relative z-10">Niche Finder</span>
               </button>
               <button
                 onClick={() => setActiveTab('viral')}
-                className={`p-2 rounded-md transition-all ${activeTab === 'viral' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground'}`}
-                aria-label="Viral Ideas"
+                className={`relative flex items-center gap-2.5 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
+                  activeTab === 'viral'
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
               >
-                <Flame className="w-4 h-4" />
+                {activeTab === 'viral' && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-background rounded-xl shadow-sm border border-border/50"
+                    transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
+                  />
+                )}
+                <Flame className="w-4 h-4 relative z-10" />
+                <span className="relative z-10">Viral Ideas</span>
               </button>
-            </div>
+            </nav>
 
-            {activeTab === 'niche' && step === 'results' && data && (
-              <ExportMenu data={data} dashboardRef={dashboardRef} />
-            )}
-            
-            {activeTab === 'niche' && step !== 'search' && step !== 'loading' && (
-              <motion.button
-                onClick={handleReset}
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <RotateCcw className="w-4 h-4" />
-                <span className="hidden sm:inline">Start Over</span>
-              </motion.button>
-            )}
-            
-            <ThemeToggle />
+            <div className="flex items-center gap-3">
+              {/* Mobile Tab Toggle */}
+              <div className="md:hidden flex items-center bg-muted/40 backdrop-blur-sm rounded-xl p-1 border border-border/30">
+                <button
+                  onClick={() => setActiveTab('niche')}
+                  className={`relative p-2.5 rounded-lg transition-all ${activeTab === 'niche' ? 'text-foreground' : 'text-muted-foreground'}`}
+                  aria-label="Niche Finder"
+                >
+                  {activeTab === 'niche' && (
+                    <motion.div layoutId="mobileTab" className="absolute inset-0 bg-background rounded-lg shadow-sm border border-border/50" />
+                  )}
+                  <Search className="w-4 h-4 relative z-10" />
+                </button>
+                <button
+                  onClick={() => setActiveTab('viral')}
+                  className={`relative p-2.5 rounded-lg transition-all ${activeTab === 'viral' ? 'text-foreground' : 'text-muted-foreground'}`}
+                  aria-label="Viral Ideas"
+                >
+                  {activeTab === 'viral' && (
+                    <motion.div layoutId="mobileTab" className="absolute inset-0 bg-background rounded-lg shadow-sm border border-border/50" />
+                  )}
+                  <Flame className="w-4 h-4 relative z-10" />
+                </button>
+              </div>
+
+              {activeTab === 'niche' && step === 'results' && data && (
+                <ExportMenu data={data} dashboardRef={dashboardRef} />
+              )}
+              
+              {activeTab === 'niche' && step !== 'search' && step !== 'loading' && (
+                <motion.button
+                  onClick={handleReset}
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  <span className="hidden sm:inline">Start Over</span>
+                </motion.button>
+              )}
+              
+              <ThemeToggle />
+            </div>
           </div>
+
+          {/* Page title bar */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              className="pb-4 -mt-1"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="flex items-center gap-3">
+                <h1 className="text-lg font-semibold tracking-apple text-foreground">{pageTitle}</h1>
+                <span className="hidden sm:inline-block text-xs text-muted-foreground bg-muted/50 px-2.5 py-1 rounded-full border border-border/30">
+                  {pageSubtitle}
+                </span>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="pt-24 pb-16">
+      <main className="pt-32 pb-16">
         <AnimatePresence mode="wait">
           {activeTab === 'viral' ? (
             <motion.div
@@ -169,30 +222,49 @@ const Index = () => {
                 {step === 'search' && (
                   <motion.div
                     key="search"
-                    className="container mx-auto px-6 py-20"
+                    className="container mx-auto px-6 py-12 md:py-20"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <div className="text-center mb-12">
-                      <motion.h1 
-                        className="text-5xl md:text-6xl font-bold tracking-apple-tight mb-6 text-gradient"
+                    <div className="text-center mb-6">
+                      <motion.div
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 backdrop-blur-sm border border-primary/15 text-primary text-sm font-medium mb-6"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.05 }}
+                      >
+                        <TrendingUp className="w-3.5 h-3.5" />
+                        AI-Powered Niche Analysis
+                      </motion.div>
+                      <motion.h2 
+                        className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-apple-tight mb-5 text-gradient leading-[1.1]"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
                       >
                         Discover Your Niche
-                      </motion.h1>
+                      </motion.h2>
                       <motion.p 
-                        className="text-xl text-muted-foreground max-w-2xl mx-auto tracking-apple"
+                        className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto tracking-apple leading-relaxed"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
                       >
-                        AI-powered analysis to find untapped content opportunities and viral strategies
+                        Analyze competition, audience demand, and growth potential across YouTube, TikTok & Instagram
                       </motion.p>
                     </div>
+
+                    {/* Animated Hero Visual */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <HeroVisual />
+                    </motion.div>
+
                     <SearchInput value={query} onChange={setQuery} onSubmit={handleSearch} />
 
                     {/* CTA to Viral Ideas */}
@@ -204,7 +276,7 @@ const Index = () => {
                     >
                       <button
                         onClick={() => setActiveTab('viral')}
-                        className="group flex items-center gap-3 px-6 py-3.5 rounded-2xl border border-border bg-muted/30 hover:bg-muted/60 hover:border-primary/30 transition-all duration-300"
+                        className="group flex items-center gap-3 px-6 py-3.5 rounded-2xl border border-border/50 bg-card/30 backdrop-blur-xl hover:bg-card/60 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-background/50"
                       >
                         <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
                           <Flame className="w-4 h-4 text-primary" />
@@ -215,6 +287,21 @@ const Index = () => {
                         </div>
                         <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
                       </button>
+                    </motion.div>
+
+                    {/* Trust indicators for GEO */}
+                    <motion.div
+                      className="flex flex-wrap justify-center gap-6 mt-14 text-xs text-muted-foreground/60"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.6 }}
+                    >
+                      {['YouTube Niche Analysis', 'TikTok Viral Trends', 'Instagram Growth', 'AI-Powered Insights', 'Free Forever'].map((item) => (
+                        <span key={item} className="flex items-center gap-1.5">
+                          <Sparkles className="w-3 h-3" />
+                          {item}
+                        </span>
+                      ))}
                     </motion.div>
                   </motion.div>
                 )}
@@ -313,6 +400,8 @@ const Index = () => {
           )}
         </AnimatePresence>
       </main>
+
+      <Footer />
     </div>
   );
 };
