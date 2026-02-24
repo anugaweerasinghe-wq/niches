@@ -31,6 +31,8 @@ interface UseViralIdeasReturn {
   reset: () => void;
 }
 
+const MAX_RETRIES = 2;
+
 export const useViralIdeas = (): UseViralIdeasReturn => {
   const [ideas, setIdeas] = useState<ViralIdea[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,21 +43,39 @@ export const useViralIdeas = (): UseViralIdeasReturn => {
     setError(null);
     setIdeas(null);
 
-    try {
-      const { data, error: fetchError } = await supabase.functions.invoke('generate-viral-ideas', {
-        body: { query, platform }
-      });
+    let lastError: string = '';
 
-      if (fetchError) throw new Error(fetchError.message || 'Failed to generate ideas');
-      if (data.error) throw new Error(data.error);
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        if (attempt > 0) {
+          // Wait before retry with exponential backoff
+          await new Promise(r => setTimeout(r, 1000 * attempt));
+        }
 
-      setIdeas(data.ideas as ViralIdea[]);
-    } catch (err) {
-      console.error('Viral ideas error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to generate viral ideas');
-    } finally {
-      setIsLoading(false);
+        const { data, error: fetchError } = await supabase.functions.invoke('generate-viral-ideas', {
+          body: { query, platform }
+        });
+
+        if (fetchError) throw new Error(fetchError.message || 'Failed to generate ideas');
+        if (data?.error) throw new Error(data.error);
+        if (!data?.ideas || !Array.isArray(data.ideas)) throw new Error('Invalid response format');
+
+        setIdeas(data.ideas as ViralIdea[]);
+        setIsLoading(false);
+        return; // Success - exit retry loop
+      } catch (err) {
+        lastError = err instanceof Error ? err.message : 'Failed to generate viral ideas';
+        console.error(`Viral ideas attempt ${attempt + 1} failed:`, lastError);
+        
+        // Don't retry on rate limit or credits errors
+        if (lastError.includes('Rate limit') || lastError.includes('credits')) {
+          break;
+        }
+      }
     }
+
+    setError(lastError);
+    setIsLoading(false);
   }, []);
 
   const reset = useCallback(() => {
