@@ -48,27 +48,53 @@ async function callAIWithRetry(body: object, apiKey: string, maxRetries = 3): Pr
 }
 
 function parseJSON(content: string): any {
-  try { return JSON.parse(content.trim()); } catch {}
+  // Strip markdown code blocks
+  let cleaned = content
+    .replace(/```json\s*/gi, '')
+    .replace(/```\s*/g, '')
+    .trim();
 
-  const jsonMatch = content.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
-  if (jsonMatch) {
-    try { return JSON.parse(jsonMatch[1].trim()); } catch {}
+  // Try direct parse
+  try { return JSON.parse(cleaned); } catch {}
+
+  // Find JSON boundaries
+  const jsonStart = cleaned.search(/[\{\[]/);
+  if (jsonStart === -1) throw new Error('No JSON found in response');
+  
+  const isArray = cleaned[jsonStart] === '[';
+  const endChar = isArray ? ']' : '}';
+  const startChar = isArray ? '[' : '{';
+  
+  let depth = 0;
+  let jsonEnd = -1;
+  for (let i = jsonStart; i < cleaned.length; i++) {
+    if (cleaned[i] === startChar) depth++;
+    if (cleaned[i] === endChar) depth--;
+    if (depth === 0) { jsonEnd = i; break; }
   }
 
-  const firstBracket = content.indexOf('[');
-  if (firstBracket >= 0) {
-    let depth = 0;
-    for (let i = firstBracket; i < content.length; i++) {
-      if (content[i] === '[') depth++;
-      if (content[i] === ']') depth--;
-      if (depth === 0) {
-        try { return JSON.parse(content.slice(firstBracket, i + 1)); } catch {}
-        break;
-      }
-    }
+  if (jsonEnd === -1) {
+    // Truncated response — try to repair by closing brackets
+    console.warn('Detected truncated JSON, attempting repair');
+    cleaned = cleaned.substring(jsonStart);
+    // Close any open strings, objects, arrays
+    const openBraces = (cleaned.match(/{/g) || []).length - (cleaned.match(/}/g) || []).length;
+    const openBrackets = (cleaned.match(/\[/g) || []).length - (cleaned.match(/\]/g) || []).length;
+    for (let i = 0; i < openBraces; i++) cleaned += '}';
+    for (let i = 0; i < openBrackets; i++) cleaned += ']';
+  } else {
+    cleaned = cleaned.substring(jsonStart, jsonEnd + 1);
   }
 
-  throw new Error('Failed to parse AI response as JSON');
+  // Fix common LLM JSON issues
+  cleaned = cleaned
+    .replace(/,\s*}/g, '}')
+    .replace(/,\s*]/g, ']')
+    .replace(/[\x00-\x1F\x7F]/g, '');
+
+  try { return JSON.parse(cleaned); } catch (e) {
+    throw new Error('Failed to parse AI response as JSON');
+  }
 }
 
 serve(async (req) => {
