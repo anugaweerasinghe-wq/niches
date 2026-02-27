@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
+import { Eye, Flame, TrendingUp } from 'lucide-react';
 
 /** Premium animated hero — orbiting metric cards with pulsing rings */
 const HeroVisual = () => {
   const metrics = [
-    { label: '92% Viral Score', delay: 0 },
-    { label: '1.2M Predicted', delay: 0.4 },
-    { label: 'Trending ↑', delay: 0.8 },
+    { label: '92% Viral Score', delay: 0, icon: Flame },
+    { label: '1.2M Views Predicted', delay: 0.4, icon: Eye },
+    { label: 'Trending ↑', delay: 0.8, icon: TrendingUp },
   ];
 
   return (
@@ -56,8 +57,17 @@ const HeroVisual = () => {
               y: { delay: m.delay + 1.2, duration: 4, repeat: Infinity, ease: 'easeInOut' },
             }}
           >
-            <div className="px-3 py-1.5 rounded-xl backdrop-blur-2xl border border-primary/15 bg-primary/6 text-primary text-xs font-medium whitespace-nowrap shadow-lg shadow-primary/5">
-              {m.label}
+            <div className="flex flex-col items-center gap-1.5">
+              {/* Animated icon above the chip */}
+              <motion.div
+                animate={{ y: [0, -4, 0], scale: [1, 1.15, 1] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: m.delay }}
+              >
+                <m.icon className="w-4 h-4 text-primary drop-shadow-[0_0_6px_hsl(var(--primary)/0.4)]" />
+              </motion.div>
+              <div className="px-3 py-1.5 rounded-xl backdrop-blur-2xl border border-primary/15 bg-primary/6 text-primary text-xs font-medium whitespace-nowrap shadow-lg shadow-primary/5">
+                {m.label}
+              </div>
             </div>
           </motion.div>
         );

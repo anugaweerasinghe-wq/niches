@@ -98,68 +98,79 @@ serve(async (req) => {
 
 MISSION: Generate 10 video ideas for the niche "${query}" on ${platform} that have the HIGHEST probability of going viral RIGHT NOW.
 
-Your analysis MUST be grounded in current ${month} trends:
-- What topics are currently trending in "${query}" on ${platform}?
-- What format/style is the ${platform} algorithm currently favoring?
-- What content gaps exist that creators haven't exploited yet?
-- What seasonal or cultural moments can be leveraged this month?
-- What emerging micro-trends in "${query}" are about to explode?
+CRITICAL REQUIREMENT — PRACTICALITY & EXECUTABILITY:
+Every single idea MUST be something a solo creator can film and publish TODAY with:
+- A phone/camera, basic editing software, and 1-8 hours of work
+- No special equipment, celebrity features, or expensive setups unless explicitly noted
+- Clear step-by-step execution path (not vague concepts)
+- A specific, proven format that has worked for similar creators in the last 30 days
 
-DATA-DRIVEN REQUIREMENTS:
-- Reference real engagement rate benchmarks for ${platform} (avg ER for this niche, top performer ER)
-- Cite specific algorithmic signals: watch time thresholds, save-to-view ratios, share velocity
-- Include retention curve insights (e.g., "hook pattern retains 78% past 3s")
-- Reference platform-specific KPIs (YouTube CTR 4-10%, TikTok completion rate benchmarks, IG save rates)
-- Factor in current content saturation and white-space opportunities
+VIRAL MAXIMIZATION — RESEARCH-BACKED FRAMEWORK:
+Use this evidence-based viral formula for EACH idea:
+1. HOOK (0-3 seconds): Pattern interrupt that creates an open loop. Reference hooks that achieved >80% 3-second retention in similar niches. Examples: "I spent $X so you don't have to", "Nobody talks about this", "POV:", controversial statement + proof
+2. RETENTION ENGINE: Build in at least 2 retention triggers — curiosity payoffs every 15-30 seconds, visual changes, unexpected reveals, countdown/list structure
+3. SHAREABILITY: Each idea must pass the "DM test" — would someone screenshot or send this to a friend? Why specifically?
+4. ALGORITHM EXPLOIT: Target ONE primary signal per idea:
+   - YouTube: High CTR (8%+) + Watch Time (>50% AVD) + Comment Velocity
+   - TikTok: Completion Rate (>65%) + Save Rate (>3%) + Share Rate (>2%)  
+   - Instagram: Save Rate (>5%) + Share Rate (>3%) + Reach via Explore
+5. TREND SURFING: Each idea must ride a SPECIFIC current trend from ${month} — not generic evergreen topics
 
-VIRAL MAXIMIZATION FACTORS — each idea must exploit at least 2:
-1. Pattern interrupt in first 1.5 seconds
-2. Emotional trigger (curiosity gap, outrage, awe, FOMO)
-3. Trending audio/format/meme alignment
-4. Shareability factor (would someone send this to a friend?)
-5. Algorithm signal optimization (saves, shares, comments, watch time)
-6. Search demand alignment (trending search terms)
+PROVEN VIRAL PATTERNS TO LEVERAGE (pick different ones per idea):
+- "I tested X for Y days" (transformation + curiosity)
+- "Stop doing X, do Y instead" (contrarian + value)
+- Comparison/battle format (built-in engagement bait)
+- "What $X gets you" (price anchoring + visual satisfaction)
+- Myth-busting/exposé (outrage + education)
+- "Day in my life as X" (aspirational + relatable)
+- Before/After reveals (visual dopamine hit)
+- Tutorial with unexpected twist (value + surprise)
+- Reaction to trending topic (timeliness + commentary)
+- Ranked list with controversial ordering (comment bait)
 
 Return a JSON array with exactly 10 objects (pure JSON, no markdown):
 [
   {
     "id": "<unique numeric string>",
     "title": "<compelling viral title that exploits curiosity — max 80 chars>",
-    "hook": "<exact first 3-5 seconds script that stops the scroll — conversational, punchy>",
-    "thumbnailConcept": "<detailed thumbnail description: facial expression, text overlay, colors, composition>",
-    "bestPostingTime": "<optimal day and time like 'Tuesday 2PM EST' based on niche audience behavior>",
-    "hashtags": ["<5 hashtags mixing trending + niche-specific + broad reach>"],
-    "viralityScore": <number 60-98 — be honest, not everything is 90+>,
-    "engagementRate": "<predicted ER like '8.2%' with niche context>",
-    "retentionInsight": "<specific retention pattern, e.g., 'List format with reveals every 8s drives 72% avg watch-through'>",
-    "algorithmSignal": "<primary algorithm exploit, e.g., 'High comment-to-view ratio (4.2x niche avg) triggers recommendation engine'>",
-    "trendAlignment": "<what ${month} trend this leverages — be specific>",
-    "targetEmotion": "<curiosity|shock|inspiration|humor|fear|awe>",
+    "hook": "<EXACT word-for-word script for first 3-5 seconds. Must create an irresistible open loop. Write it as the creator would say it on camera.>",
+    "thumbnailConcept": "<detailed thumbnail: facial expression, text overlay (max 4 words), colors, composition. Reference what's proven to get 10%+ CTR in this niche>",
+    "bestPostingTime": "<optimal day and time like 'Tuesday 2PM EST' — based on when ${platform} niche audience is most active in ${month}>",
+    "hashtags": ["<5 hashtags mixing 1 trending, 2 niche-specific, 2 broad reach — include actual current trending tags>"],
+    "viralityScore": <number 60-98 — calibrate honestly: 60-70 = solid content, 70-80 = high potential, 80-90 = strong viral signals, 90+ = exceptional alignment with multiple viral factors>,
+    "engagementRate": "<predicted ER with context, e.g., '8.2% (2.1x niche average of 3.9%)'>",
+    "retentionInsight": "<specific retention strategy with timing, e.g., 'Reveal at 0:45 creates 2nd retention peak. List format with visual change every 8s maintains 72% avg watch-through'>",
+    "algorithmSignal": "<primary algorithm exploit with benchmarks, e.g., 'Save-to-view ratio of 4.8% (3x niche avg) triggers Explore page recommendation'>",
+    "trendAlignment": "<SPECIFIC ${month} trend this leverages — name the trend, why it's peaking now, and its trajectory>",
+    "targetEmotion": "<curiosity|shock|inspiration|humor|fear|awe — explain WHY this emotion drives shares in this niche>",
     "contentFormat": "<storytime|tutorial|challenge|reaction|comparison|expose|transformation|listicle|POV>",
-    "scriptOutline": "<4-5 sentence detailed script structure with timing>",
-    "whyItWorks": "<3 sentence data-backed analysis — reference specific metrics and behavioral patterns>",
+    "scriptOutline": "<DETAILED 5-step script structure with exact timing: 0:00-0:03 hook, 0:03-0:15 context, 0:15-0:45 main content, 0:45-1:00 twist/reveal, 1:00-1:15 CTA. Adapt timing to ideal video length for this format on ${platform}>",
+    "whyItWorks": "<3 sentences citing SPECIFIC metrics: 'This format averages X views in ${query} niche because [psychological trigger]. Similar videos by [type of creator] achieved [metric]. The ${month} timing amplifies this because [reason].'>",
     "competitionLevel": "<Low|Medium|High>",
-    "searchVolume": "<trend indicator like 'Rising +340%' or 'Breakout' or 'Steady High'>",
-    "estimatedProductionTime": "<realistic time like '2-3 hours'>",
-    "callToAction": "<CTA that drives algorithm-boosting engagement>"
+    "searchVolume": "<trend indicator like 'Rising +340%' or 'Breakout' or 'Steady High' — reference actual search demand>",
+    "estimatedProductionTime": "<realistic time like '2-3 hours' — include what's needed: filming, editing, thumbnail>",
+    "callToAction": "<CTA that drives algorithm-boosting engagement — must feel natural, not forced. e.g., 'Comment which one surprised you most' drives comment velocity>"
   }
 ]
 
 CRITICAL RULES:
 - Sort by viralityScore descending
-- Each idea must exploit a DIFFERENT algorithmic signal or trend
-- Vary content formats across the 10 ideas
+- Each idea must exploit a DIFFERENT viral pattern from the list above
+- Vary content formats — no more than 2 ideas with the same format
 - Mix competition levels (at least 3 Low, 3 Medium, some High)
-- Make hooks feel natural and conversational, not clickbaity
-- Every recommendation must be actionable TODAY in ${month}`;
+- Hooks must be CONVERSATIONAL and authentic — never clickbaity or generic
+- Every idea must be filmable TODAY by a solo creator with a smartphone
+- ScriptOutlines must include specific timing for ${platform}'s ideal video length
+- WHY IT WORKS must cite specific metrics, not vague claims
+- All trends must be specific to ${month} — not generic evergreen advice`;
 
     const data = await callAIWithRetry({
       model: 'google/gemini-2.5-flash',
       messages: [
-        { role: 'system', content: `You are a data-driven viral content analyst specializing in ${platform}. Today is ${today}. Your recommendations must reflect current ${month} trends, algorithm behavior, and market conditions. Respond with valid JSON only — no markdown, no code blocks, no extra text.` },
+        { role: 'system', content: `You are a data-driven viral content analyst specializing in ${platform}. Today is ${today}. You have deep knowledge of viral video patterns, algorithm mechanics, and creator economics. Your recommendations must be PRACTICAL (filmable today), SPECIFIC (exact scripts and timing), and GROUNDED in proven ${month} trends. Respond with valid JSON only — no markdown, no code blocks, no extra text.` },
         { role: 'user', content: prompt }
       ],
-      temperature: 0.75,
+      temperature: 0.72,
     }, LOVABLE_API_KEY);
 
     const content = data.choices[0].message.content;
