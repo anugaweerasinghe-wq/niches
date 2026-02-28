@@ -20,7 +20,6 @@ async function callAIWithRetry(body: object, apiKey: string, maxRetries = 3): Pr
 
       if (response.status === 429) {
         const wait = Math.pow(2, attempt) * 1000;
-        console.log(`Rate limited, waiting ${wait}ms before retry ${attempt + 1}`);
         await new Promise(r => setTimeout(r, wait));
         continue;
       }
@@ -38,7 +37,6 @@ async function callAIWithRetry(body: object, apiKey: string, maxRetries = 3): Pr
       return await response.json();
     } catch (err) {
       if (attempt < maxRetries - 1) {
-        console.log(`Retry ${attempt + 1} after error:`, err);
         await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
         continue;
       }
@@ -48,23 +46,16 @@ async function callAIWithRetry(body: object, apiKey: string, maxRetries = 3): Pr
 }
 
 function parseJSON(content: string): any {
-  // Strip markdown code blocks
-  let cleaned = content
-    .replace(/```json\s*/gi, '')
-    .replace(/```\s*/g, '')
-    .trim();
-
-  // Try direct parse
+  let cleaned = content.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
   try { return JSON.parse(cleaned); } catch {}
 
-  // Find JSON boundaries
   const jsonStart = cleaned.search(/[\{\[]/);
   if (jsonStart === -1) throw new Error('No JSON found in response');
-  
+
   const isArray = cleaned[jsonStart] === '[';
   const endChar = isArray ? ']' : '}';
   const startChar = isArray ? '[' : '{';
-  
+
   let depth = 0;
   let jsonEnd = -1;
   for (let i = jsonStart; i < cleaned.length; i++) {
@@ -74,7 +65,6 @@ function parseJSON(content: string): any {
   }
 
   if (jsonEnd === -1) {
-    console.warn('Detected truncated JSON, attempting repair');
     cleaned = cleaned.substring(jsonStart);
     const openBraces = (cleaned.match(/{/g) || []).length - (cleaned.match(/}/g) || []).length;
     const openBrackets = (cleaned.match(/\[/g) || []).length - (cleaned.match(/\]/g) || []).length;
@@ -84,12 +74,7 @@ function parseJSON(content: string): any {
     cleaned = cleaned.substring(jsonStart, jsonEnd + 1);
   }
 
-  // Fix common LLM JSON issues
-  cleaned = cleaned
-    .replace(/,\s*}/g, '}')
-    .replace(/,\s*]/g, ']')
-    .replace(/[\x00-\x1F\x7F]/g, '');
-
+  cleaned = cleaned.replace(/,\s*}/g, '}').replace(/,\s*]/g, ']').replace(/[\x00-\x1F\x7F]/g, '');
   try { return JSON.parse(cleaned); } catch (e) {
     throw new Error('Failed to parse AI response as JSON');
   }
@@ -111,70 +96,62 @@ serve(async (req) => {
     }
 
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
-    if (!LOVABLE_API_KEY) {
-      throw new Error('LOVABLE_API_KEY is not configured');
-    }
+    if (!LOVABLE_API_KEY) throw new Error('LOVABLE_API_KEY is not configured');
 
     const today = new Date().toISOString().split('T')[0];
 
-    const prompt = `You are a world-class social media niche analyst. Today's date is ${today}.
+    const prompt = `You are a social media analyst. Today is ${today}.
 
-Analyze the niche "${query}" for ${platform} content with a ${style} style preference.
+Analyze the niche "${query}" for ${platform} with ${style} style.
 
-CRITICAL — HONESTY & ACCURACY:
-- Do NOT fabricate specific creator names, exact follower counts, or view numbers
-- Use realistic ESTIMATED ranges instead of precise fake numbers
-- Base analysis on general market knowledge, not invented data points
-- Be transparent about what is an AI estimate vs a known fact
+CRITICAL RULES:
+1. OUTLIER CREATORS: You MUST provide REAL, VERIFIED creators who actually exist on ${platform}. Use their REAL channel/account name. Provide their REAL channel URL. Stats should be your best estimate of their current numbers — be approximately accurate, not fabricated.
+2. VIRAL CONTENT: You MUST provide REAL videos/posts that actually exist and went viral in this niche on ${platform}. Use REAL video titles, REAL creator names. Provide the ACTUAL video URL (e.g., https://youtube.com/watch?v=XXXXX or https://tiktok.com/@user/video/XXXXX). For thumbnails, use a relevant Unsplash image URL as a visual placeholder (since we can't embed actual thumbnails).
+3. DETERMINISM: For the same query, always return the same creators and videos — pick the most well-known, established ones.
 
-Your analysis must reflect CURRENT market conditions as of ${today}:
-- Reference trending topics and content formats performing well on ${platform}
-- Consider seasonal trends, current events, and emerging micro-trends for ${today}
-- Base metrics on current platform algorithm behavior
-- Suggest creator archetypes (not fake names) who are growing in this space
-- Factor in current audience sentiment and content fatigue levels
-
-Return a JSON object with this exact structure (no markdown, pure JSON only):
+Return JSON (no markdown):
 {
   "scorecard": {
-    "marketSaturation": <number 0-100>,
-    "growthPotential": <number 0-100>,
-    "gapScore": <number 0-100>
+    "marketSaturation": <0-100>,
+    "growthPotential": <0-100>,
+    "gapScore": <0-100>
   },
   "outliers": [
     {
-      "name": "<creator archetype description like 'Tech Review Creator' — NOT a fake real name>",
-      "niche": "<specific sub-niche>",
-      "followers": <estimated typical follower count for this archetype>,
-      "avgViews": <estimated average views>,
-      "viewToFollowerRatio": <number like 6.5>,
-      "insight": "<actionable insight about what strategy is working for creators like this>"
+      "name": "<REAL creator name as known on ${platform}>",
+      "niche": "<their specific sub-niche>",
+      "followers": <approximate real follower count>,
+      "avgViews": <approximate real avg views>,
+      "viewToFollowerRatio": <calculated ratio like 6.5>,
+      "insight": "<what strategy makes them successful>",
+      "channelUrl": "<REAL full URL to their ${platform} channel/profile>"
     }
   ],
   "viralContent": [
     {
       "id": "<unique id>",
-      "title": "<example viral video title reflecting current trends — clearly an AI-generated example>",
-      "creator": "<creator archetype, not a fake name>",
+      "title": "<REAL title of an actual viral video/post in this niche>",
+      "creator": "<REAL creator name who made it>",
       "platform": "${platform}",
-      "thumbnail": "<unsplash URL with w=640&h=360&fit=crop>",
-      "views": <realistic estimated number>,
-      "likes": <realistic estimated number>,
-      "comments": <realistic estimated number>,
-      "duration": "<duration like 12:34>"
+      "thumbnail": "https://images.unsplash.com/photo-<relevant-photo-id>?w=640&h=360&fit=crop",
+      "views": <approximate real view count>,
+      "likes": <approximate real like count>,
+      "comments": <approximate real comment count>,
+      "duration": "<actual duration>",
+      "videoUrl": "<REAL full URL to the actual video/post>"
     }
   ],
   "contentIdeas": [
     {
-      "title": "<video idea title aligned with current trends>",
-      "description": "<brief description with trend context>",
+      "title": "<video idea>",
+      "description": "<brief description>",
       "estimatedViews": "<range like 50K-200K>",
       "difficulty": "<Easy|Medium|Hard>"
     }
   ],
   "viralHooks": [
     {
-      "text": "<hook text optimized for current ${platform} algorithm>",
+      "text": "<hook text>",
       "platform": "${platform}",
       "hookType": "<hook type>"
     }
@@ -182,29 +159,27 @@ Return a JSON object with this exact structure (no markdown, pure JSON only):
 }
 
 Provide exactly:
-- 3 outlier creator archetypes with realistic estimated metrics (varied scales)
-- 6 viral content examples with engaging trend-aware titles and varied Unsplash thumbnail URLs
-- 3 content ideas with varying difficulty, each exploiting a different current trend
-- 5 viral hooks optimized for ${platform}'s current algorithm priorities
+- 3 REAL outlier creators with their actual channel URLs
+- 6 REAL viral videos/posts with their actual URLs (use Unsplash for thumbnail placeholders)
+- 3 content ideas
+- 5 viral hooks
 
-Make every recommendation timely, specific to ${today}'s market, and immediately actionable. Be honest — do not invent fake statistics.`;
+IMPORTANT: Every creator and video MUST be real and verifiable. URLs must be actual links to real content. Do not invent fake creators or videos.`;
 
     const data = await callAIWithRetry({
       model: 'google/gemini-2.5-flash',
       messages: [
-        { role: 'system', content: `You are a social media analytics expert. Today is ${today}. Always respond with valid JSON only. No markdown formatting, no code blocks, no extra text. Just the JSON object.` },
+        { role: 'system', content: `You are a social media analyst. Today is ${today}. Respond with valid JSON only. All creators and videos must be REAL and verifiable — never fabricate names, channels, or URLs. For the same query input, always return the same well-known creators and videos.` },
         { role: 'user', content: prompt }
       ],
-      temperature: 0.7,
+      temperature: 0.3,
     }, LOVABLE_API_KEY);
 
     const content = data.choices[0].message.content;
     const analysisData = parseJSON(content);
 
     return new Response(JSON.stringify({
-      query,
-      platform,
-      style,
+      query, platform, style,
       ...analysisData
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
 
 /** Premium animated hero — orbiting dots with pulsing rings and honest labels */
 const HeroVisual = () => {
   const labels = [
-    { label: 'AI Niche Analysis', delay: 0 },
-    { label: 'Viral Predictions', delay: 0.4 },
-    { label: 'Content Blueprints', delay: 0.8 },
+    { label: 'AI Niche Analysis', delay: 0, hasIcon: false },
+    { label: 'Viral Predictions', delay: 0.4, hasIcon: true },
+    { label: 'Content Blueprints', delay: 0.8, hasIcon: false },
   ];
 
   return (
@@ -36,7 +37,7 @@ const HeroVisual = () => {
         </motion.svg>
       </motion.div>
 
-      {/* Floating label chips — no fake metrics */}
+      {/* Floating label chips */}
       {labels.map((m, i) => {
         const angle = (i * 120 - 90) * (Math.PI / 180);
         const r = 95;
@@ -46,16 +47,24 @@ const HeroVisual = () => {
         return (
           <motion.div
             key={m.label}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            style={{ x, y }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1.5"
+            style={{ x, y: y - (m.hasIcon ? 6 : 0) }}
             initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1, y: [y, y - 6, y] }}
+            animate={{ opacity: 1, scale: 1, y: [y - (m.hasIcon ? 6 : 0), y - (m.hasIcon ? 12 : 6), y - (m.hasIcon ? 6 : 0)] }}
             transition={{
               opacity: { delay: m.delay + 0.6, duration: 0.5 },
               scale: { delay: m.delay + 0.6, duration: 0.5 },
               y: { delay: m.delay + 1.2, duration: 4, repeat: Infinity, ease: 'easeInOut' },
             }}
           >
+            {m.hasIcon && (
+              <motion.div
+                animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <Sparkles className="w-4 h-4 text-primary" />
+              </motion.div>
+            )}
             <div className="px-3 py-1.5 rounded-xl backdrop-blur-2xl border border-primary/15 bg-primary/6 text-primary text-xs font-medium whitespace-nowrap shadow-lg shadow-primary/5">
               {m.label}
             </div>

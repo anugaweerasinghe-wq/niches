@@ -14,6 +14,7 @@ export interface OutlierCreator {
   avgViews: number;
   viewToFollowerRatio: number;
   insight: string;
+  channelUrl?: string;
 }
 
 export interface ViralContent {
@@ -26,7 +27,7 @@ export interface ViralContent {
   likes: number;
   comments: number;
   duration: string;
-  videoUrl?: string;
+  videoUrl: string;
   previewGif?: string;
 }
 

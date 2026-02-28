@@ -14,14 +14,20 @@ const OutlierCard = ({ creator, index }: OutlierCardProps) => {
     return num.toString();
   };
 
+  const handleClick = () => {
+    if (creator.channelUrl) {
+      window.open(creator.channelUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <motion.div
       className="relative overflow-hidden card-premium p-6 group cursor-pointer hover:scale-[1.01] transition-transform duration-500"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.08 }}
+      onClick={handleClick}
     >
-      {/* Subtle gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-transparent rounded-3xl" />
 
       <div className="relative">
@@ -37,7 +43,7 @@ const OutlierCard = ({ creator, index }: OutlierCardProps) => {
               <p className="text-sm text-muted-foreground">{creator.niche}</p>
             </div>
           </div>
-          <ExternalLink className="w-4 h-4 text-muted-foreground/30 group-hover:text-muted-foreground transition-all" />
+          <ExternalLink className="w-4 h-4 text-muted-foreground/30 group-hover:text-primary transition-all" />
         </div>
         
         <div className="grid grid-cols-3 gap-2 mb-5">
@@ -69,6 +75,12 @@ const OutlierCard = ({ creator, index }: OutlierCardProps) => {
         <p className="text-sm text-muted-foreground leading-relaxed">
           {creator.insight}
         </p>
+
+        {creator.channelUrl && (
+          <p className="text-xs text-primary/60 mt-3 group-hover:text-primary transition-colors">
+            Click to visit channel →
+          </p>
+        )}
       </div>
     </motion.div>
   );
