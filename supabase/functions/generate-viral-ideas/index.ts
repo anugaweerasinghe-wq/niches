@@ -141,6 +141,8 @@ Use this evidence-based viral formula for EACH idea:
    - TikTok: Completion Rate (>65%) + Save Rate (>3%) + Share Rate (>2%)  
    - Instagram: Save Rate (>5%) + Share Rate (>3%) + Reach via Explore
 5. TREND SURFING: Each idea must ride a SPECIFIC current trend from ${month} — not generic evergreen topics
+6. EMOTIONAL TRIGGER: Every idea must target a specific emotion (curiosity, shock, FOMO, nostalgia, outrage, awe) that has been proven to drive shares in this niche
+7. THUMBNAIL PSYCHOLOGY: Thumbnails must use proven CTR principles — contrast colors, expressive faces (or striking visuals for faceless), max 4 words of text, curiosity gap
 
 PROVEN VIRAL PATTERNS TO LEVERAGE (pick different ones per idea):
 - "I tested X for Y days" (transformation + curiosity)
@@ -153,6 +155,13 @@ PROVEN VIRAL PATTERNS TO LEVERAGE (pick different ones per idea):
 - Tutorial with unexpected twist (value + surprise)
 - Reaction to trending topic (timeliness + commentary)
 - Ranked list with controversial ordering (comment bait)
+
+ADDITIONAL VIRAL AMPLIFIERS:
+- Use "series potential" — ideas that naturally lead to Part 2, Part 3 for subscriber retention
+- Include at least 2 ideas that tap into current news, pop culture, or seasonal events of ${month}
+- At least 1 idea should be a "low effort, high reward" format (screen recordings, voiceovers, text-on-screen)
+- Include specific B-roll suggestions or visual references for each idea
+- Each hook must create a "knowledge gap" — viewer NEEDS to watch to find out the answer
 
 Return a JSON array with exactly 10 objects (pure JSON, no markdown):
 [
@@ -188,7 +197,9 @@ CRITICAL RULES:
 - Every idea must be filmable TODAY by a solo creator with a smartphone
 - ScriptOutlines must include specific timing for ${platform}'s ideal video length
 - WHY IT WORKS must cite specific metrics, not vague claims
-- All trends must be specific to ${month} — not generic evergreen advice`;
+- All trends must be specific to ${month} — not generic evergreen advice
+- Do NOT fabricate view counts or follower numbers — use ranges and estimates
+- Be honest about competition levels and realistic about engagement predictions`;
 
     const data = await callAIWithRetry({
       model: 'google/gemini-2.5-flash',

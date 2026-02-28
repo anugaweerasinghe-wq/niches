@@ -117,15 +117,21 @@ serve(async (req) => {
 
     const today = new Date().toISOString().split('T')[0];
 
-    const prompt = `You are a world-class social media niche analyst with access to real-time platform data. Today's date is ${today}.
+    const prompt = `You are a world-class social media niche analyst. Today's date is ${today}.
 
 Analyze the niche "${query}" for ${platform} content with a ${style} style preference.
 
-CRITICAL: Your analysis must reflect CURRENT market conditions as of ${today}:
-- Reference trending topics and hashtags that are performing well RIGHT NOW on ${platform}
-- Consider seasonal trends, current events, and emerging micro-trends
-- Base metrics on current platform algorithm behavior (${platform}'s latest algorithm update priorities)
-- Include creators who are currently growing fastest in this space
+CRITICAL — HONESTY & ACCURACY:
+- Do NOT fabricate specific creator names, exact follower counts, or view numbers
+- Use realistic ESTIMATED ranges instead of precise fake numbers
+- Base analysis on general market knowledge, not invented data points
+- Be transparent about what is an AI estimate vs a known fact
+
+Your analysis must reflect CURRENT market conditions as of ${today}:
+- Reference trending topics and content formats performing well on ${platform}
+- Consider seasonal trends, current events, and emerging micro-trends for ${today}
+- Base metrics on current platform algorithm behavior
+- Suggest creator archetypes (not fake names) who are growing in this space
 - Factor in current audience sentiment and content fatigue levels
 
 Return a JSON object with this exact structure (no markdown, pure JSON only):
@@ -137,24 +143,24 @@ Return a JSON object with this exact structure (no markdown, pure JSON only):
   },
   "outliers": [
     {
-      "name": "<real-sounding creator name>",
+      "name": "<creator archetype description like 'Tech Review Creator' — NOT a fake real name>",
       "niche": "<specific sub-niche>",
-      "followers": <number>,
-      "avgViews": <number>,
+      "followers": <estimated typical follower count for this archetype>,
+      "avgViews": <estimated average views>,
       "viewToFollowerRatio": <number like 6.5>,
-      "insight": "<actionable insight about their current success strategy>"
+      "insight": "<actionable insight about what strategy is working for creators like this>"
     }
   ],
   "viralContent": [
     {
       "id": "<unique id>",
-      "title": "<viral video title reflecting current trends>",
-      "creator": "<creator name>",
+      "title": "<example viral video title reflecting current trends — clearly an AI-generated example>",
+      "creator": "<creator archetype, not a fake name>",
       "platform": "${platform}",
       "thumbnail": "<unsplash URL with w=640&h=360&fit=crop>",
-      "views": <realistic number>,
-      "likes": <realistic number>,
-      "comments": <realistic number>,
+      "views": <realistic estimated number>,
+      "likes": <realistic estimated number>,
+      "comments": <realistic estimated number>,
       "duration": "<duration like 12:34>"
     }
   ],
@@ -162,7 +168,7 @@ Return a JSON object with this exact structure (no markdown, pure JSON only):
     {
       "title": "<video idea title aligned with current trends>",
       "description": "<brief description with trend context>",
-      "estimatedViews": "<range like 500K-1M>",
+      "estimatedViews": "<range like 50K-200K>",
       "difficulty": "<Easy|Medium|Hard>"
     }
   ],
@@ -176,12 +182,12 @@ Return a JSON object with this exact structure (no markdown, pure JSON only):
 }
 
 Provide exactly:
-- 3 outlier creators with realistic metrics (varied follower counts from 10K to 500K+)
+- 3 outlier creator archetypes with realistic estimated metrics (varied scales)
 - 6 viral content examples with engaging trend-aware titles and varied Unsplash thumbnail URLs
 - 3 content ideas with varying difficulty, each exploiting a different current trend
 - 5 viral hooks optimized for ${platform}'s current algorithm priorities
 
-Make every recommendation feel timely, specific to ${today}'s market, and immediately actionable.`;
+Make every recommendation timely, specific to ${today}'s market, and immediately actionable. Be honest — do not invent fake statistics.`;
 
     const data = await callAIWithRetry({
       model: 'google/gemini-2.5-flash',
