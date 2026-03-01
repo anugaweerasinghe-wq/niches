@@ -1,33 +1,33 @@
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, BarChart3, FileText } from 'lucide-react';
 
-/** Premium animated hero — orbiting dots with pulsing rings and honest labels */
+/** Premium hero — three feature chips aligned on a strict horizontal axis */
 const HeroVisual = () => {
-  const labels = [
-    { label: 'AI Niche Analysis', delay: 0, hasIcon: false },
-    { label: 'Viral Predictions', delay: 0.4, hasIcon: true },
-    { label: 'Content Blueprints', delay: 0.8, hasIcon: false },
+  const features = [
+    { label: 'AI Niche Analysis', icon: BarChart3, delay: 0 },
+    { label: 'Viral Predictions', icon: Sparkles, delay: 0.15 },
+    { label: 'Content Blueprints', icon: FileText, delay: 0.3 },
   ];
 
   return (
-    <div className="relative w-full max-w-md mx-auto h-52 md:h-60 mt-6 mb-2" aria-hidden="true">
-      {/* Pulse rings */}
-      {[0, 0.5, 1].map((delay, i) => (
+    <div className="relative w-full max-w-lg mx-auto mt-6 mb-2" aria-hidden="true">
+      {/* Central pulse rings */}
+      {[0, 0.6, 1.2].map((delay, i) => (
         <motion.div
           key={i}
-          className="absolute inset-0 m-auto w-28 h-28 rounded-full border border-primary/20"
-          animate={{ scale: [1, 1.5 + i * 0.15, 1], opacity: [0.25, 0, 0.25] }}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full border border-primary/15"
+          animate={{ scale: [1, 1.6 + i * 0.1, 1], opacity: [0.2, 0, 0.2] }}
           transition={{ duration: 3.5, repeat: Infinity, ease: 'easeOut', delay }}
         />
       ))}
 
-      {/* Center glow */}
+      {/* Center glow dot */}
       <motion.div
-        className="absolute inset-0 m-auto w-14 h-14 rounded-2xl bg-primary/8 backdrop-blur-2xl border border-primary/15 flex items-center justify-center"
-        animate={{ y: [0, -5, 0] }}
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-2xl bg-primary/8 backdrop-blur-2xl border border-primary/15 flex items-center justify-center"
+        animate={{ y: [0, -4, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <motion.svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round">
+        <motion.svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round">
           <motion.path
             d="M2 12L6 8L10 14L14 6L18 12L22 10"
             initial={{ pathLength: 0 }}
@@ -37,53 +37,24 @@ const HeroVisual = () => {
         </motion.svg>
       </motion.div>
 
-      {/* Floating label chips */}
-      {labels.map((m, i) => {
-        const angle = (i * 120 - 90) * (Math.PI / 180);
-        const r = 95;
-        const x = Math.cos(angle) * r;
-        const y = Math.sin(angle) * r;
+      {/* Spacer for the rings */}
+      <div className="h-40 md:h-48" />
 
-        return (
+      {/* Horizontally aligned feature chips — strict flexbox row */}
+      <div className="flex items-center justify-center gap-3 md:gap-4">
+        {features.map((f) => (
           <motion.div
-            key={m.label}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1.5"
-            style={{ x, y: y - (m.hasIcon ? 6 : 0) }}
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1, y: [y - (m.hasIcon ? 6 : 0), y - (m.hasIcon ? 12 : 6), y - (m.hasIcon ? 6 : 0)] }}
-            transition={{
-              opacity: { delay: m.delay + 0.6, duration: 0.5 },
-              scale: { delay: m.delay + 0.6, duration: 0.5 },
-              y: { delay: m.delay + 1.2, duration: 4, repeat: Infinity, ease: 'easeInOut' },
-            }}
+            key={f.label}
+            className="flex items-center gap-2 px-3.5 py-2 rounded-xl backdrop-blur-2xl border border-primary/15 bg-primary/6 text-primary text-xs font-medium whitespace-nowrap shadow-lg shadow-primary/5"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: f.delay + 0.4, duration: 0.5 }}
           >
-            {m.hasIcon && (
-              <motion.div
-                animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <Sparkles className="w-4 h-4 text-primary" />
-              </motion.div>
-            )}
-            <div className="px-3 py-1.5 rounded-xl backdrop-blur-2xl border border-primary/15 bg-primary/6 text-primary text-xs font-medium whitespace-nowrap shadow-lg shadow-primary/5">
-              {m.label}
-            </div>
+            <f.icon className="w-3.5 h-3.5 flex-shrink-0" />
+            {f.label}
           </motion.div>
-        );
-      })}
-
-      {/* Orbiting dots */}
-      {Array.from({ length: 6 }).map((_, i) => (
-        <motion.div
-          key={`dot-${i}`}
-          className="absolute left-1/2 top-1/2 w-1 h-1 rounded-full bg-primary/25"
-          animate={{
-            x: [Math.cos((i * 60) * Math.PI / 180) * 65, Math.cos((i * 60 + 360) * Math.PI / 180) * 65],
-            y: [Math.sin((i * 60) * Math.PI / 180) * 65, Math.sin((i * 60 + 360) * Math.PI / 180) * 65],
-          }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'linear', delay: i * 0.4 }}
-        />
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
