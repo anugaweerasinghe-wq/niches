@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { TrendingUp, TrendingDown, Target, Gauge, Rocket, Zap } from 'lucide-react';
+import { Target, Gauge, Rocket } from 'lucide-react';
 import type { NicheScorecard } from '@/hooks/useNicheAnalysis';
 
 interface ScorecardGridProps {
@@ -12,24 +12,24 @@ const ScorecardGrid = ({ scorecard }: ScorecardGridProps) => {
       label: 'Market Saturation',
       value: scorecard.marketSaturation,
       icon: <Gauge className="w-5 h-5" />,
-      color: scorecard.marketSaturation > 70 ? 'text-destructive' : scorecard.marketSaturation > 40 ? 'text-warning' : 'text-success',
-      bgColor: scorecard.marketSaturation > 70 ? 'bg-destructive/8' : scorecard.marketSaturation > 40 ? 'bg-warning/8' : 'bg-success/8',
+      color: scorecard.marketSaturation > 70 ? 'text-destructive' : scorecard.marketSaturation > 40 ? 'text-[hsl(var(--warning))]' : 'text-[hsl(var(--success))]',
+      barColor: scorecard.marketSaturation > 70 ? 'bg-destructive' : scorecard.marketSaturation > 40 ? 'bg-[hsl(var(--warning))]' : 'bg-[hsl(var(--success))]',
       description: scorecard.marketSaturation > 70 ? 'Highly competitive' : scorecard.marketSaturation > 40 ? 'Moderate competition' : 'Low competition'
     },
     {
       label: 'Growth Potential',
       value: scorecard.growthPotential,
       icon: <Rocket className="w-5 h-5" />,
-      color: scorecard.growthPotential > 70 ? 'text-success' : scorecard.growthPotential > 40 ? 'text-warning' : 'text-destructive',
-      bgColor: scorecard.growthPotential > 70 ? 'bg-success/8' : scorecard.growthPotential > 40 ? 'bg-warning/8' : 'bg-destructive/8',
+      color: scorecard.growthPotential > 70 ? 'text-[hsl(var(--success))]' : scorecard.growthPotential > 40 ? 'text-[hsl(var(--warning))]' : 'text-destructive',
+      barColor: scorecard.growthPotential > 70 ? 'bg-[hsl(var(--success))]' : scorecard.growthPotential > 40 ? 'bg-[hsl(var(--warning))]' : 'bg-destructive',
       description: scorecard.growthPotential > 70 ? 'Excellent opportunity' : scorecard.growthPotential > 40 ? 'Moderate potential' : 'Limited growth'
     },
     {
       label: 'The Gap Score',
       value: scorecard.gapScore,
       icon: <Target className="w-5 h-5" />,
-      color: scorecard.gapScore > 70 ? 'text-success' : scorecard.gapScore > 40 ? 'text-warning' : 'text-destructive',
-      bgColor: scorecard.gapScore > 70 ? 'bg-success/8' : scorecard.gapScore > 40 ? 'bg-warning/8' : 'bg-destructive/8',
+      color: scorecard.gapScore > 70 ? 'text-[hsl(var(--success))]' : scorecard.gapScore > 40 ? 'text-[hsl(var(--warning))]' : 'text-destructive',
+      barColor: scorecard.gapScore > 70 ? 'bg-[hsl(var(--success))]' : scorecard.gapScore > 40 ? 'bg-[hsl(var(--warning))]' : 'bg-destructive',
       description: scorecard.gapScore > 70 ? 'Strong opportunity gap' : scorecard.gapScore > 40 ? 'Some opportunities' : 'Crowded space'
     }
   ];
@@ -44,15 +44,14 @@ const ScorecardGrid = ({ scorecard }: ScorecardGridProps) => {
       {cards.map((card, index) => (
         <motion.div
           key={card.label}
-          className="relative overflow-hidden card-premium p-6 group hover:scale-[1.01] transition-transform duration-500"
+          className="relative overflow-hidden rounded-2xl backdrop-blur-xl bg-card/50 border border-border/40 p-6 hover:bg-card/70 hover:border-border/60 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500"
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
         >
-          {/* Subtle gradient overlay */}
-          <div className={`absolute inset-0 ${card.bgColor} opacity-30 rounded-3xl`} />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-transparent pointer-events-none rounded-2xl" />
           
           <div className="relative">
             <div className="flex items-center gap-3 mb-5">
-              <div className={`p-2 rounded-xl ${card.bgColor}`}>
+              <div className="p-2 rounded-xl bg-muted/40 backdrop-blur-sm border border-border/30">
                 {card.icon}
               </div>
               <span className="text-sm font-medium text-muted-foreground tracking-apple">
@@ -69,13 +68,9 @@ const ScorecardGrid = ({ scorecard }: ScorecardGridProps) => {
             
             <p className="text-sm text-muted-foreground mb-4">{card.description}</p>
             
-            {/* Progress bar with glow */}
-            <div className="h-1.5 bg-muted/50 rounded-full overflow-hidden">
+            <div className="h-1.5 bg-muted/40 rounded-full overflow-hidden">
               <motion.div
-                className={`h-full rounded-full ${
-                  card.color === 'text-success' ? 'bg-success' : 
-                  card.color === 'text-warning' ? 'bg-warning' : 'bg-destructive'
-                }`}
+                className={`h-full rounded-full ${card.barColor}`}
                 initial={{ width: 0 }}
                 animate={{ width: `${card.value}%` }}
                 transition={{ duration: 1.2, delay: 0.2 + index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}

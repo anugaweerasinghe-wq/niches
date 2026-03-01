@@ -336,33 +336,60 @@ const Index = () => {
 
                 {step === 'results' && data && (
                   <motion.div key="results" ref={dashboardRef} className="container mx-auto px-6 py-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-                    <motion.div className="text-center mb-12" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                      <p className="text-sm text-primary mb-3 tracking-widest uppercase font-medium">Analysis Complete</p>
+                    <motion.div className="text-center mb-14" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/6 backdrop-blur-sm border border-primary/12 text-primary text-sm font-medium mb-5">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        Analysis Complete
+                      </div>
                       <h2 className="text-3xl md:text-4xl font-bold tracking-apple-tight mb-4 text-gradient">Your Niche Insights</h2>
-                      <p className="text-muted-foreground tracking-apple">Based on "{query}" for {platform} with {style} content style</p>
+                      <p className="text-muted-foreground tracking-apple">Based on "<span className="text-foreground font-medium">{query}</span>" for <span className="text-foreground font-medium capitalize">{platform}</span> · {style} content</p>
                     </motion.div>
+
                     <section className="mb-14" aria-label="Niche scorecard">
-                      <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Niche Scorecard</h3>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="p-2 rounded-xl bg-primary/8 border border-primary/12">
+                          <Zap className="w-4 h-4 text-primary" />
+                        </div>
+                        <h3 className="text-lg font-semibold tracking-apple text-foreground">Niche Scorecard</h3>
+                      </div>
                       <ScorecardGrid scorecard={data.scorecard} />
                     </section>
+
                     <section className="mb-14" aria-label="Outlier creators">
-                      <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Outlier Creators</h3>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="p-2 rounded-xl bg-primary/8 border border-primary/12">
+                          <TrendingUp className="w-4 h-4 text-primary" />
+                        </div>
+                        <h3 className="text-lg font-semibold tracking-apple text-foreground">Outlier Creators</h3>
+                      </div>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {data.outliers.map((creator, index) => (
                           <OutlierCard key={creator.name} creator={creator} index={index} />
                         ))}
                       </div>
                     </section>
+
                     <section className="mb-14" aria-label="Viral content feed">
-                      <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Viral Content Feed</h3>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="p-2 rounded-xl bg-primary/8 border border-primary/12">
+                          <Globe className="w-4 h-4 text-primary" />
+                        </div>
+                        <h3 className="text-lg font-semibold tracking-apple text-foreground">Viral Content Feed</h3>
+                      </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {data.viralContent.map((video, index) => (
                           <VideoCard key={video.id} video={video} index={index} />
                         ))}
                       </div>
                     </section>
+
                     <section aria-label="Content blueprint">
-                      <h3 className="text-xl font-semibold tracking-apple mb-6 text-foreground">Content Blueprint</h3>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="p-2 rounded-xl bg-primary/8 border border-primary/12">
+                          <Flame className="w-4 h-4 text-primary" />
+                        </div>
+                        <h3 className="text-lg font-semibold tracking-apple text-foreground">Content Blueprint</h3>
+                      </div>
                       <ContentBlueprint ideas={data.contentIdeas} hooks={data.viralHooks} />
                     </section>
                   </motion.div>
