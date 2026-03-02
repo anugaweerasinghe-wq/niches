@@ -1,59 +1,47 @@
-import { motion } from 'framer-motion';
+const particles = [
+  { top: '8%', left: '15%', size: 3, opacity: 0.2, blur: 2, duration: 18 },
+  { top: '22%', left: '78%', size: 2, opacity: 0.15, blur: 1, duration: 25 },
+  { top: '45%', left: '5%', size: 4, opacity: 0.1, blur: 3, duration: 32 },
+  { top: '60%', left: '92%', size: 2, opacity: 0.25, blur: 1, duration: 20 },
+  { top: '75%', left: '40%', size: 3, opacity: 0.12, blur: 2, duration: 28 },
+  { top: '12%', left: '55%', size: 2, opacity: 0.18, blur: 1, duration: 22 },
+  { top: '88%', left: '20%', size: 3, opacity: 0.1, blur: 2, duration: 35 },
+  { top: '35%', left: '85%', size: 2, opacity: 0.2, blur: 1, duration: 19 },
+  { top: '50%', left: '30%', size: 4, opacity: 0.08, blur: 3, duration: 40 },
+  { top: '95%', left: '65%', size: 2, opacity: 0.15, blur: 1, duration: 24 },
+  { top: '5%', left: '42%', size: 3, opacity: 0.22, blur: 2, duration: 30 },
+  { top: '70%', left: '12%', size: 2, opacity: 0.13, blur: 1, duration: 27 },
+];
 
 const AnimatedBackground = () => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-      {/* Primary gradient orb — upper right */}
-      <motion.div
-        className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, hsl(215 100% 60% / 0.07) 0%, transparent 70%)',
-          filter: 'blur(40px)',
-        }}
-        animate={{
-          x: [0, 40, -20, 0],
-          y: [0, -50, 25, 0],
-          scale: [1, 1.15, 0.9, 1],
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      {/* Emerald particle dots */}
+      {particles.map((p, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full animate-float"
+          style={{
+            top: p.top,
+            left: p.left,
+            width: p.size,
+            height: p.size,
+            opacity: p.opacity,
+            filter: `blur(${p.blur}px)`,
+            background: 'hsl(157 100% 49%)',
+            animationDuration: `${p.duration}s`,
+            animationDelay: `${i * -2}s`,
+          }}
+        />
+      ))}
 
-      {/* Secondary orb — left */}
-      <motion.div
-        className="absolute top-1/4 -left-32 w-[500px] h-[500px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, hsl(270 100% 60% / 0.05) 0%, transparent 70%)',
-          filter: 'blur(50px)',
-        }}
-        animate={{
-          x: [0, 50, -15, 0],
-          y: [0, 25, -40, 0],
-          scale: [1, 0.85, 1.1, 1],
-        }}
-        transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      {/* Accent orb — bottom center */}
-      <motion.div
-        className="absolute bottom-0 left-1/3 w-[400px] h-[400px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, hsl(215 100% 55% / 0.04) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-        animate={{
-          x: [0, -35, 25, 0],
-          y: [0, -30, 15, 0],
-        }}
-        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      {/* Subtle grid */}
+      {/* Subtle emerald-tinted grid */}
       <div 
         className="absolute inset-0 opacity-[0.012]"
         style={{
           backgroundImage: `
-            linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
+            linear-gradient(hsl(157 100% 49%) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(157 100% 49%) 1px, transparent 1px)
           `,
           backgroundSize: '100px 100px',
         }}

@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=SF+Pro+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@400;500;600;700;800&display=swap');
 
-/* NichePulse AI — Ultra-Premium Design System */
+/* NichePulse AI — Elite Obsidian Terminal Design System */
 
 @layer base {
   /* Light Theme */
@@ -18,7 +18,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 5%;
 
-    --primary: 215 100% 50%;
+    --primary: 157 100% 35%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 96%;
@@ -27,7 +27,7 @@
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 215 100% 50%;
+    --accent: 157 100% 35%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -35,15 +35,15 @@
 
     --border: 0 0% 92%;
     --input: 0 0% 92%;
-    --ring: 215 100% 50%;
+    --ring: 157 100% 35%;
 
     --radius: 1rem;
 
     /* Custom NichePulse tokens */
     --glass-bg: 0 0% 0% / 0.02;
     --glass-border: 0 0% 0% / 0.06;
-    --glow-primary: 215 100% 50%;
-    --glow-secondary: 270 100% 60%;
+    --glow-primary: 157 100% 35%;
+    --glow-secondary: 170 100% 40%;
     --text-gradient-start: 0 0% 30%;
     --text-gradient-end: 0 0% 5%;
     --card-elevated: 0 0% 100%;
@@ -52,63 +52,63 @@
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 0 0% 20%;
-    --sidebar-primary: 215 100% 50%;
+    --sidebar-primary: 157 100% 35%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 0 0% 96%;
     --sidebar-accent-foreground: 0 0% 9%;
     --sidebar-border: 0 0% 92%;
-    --sidebar-ring: 215 100% 50%;
+    --sidebar-ring: 157 100% 35%;
   }
 
-  /* Dark Theme */
+  /* Dark Theme — Obsidian Terminal */
   .dark {
     --background: 0 0% 2%;
-    --foreground: 0 0% 98%;
+    --foreground: 0 0% 95%;
 
-    --card: 0 0% 6%;
+    --card: 0 0% 10%;
     --card-foreground: 0 0% 98%;
 
     --popover: 0 0% 4%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 215 100% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 157 100% 49%;
+    --primary-foreground: 0 0% 5%;
 
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 10%;
+    --muted: 0 0% 8%;
     --muted-foreground: 0 0% 55%;
 
-    --accent: 215 100% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 157 100% 49%;
+    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 14%;
-    --input: 0 0% 14%;
-    --ring: 215 100% 60%;
+    --border: 157 20% 12%;
+    --input: 157 15% 12%;
+    --ring: 157 100% 49%;
 
-    /* Custom NichePulse tokens - Dark */
-    --glass-bg: 0 0% 100% / 0.03;
-    --glass-border: 0 0% 100% / 0.08;
-    --glow-primary: 215 100% 60%;
-    --glow-secondary: 270 100% 60%;
-    --text-gradient-start: 0 0% 70%;
-    --text-gradient-end: 0 0% 100%;
-    --card-elevated: 0 0% 8%;
+    /* Custom NichePulse tokens - Obsidian */
+    --glass-bg: 0 0% 100% / 0.04;
+    --glass-border: 157 100% 49% / 0.10;
+    --glow-primary: 157 100% 49%;
+    --glow-secondary: 170 100% 40%;
+    --text-gradient-start: 157 60% 60%;
+    --text-gradient-end: 0 0% 98%;
+    --card-elevated: 0 0% 12%;
     --success: 152 76% 50%;
     --warning: 38 100% 55%;
 
     --sidebar-background: 0 0% 3%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 215 100% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary: 157 100% 49%;
+    --sidebar-primary-foreground: 0 0% 5%;
     --sidebar-accent: 0 0% 10%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 14%;
-    --sidebar-ring: 215 100% 60%;
+    --sidebar-border: 157 20% 12%;
+    --sidebar-ring: 157 100% 49%;
   }
 }
 
@@ -118,7 +118,7 @@
   }
 
   html {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -131,7 +131,7 @@
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.15);
+    background: hsl(157 100% 49% / 0.15);
     color: hsl(var(--foreground));
   }
 }
@@ -165,6 +165,11 @@
     @apply backdrop-blur-2xl rounded-2xl;
     background: hsl(var(--glass-bg));
     border: 1px solid hsl(var(--glass-border));
+  }
+
+  .micro-glow {
+    border: 0.5px solid hsl(157 100% 49% / 0.15);
+    box-shadow: 0 0 12px hsl(157 100% 49% / 0.06);
   }
 
   .glow-border {
@@ -219,7 +224,6 @@
     box-shadow: 0 0 20px hsl(var(--glow-primary) / 0.6);
   }
 
-  /* Premium card with depth */
   .card-premium {
     @apply rounded-3xl backdrop-blur-2xl;
     background: hsl(var(--card));
@@ -239,7 +243,6 @@
       0 24px 48px -12px hsl(0 0% 0% / 0.4);
   }
 
-  /* Noise texture overlay for depth */
   .noise-overlay::after {
     content: '';
     position: absolute;
