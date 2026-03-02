@@ -274,7 +274,7 @@ const ViralIdeasSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="max-w-3xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
           {/* Results Header */}
           <div className="flex items-center justify-between mb-8">
@@ -304,8 +304,8 @@ const ViralIdeasSection = () => {
             </div>
           </div>
 
-          {/* Ideas List */}
-          <div className="space-y-3">
+          {/* Ideas Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {ideas.map((idea, index) => (
               <ViralIdeaCard
                 key={idea.id}
