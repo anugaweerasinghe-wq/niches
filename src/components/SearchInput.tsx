@@ -64,7 +64,7 @@ const SearchInput = ({ value, onChange, onSubmit, placeholder = "I love fitness 
       <motion.div
         className="absolute -inset-1 rounded-2xl opacity-0 blur-xl"
         style={{
-          background: 'linear-gradient(135deg, hsl(210 100% 60% / 0.3) 0%, hsl(280 100% 60% / 0.3) 100%)'
+          background: 'linear-gradient(135deg, hsl(157 100% 49% / 0.3) 0%, hsl(170 100% 40% / 0.3) 100%)'
         }}
         animate={{ opacity: isFocused ? 0.6 : 0 }}
         transition={{ duration: 0.3 }}

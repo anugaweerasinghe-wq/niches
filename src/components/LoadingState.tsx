@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import logoImg from '@/assets/logo.png';
 
 const statusMessages = [
   'Analyzing global trends',
@@ -51,14 +52,25 @@ const LoadingState = ({ progress }: LoadingStateProps) => {
           />
         ))}
         
-        {/* Center icon */}
+        {/* Center branded logo */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
-            <div className="w-8 h-8 rounded-full bg-primary animate-glow" />
+          <div 
+            className="w-16 h-16 rounded-full flex items-center justify-center"
+            style={{ 
+              boxShadow: '0 0 40px hsl(var(--primary) / 0.3)',
+              mixBlendMode: 'screen'
+            }}
+          >
+            <img 
+              src={logoImg} 
+              alt="Loading" 
+              className="w-16 h-16 object-contain"
+              style={{ filter: 'brightness(1.1)' }}
+            />
           </div>
         </motion.div>
       </div>
