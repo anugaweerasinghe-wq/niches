@@ -198,7 +198,7 @@ const Index = () => {
                 {step === 'search' && (
                   <motion.section
                     key="search"
-                    className="container mx-auto px-6 py-12 md:py-20"
+                    className="container mx-auto px-6 py-8 md:py-14"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
@@ -335,7 +335,7 @@ const Index = () => {
                 )}
 
                 {step === 'results' && data && (
-                  <motion.div key="results" ref={dashboardRef} className="container mx-auto px-6 py-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+                  <motion.div key="results" ref={dashboardRef} className="container mx-auto px-6 py-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, staggerChildren: 0.1 }}>
                     <motion.div className="text-center mb-14" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                       <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/6 backdrop-blur-sm border border-primary/12 text-primary text-sm font-medium mb-5">
                         <Sparkles className="w-3.5 h-3.5" />

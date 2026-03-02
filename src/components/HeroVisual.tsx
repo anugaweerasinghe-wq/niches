@@ -38,7 +38,7 @@ const HeroVisual = () => {
       </motion.div>
 
       {/* Spacer for the rings */}
-      <div className="h-40 md:h-48" />
+      <div className="h-28 md:h-36" />
 
       {/* Horizontally aligned feature chips — strict flexbox row */}
       <div className="flex items-center justify-center gap-3 md:gap-4">
