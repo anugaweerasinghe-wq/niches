@@ -1,4 +1,7 @@
-/** SEO-rich footer with maximum GEO content for search engine visibility */
+import { Link } from 'react-router-dom';
+import { glossaryTerms } from '@/data/glossary';
+
+/** SEO-rich footer with Hub & Spoke internal linking */
 const Footer = () => {
   return (
     <footer className="border-t border-border/30 mt-24">
@@ -6,34 +9,72 @@ const Footer = () => {
         {/* GEO Content Sections */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           <article>
-            <h3 className="text-sm font-semibold text-foreground mb-3 tracking-apple">How NichePulse AI Works</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3 tracking-tight">How NichePulse AI Works</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
               NichePulse AI uses advanced machine learning to analyze millions of data points across YouTube, TikTok, and Instagram.
-              Our niche analysis engine evaluates competition density, audience demand signals, and monetization potential to score
+              Our <Link to="/wiki/niche-analysis" className="text-primary hover:underline">niche analysis</Link> engine evaluates competition density, audience demand signals, and monetization potential to score
               every niche on a 0–100 scale. Content creators worldwide use NichePulse to discover untapped markets before they become saturated.
             </p>
           </article>
           <article>
-            <h3 className="text-sm font-semibold text-foreground mb-3 tracking-apple">Viral Video Prediction Technology</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3 tracking-tight">Viral Video Prediction Technology</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Our viral prediction model studies engagement rate benchmarks, watch-time retention curves, and algorithm signals
+              Our <Link to="/wiki/viral-prediction" className="text-primary hover:underline">viral prediction</Link> model studies <Link to="/wiki/engagement-rate" className="text-primary hover:underline">engagement rate</Link> benchmarks, watch-time <Link to="/wiki/retention-pattern" className="text-primary hover:underline">retention curves</Link>, and <Link to="/wiki/algorithm-signal" className="text-primary hover:underline">algorithm signals</Link>
               specific to each platform. Every viral idea includes a data-backed virality score, opening hook script, thumbnail concept,
-              and optimal posting schedule — giving you a complete blueprint to maximize your chance of going viral.
+              and optimal posting schedule.
             </p>
           </article>
           <article>
-            <h3 className="text-sm font-semibold text-foreground mb-3 tracking-apple">Supported Platforms &amp; Formats</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3 tracking-tight">Supported Platforms &amp; Formats</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Whether you're a YouTube creator seeking long-form content niches, a TikTok creator looking for short-form viral trends,
-              or an Instagram Reels creator wanting to grow your audience — NichePulse delivers tailored insights for your specific platform
-              and content style, including both faceless and persona-based channels.
+              Whether you're a YouTube creator seeking long-form content niches, a TikTok creator looking for <Link to="/wiki/short-form-content" className="text-primary hover:underline">short-form viral trends</Link>,
+              or an Instagram Reels creator wanting to grow — NichePulse delivers tailored insights for your specific platform
+              and content style, including both <Link to="/wiki/faceless-channel" className="text-primary hover:underline">faceless</Link> and persona-based channels.
             </p>
           </article>
         </div>
 
+        {/* Wiki Quick Links */}
+        <section className="mb-16">
+          <h3 className="text-sm font-semibold text-foreground mb-4 tracking-tight">Creator Intelligence Wiki</h3>
+          <div className="flex flex-wrap gap-2">
+            {glossaryTerms.map(term => (
+              <Link
+                key={term.slug}
+                to={`/wiki/${term.slug}`}
+                className="px-3 py-1.5 rounded-lg text-[11px] font-medium bg-muted/30 text-muted-foreground hover:text-primary hover:bg-primary/8 border border-border/20 hover:border-primary/15 transition-all"
+              >
+                {term.term}
+              </Link>
+            ))}
+            <Link
+              to="/wiki"
+              className="px-3 py-1.5 rounded-lg text-[11px] font-medium bg-primary/8 text-primary border border-primary/15 hover:bg-primary/15 transition-all"
+            >
+              View All →
+            </Link>
+          </div>
+        </section>
+
+        {/* Niche Quick Links */}
+        <section className="mb-16">
+          <h3 className="text-sm font-semibold text-foreground mb-4 tracking-tight">Popular Niche Analyses</h3>
+          <div className="flex flex-wrap gap-2">
+            {['fitness-tech', 'cooking-tips', 'crypto-trading', 'personal-finance', 'ai-tools', 'self-improvement', 'gaming-content', 'travel-vlogging', 'home-workouts', 'true-crime'].map(niche => (
+              <Link
+                key={niche}
+                to={`/niche/${niche}`}
+                className="px-3 py-1.5 rounded-lg text-[11px] font-medium bg-muted/30 text-muted-foreground hover:text-primary hover:bg-primary/8 border border-border/20 hover:border-primary/15 transition-all capitalize"
+              >
+                {niche.replace(/-/g, ' ')}
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* FAQ Section for GEO */}
         <section className="mb-16" itemScope itemType="https://schema.org/FAQPage" aria-label="Frequently Asked Questions">
-          <h3 className="text-sm font-semibold text-foreground mb-8 tracking-apple">Frequently Asked Questions</h3>
+          <h3 className="text-sm font-semibold text-foreground mb-8 tracking-tight">Frequently Asked Questions</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               {
@@ -75,10 +116,10 @@ const Footer = () => {
             © {new Date().getFullYear()} NichePulse AI — AI-Powered Niche Analysis & Viral Video Idea Generator
           </p>
           <nav className="flex items-center gap-6 text-xs text-muted-foreground/50" aria-label="Platform features">
+            <Link to="/wiki" className="hover:text-primary transition-colors">Creator Wiki</Link>
             <span>YouTube Niche Finder</span>
             <span>TikTok Viral Ideas</span>
             <span>Instagram Content Strategy</span>
-            <span>Free AI Analysis</span>
           </nav>
         </div>
       </div>
