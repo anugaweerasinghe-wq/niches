@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import WikiIndex from "./pages/WikiIndex";
 import WikiTerm from "./pages/WikiTerm";
 import NicheResult from "./pages/NicheResult";
+import SeoAudit from "./pages/SeoAudit";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
               <Route path="/wiki" element={<WikiIndex />} />
               <Route path="/wiki/:slug" element={<WikiTerm />} />
               <Route path="/niche/:id" element={<NicheResult />} />
+              <Route path="/admin/seo-audit" element={<SeoAudit />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
