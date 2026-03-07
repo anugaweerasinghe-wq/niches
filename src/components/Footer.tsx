@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { glossaryTerms } from '@/data/glossary';
+import { nicheDatabase } from '@/data/niches';
 
 /** SEO-rich footer with Hub & Spoke internal linking */
 const Footer = () => {
@@ -56,17 +57,17 @@ const Footer = () => {
           </div>
         </section>
 
-        {/* Niche Quick Links */}
+        {/* Niche Quick Links — All 50 */}
         <section className="mb-16">
-          <h3 className="text-sm font-semibold text-foreground mb-4 tracking-tight">Popular Niche Analyses</h3>
+          <h3 className="text-sm font-semibold text-foreground mb-4 tracking-tight">All Niche Analyses ({nicheDatabase.length})</h3>
           <div className="flex flex-wrap gap-2">
-            {['fitness-tech', 'cooking-tips', 'crypto-trading', 'personal-finance', 'ai-tools', 'self-improvement', 'gaming-content', 'travel-vlogging', 'home-workouts', 'true-crime'].map(niche => (
+            {nicheDatabase.map(niche => (
               <Link
-                key={niche}
-                to={`/niche/${niche}`}
-                className="px-3 py-1.5 rounded-lg text-[11px] font-medium bg-muted/30 text-muted-foreground hover:text-primary hover:bg-primary/8 border border-border/20 hover:border-primary/15 transition-all capitalize"
+                key={niche.slug}
+                to={`/niche/${niche.slug}`}
+                className="px-3 py-1.5 rounded-lg text-[11px] font-medium bg-muted/30 text-muted-foreground hover:text-primary hover:bg-primary/8 border border-border/20 hover:border-primary/15 transition-all"
               >
-                {niche.replace(/-/g, ' ')}
+                {niche.title}
               </Link>
             ))}
           </div>
