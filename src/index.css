@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-/* NichePulse AI — Elite Obsidian Terminal Design System */
+/* ViralHQ — Neon Obsidian Design System */
 
 @layer base {
   /* Light Theme */
@@ -18,16 +18,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 5%;
 
-    --primary: 157 100% 35%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 187 100% 50%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
+    --secondary: 338 99% 51%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 157 100% 35%;
+    --accent: 338 99% 51%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -35,80 +35,80 @@
 
     --border: 0 0% 92%;
     --input: 0 0% 92%;
-    --ring: 157 100% 35%;
+    --ring: 187 100% 50%;
 
     --radius: 1rem;
 
-    /* Custom NichePulse tokens */
+    /* Custom tokens */
     --glass-bg: 0 0% 0% / 0.02;
     --glass-border: 0 0% 0% / 0.06;
-    --glow-primary: 157 100% 35%;
-    --glow-secondary: 170 100% 40%;
-    --text-gradient-start: 0 0% 30%;
-    --text-gradient-end: 0 0% 5%;
+    --glow-primary: 187 100% 50%;
+    --glow-secondary: 338 99% 51%;
+    --text-gradient-start: 187 80% 40%;
+    --text-gradient-end: 338 80% 45%;
     --card-elevated: 0 0% 100%;
     --success: 152 76% 42%;
     --warning: 38 100% 50%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 0 0% 20%;
-    --sidebar-primary: 157 100% 35%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary: 187 100% 50%;
+    --sidebar-primary-foreground: 0 0% 5%;
     --sidebar-accent: 0 0% 96%;
     --sidebar-accent-foreground: 0 0% 9%;
     --sidebar-border: 0 0% 92%;
-    --sidebar-ring: 157 100% 35%;
+    --sidebar-ring: 187 100% 50%;
   }
 
-  /* Dark Theme — Obsidian Terminal */
+  /* Dark Theme — Neon Obsidian */
   .dark {
     --background: 0 0% 2%;
     --foreground: 0 0% 95%;
 
-    --card: 0 0% 10%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 98%;
 
     --popover: 0 0% 4%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 157 100% 49%;
+    --primary: 187 100% 50%;
     --primary-foreground: 0 0% 5%;
 
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 338 99% 55%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 8%;
     --muted-foreground: 0 0% 55%;
 
-    --accent: 157 100% 49%;
-    --accent-foreground: 0 0% 5%;
+    --accent: 338 99% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 157 20% 12%;
-    --input: 157 15% 12%;
-    --ring: 157 100% 49%;
+    --border: 187 15% 12%;
+    --input: 187 10% 12%;
+    --ring: 187 100% 50%;
 
-    /* Custom NichePulse tokens - Obsidian */
-    --glass-bg: 0 0% 100% / 0.04;
-    --glass-border: 157 100% 49% / 0.10;
-    --glow-primary: 157 100% 49%;
-    --glow-secondary: 170 100% 40%;
-    --text-gradient-start: 157 60% 60%;
-    --text-gradient-end: 0 0% 98%;
-    --card-elevated: 0 0% 12%;
+    /* Custom tokens — Neon Obsidian */
+    --glass-bg: 0 0% 100% / 0.03;
+    --glass-border: 187 100% 50% / 0.08;
+    --glow-primary: 187 100% 50%;
+    --glow-secondary: 338 99% 55%;
+    --text-gradient-start: 187 100% 60%;
+    --text-gradient-end: 338 90% 65%;
+    --card-elevated: 0 0% 10%;
     --success: 152 76% 50%;
     --warning: 38 100% 55%;
 
     --sidebar-background: 0 0% 3%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 157 100% 49%;
+    --sidebar-primary: 187 100% 50%;
     --sidebar-primary-foreground: 0 0% 5%;
     --sidebar-accent: 0 0% 10%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 157 20% 12%;
-    --sidebar-ring: 157 100% 49%;
+    --sidebar-border: 187 15% 12%;
+    --sidebar-ring: 187 100% 50%;
   }
 }
 
@@ -118,7 +118,7 @@
   }
 
   html {
-    font-family: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -130,8 +130,15 @@
     overflow-x: hidden;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-rendering: optimizeLegibility;
+  }
+
   ::selection {
-    background: hsl(157 100% 49% / 0.15);
+    background: hsl(187 100% 50% / 0.15);
     color: hsl(var(--foreground));
   }
 }
@@ -140,7 +147,7 @@
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(
-      180deg,
+      135deg,
       hsl(var(--text-gradient-start)) 0%,
       hsl(var(--text-gradient-end)) 100%
     );
@@ -155,21 +162,39 @@
     );
   }
 
+  /* Glassmorphism — desktop */
   .glass {
-    @apply backdrop-blur-2xl;
+    @apply backdrop-blur-xl;
     background: hsl(var(--glass-bg));
     border: 1px solid hsl(var(--glass-border));
   }
 
   .glass-card {
-    @apply backdrop-blur-2xl rounded-2xl;
+    @apply backdrop-blur-xl rounded-2xl;
     background: hsl(var(--glass-bg));
     border: 1px solid hsl(var(--glass-border));
   }
 
+  /* Mobile performance override: disable blur */
+  @media (max-width: 768px) {
+    .glass,
+    .glass-card {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .dark .glass,
+    .dark .glass-card {
+      background: hsla(0, 0%, 6%, 0.98);
+    }
+    .glass,
+    .glass-card {
+      background: hsla(0, 0%, 97%, 0.98);
+    }
+  }
+
   .micro-glow {
-    border: 0.5px solid hsl(157 100% 49% / 0.15);
-    box-shadow: 0 0 12px hsl(157 100% 49% / 0.06);
+    border: 0.5px solid hsl(187 100% 50% / 0.12);
+    box-shadow: 0 0 12px hsl(187 100% 50% / 0.05);
   }
 
   .glow-border {
@@ -225,18 +250,39 @@
   }
 
   .card-premium {
-    @apply rounded-3xl backdrop-blur-2xl;
+    @apply rounded-3xl;
     background: hsl(var(--card));
     border: 1px solid hsl(var(--border) / 0.5);
-    box-shadow: 
+    box-shadow:
       0 0 0 1px hsl(var(--border) / 0.3),
       0 2px 4px -1px hsl(0 0% 0% / 0.06),
       0 8px 16px -4px hsl(0 0% 0% / 0.08),
       0 24px 48px -12px hsl(0 0% 0% / 0.12);
   }
 
+  /* Glassmorphism card with full blur on desktop, solid on mobile */
+  .glass-premium {
+    @apply rounded-2xl backdrop-blur-xl;
+    background: hsl(var(--glass-bg));
+    border: 1px solid hsl(var(--glass-border));
+  }
+
+  @media (max-width: 768px) {
+    .glass-premium {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .dark .glass-premium {
+      background: hsla(0, 0%, 6%, 0.98);
+      border-color: hsl(187 15% 12%);
+    }
+    .glass-premium {
+      background: hsla(0, 0%, 97%, 0.98);
+    }
+  }
+
   .dark .card-premium {
-    box-shadow: 
+    box-shadow:
       0 0 0 1px hsl(var(--border) / 0.5),
       0 2px 4px -1px hsl(0 0% 0% / 0.2),
       0 8px 16px -4px hsl(0 0% 0% / 0.3),

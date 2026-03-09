@@ -1,30 +1,37 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp } from 'lucide-react';
-
-const trendingTopics = [
-  'AI Agents +142%', 'Faceless YouTube +89%', 'No-Code SaaS +67%',
-  'Stoicism Shorts +55%', 'Cybersecurity +52%', 'EV Reviews +48%',
-  '3D Printing +41%', 'Street Food +38%', 'Horror ASMR +35%',
-  'Automation Tools +61%', 'Credit Repair +27%', 'Urbex Content +40%',
-];
+import { Link } from 'react-router-dom';
+import { nicheDatabase } from '@/data/niches';
 
 const MarketPulseTicker = () => {
+  // Build ticker items from real niche data with valid routes
+  const tickerItems = useMemo(() => {
+    const shuffled = [...nicheDatabase].sort(() => Math.random() - 0.5);
+    return shuffled.map(n => ({
+      label: `${n.title} +${n.growthRate}%`,
+      slug: n.slug,
+    }));
+  }, []);
+
   const [index, setIndex] = useState(0);
   const [flash, setFlash] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex(prev => (prev + 1) % trendingTopics.length);
+      setIndex(prev => (prev + 1) % tickerItems.length);
       setFlash(true);
       setTimeout(() => setFlash(false), 600);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [tickerItems.length]);
+
+  const current = tickerItems[index];
 
   return (
-    <div
-      className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-medium border transition-all duration-300 cursor-default ${
+    <Link
+      to={`/niche/${current.slug}`}
+      className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-medium border transition-all duration-300 cursor-pointer hover:scale-[1.02] active:scale-[0.98] ${
         flash
           ? 'bg-primary/10 border-primary/20 text-primary'
           : 'bg-muted/30 border-border/20 text-muted-foreground'
@@ -41,10 +48,10 @@ const MarketPulseTicker = () => {
           transition={{ duration: 0.2 }}
           className="whitespace-nowrap"
         >
-          {trendingTopics[index]}
+          {current.label}
         </motion.span>
       </AnimatePresence>
-    </div>
+    </Link>
   );
 };
 
