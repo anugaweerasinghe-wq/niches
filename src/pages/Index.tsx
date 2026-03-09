@@ -1,6 +1,9 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, RotateCcw, Search, Flame, Sparkles, TrendingUp, Zap, Globe } from 'lucide-react';
+import StatusBadge from '@/components/StatusBadge';
+import MarketPulseTicker from '@/components/MarketPulseTicker';
+import ZeigarnikRing from '@/components/ZeigarnikRing';
 import { useSearchParams } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import SearchInput from '@/components/SearchInput';
