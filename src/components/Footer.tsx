@@ -1,12 +1,35 @@
 import { Link } from 'react-router-dom';
 import { glossaryTerms } from '@/data/glossary';
 import { nicheDatabase } from '@/data/niches';
+import { Shield, CheckCircle } from 'lucide-react';
 
-/** SEO-rich footer with Hub & Spoke internal linking */
+/** SEO-rich footer with Hub & Spoke internal linking + E-E-A-T signals */
 const Footer = () => {
   return (
     <footer className="border-t border-border/30 mt-24">
       <div className="container mx-auto px-6 py-16 md:py-20">
+        {/* Founder E-E-A-T Signal */}
+        <section className="mb-16 rounded-2xl glass-premium p-6 md:p-8">
+          <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <Shield className="w-7 h-7 text-primary" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <h3 className="text-sm font-semibold text-foreground">Anuga Weerasinghe</h3>
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/15">
+                  <CheckCircle className="w-2.5 h-2.5" /> Verified
+                </span>
+              </div>
+              <p className="text-xs text-muted-foreground font-medium mb-1">Lead Systems Architect & Growth Strategist</p>
+              <p className="text-xs text-muted-foreground leading-relaxed max-w-2xl">
+                Specializing in Programmatic SEO & Algorithmic Analysis with 1.2M+ Total Network Views.
+                NichePulse AI is engineered to deliver real-time, data-driven niche intelligence to content creators worldwide.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* GEO Content Sections */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           <article>
@@ -97,7 +120,7 @@ const Footer = () => {
             ].map((faq) => (
               <div
                 key={faq.q}
-                className="rounded-2xl bg-card/60 backdrop-blur-sm border border-border/40 p-5"
+                className="rounded-2xl glass-premium p-5"
                 itemScope
                 itemProp="mainEntity"
                 itemType="https://schema.org/Question"
@@ -111,11 +134,17 @@ const Footer = () => {
           </div>
         </section>
 
-        {/* Bottom bar */}
+        {/* Bottom bar with status */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-border/20">
-          <p className="text-xs text-muted-foreground/70">
-            © {new Date().getFullYear()} NichePulse AI — AI-Powered Niche Analysis & Viral Video Idea Generator
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="text-xs text-muted-foreground/70">
+              © {new Date().getFullYear()} NichePulse AI — AI-Powered Niche Analysis & Viral Video Idea Generator
+            </p>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider bg-success/10 text-success border border-success/15">
+              <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
+              System Operational
+            </span>
+          </div>
           <nav className="flex items-center gap-6 text-xs text-muted-foreground/50" aria-label="Platform features">
             <Link to="/wiki" className="hover:text-primary transition-colors">Creator Wiki</Link>
             <span>YouTube Niche Finder</span>

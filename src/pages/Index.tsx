@@ -1,6 +1,9 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, RotateCcw, Search, Flame, Sparkles, TrendingUp, Zap, Globe } from 'lucide-react';
+import StatusBadge from '@/components/StatusBadge';
+import MarketPulseTicker from '@/components/MarketPulseTicker';
+import ZeigarnikRing from '@/components/ZeigarnikRing';
 import { useSearchParams } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import SearchInput from '@/components/SearchInput';
@@ -78,7 +81,7 @@ const Index = () => {
       <AnimatedBackground />
 
       {/* Premium Frosted Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-3xl bg-background/60 border-b border-border/30 micro-glow">
+      <header className="fixed top-0 left-0 right-0 z-50 glass micro-glow border-b border-border/30">
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             <Logo />
@@ -110,6 +113,9 @@ const Index = () => {
             </nav>
 
             <div className="flex items-center gap-3">
+              <StatusBadge />
+              <MarketPulseTicker />
+              <ZeigarnikRing />
               {/* Mobile Tab Toggle */}
               <div className="md:hidden flex items-center bg-muted/30 backdrop-blur-xl rounded-xl p-1 border border-border/20">
                 {[

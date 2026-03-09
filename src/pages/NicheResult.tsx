@@ -10,6 +10,7 @@ import MarketPulseTicker from '@/components/MarketPulseTicker';
 import ZeigarnikRing from '@/components/ZeigarnikRing';
 import { glossaryTerms } from '@/data/glossary';
 import { getNicheBySlug, getComparisonNiches, nicheDatabase } from '@/data/niches';
+import StatusBadge from '@/components/StatusBadge';
 
 const ViralScoreGauge = ({ score }: { score: number }) => {
   const radius = 54;
@@ -42,12 +43,20 @@ const TrendIcon = ({ direction }: { direction: 'rising' | 'stable' | 'declining'
   return <Minus className="w-4 h-4 text-muted-foreground" />;
 };
 
+/** Get 6 random related niches for internal linking */
+const getRelatedNiches = (currentSlug: string) => {
+  const others = nicheDatabase.filter(n => n.slug !== currentSlug);
+  const shuffled = [...others].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 6);
+};
+
 const NicheResult = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const niche = id ? getNicheBySlug(id) : undefined;
   const nicheTitle = niche?.title || (id ? id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') : '');
   const comparisonNiches = id ? getComparisonNiches(id, 4) : [];
+  const relatedNiches = id ? getRelatedNiches(id) : [];
   const relevantTerms = glossaryTerms.slice(0, 3);
 
   const jsonLd = [
@@ -58,8 +67,8 @@ const NicheResult = () => {
       "description": niche?.heroDescription || `Complete ${nicheTitle} niche analysis and viral content strategy.`,
       "url": `https://niches.lovable.app/niche/${id}`,
       "datePublished": "2026-02-01",
-      "dateModified": "2026-03-07",
-      "author": { "@type": "Organization", "name": "NichePulse AI" },
+      "dateModified": "2026-03-09",
+      "author": { "@type": "Person", "name": "Anuga Weerasinghe", "jobTitle": "Lead Systems Architect & Growth Strategist" },
       "publisher": { "@type": "Organization", "name": "NichePulse AI", "logo": { "@type": "ImageObject", "url": "https://niches.lovable.app/images/logo.png" } },
     },
     {
@@ -87,11 +96,12 @@ const NicheResult = () => {
     <div className="min-h-screen bg-background relative">
       <AnimatedBackground />
 
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-3xl bg-background/60 border-b border-border/30 micro-glow">
+      <header className="fixed top-0 left-0 right-0 z-50 glass micro-glow border-b border-border/30">
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             <Link to="/"><Logo /></Link>
             <div className="flex items-center gap-3">
+              <StatusBadge />
               <MarketPulseTicker />
               <ZeigarnikRing />
               <ThemeToggle />
@@ -146,8 +156,7 @@ const NicheResult = () => {
               ].map((metric, i) => (
                 <motion.div
                   key={metric.label}
-                  className="rounded-2xl bg-card/40 backdrop-blur-2xl border border-border/10 p-4 hover:bg-card/60 hover:scale-[0.98] active:scale-[0.96] transition-all cursor-default"
-                  style={{ borderWidth: '0.5px' }}
+                  className="rounded-2xl glass-premium p-4 hover:scale-[0.98] active:scale-[0.96] transition-all cursor-default"
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
@@ -180,11 +189,11 @@ const NicheResult = () => {
             <section className="mb-16" style={{ contentVisibility: 'auto' }}>
               <h2 className="text-xl font-semibold tracking-tight text-foreground mb-6">Content Gap Analysis</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="rounded-2xl bg-card/40 backdrop-blur-2xl border border-border/10 p-5" style={{ borderWidth: '0.5px' }}>
+                <div className="rounded-2xl glass-premium p-5">
                   <h3 className="text-sm font-semibold text-foreground mb-2">Underserved Content Gap</h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">{niche.contentGap}</p>
                 </div>
-                <div className="rounded-2xl bg-card/40 backdrop-blur-2xl border border-border/10 p-5" style={{ borderWidth: '0.5px' }}>
+                <div className="rounded-2xl glass-premium p-5">
                   <h3 className="text-sm font-semibold text-foreground mb-2">Top Performing Format</h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     The best-performing format in {nicheTitle.toLowerCase()} is <strong className="text-foreground">{niche.topFormat}</strong> on <strong className="text-foreground">{niche.bestPlatform}</strong>.
@@ -195,7 +204,7 @@ const NicheResult = () => {
             </section>
           )}
 
-          {/* Comparison Table — Semantic HTML */}
+          {/* Comparison Table */}
           {niche && comparisonNiches.length > 0 && (
             <section className="mb-16" style={{ contentVisibility: 'auto' }}>
               <h2 className="text-xl font-semibold tracking-tight text-foreground mb-2 flex items-center gap-2">
@@ -250,11 +259,36 @@ const NicheResult = () => {
             </section>
           )}
 
+          {/* Internal Linking — Study Related Niches */}
+          {relatedNiches.length > 0 && (
+            <section className="mb-16" style={{ contentVisibility: 'auto' }}>
+              <h2 className="text-lg font-semibold tracking-tight text-foreground mb-4">Explore Related Niches</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {relatedNiches.map(rn => (
+                  <Link
+                    key={rn.slug}
+                    to={`/niche/${rn.slug}`}
+                    className="group rounded-2xl glass-premium p-4 hover:scale-[0.98] active:scale-[0.96] transition-all"
+                  >
+                    <h3 className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                      Study {rn.title} Retention Data
+                    </h3>
+                    <p className="text-[10px] text-muted-foreground line-clamp-2">{rn.heroDescription}</p>
+                    <div className="flex items-center gap-3 mt-2 text-[10px] text-muted-foreground">
+                      <span>Score: {rn.viralScore}</span>
+                      <span>Growth: +{rn.growthRate}%</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Sticky CTA */}
           <div className="sticky bottom-6 z-40 flex justify-center mb-16">
             <motion.button
               onClick={handleAnalyze}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-primary text-primary-foreground font-medium text-sm shadow-xl shadow-primary/25 hover:shadow-2xl hover:brightness-110 transition-all backdrop-blur-xl border border-primary/20"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-primary text-primary-foreground font-medium text-sm shadow-xl shadow-primary/25 hover:shadow-2xl hover:brightness-110 transition-all border border-primary/20"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
@@ -272,8 +306,7 @@ const NicheResult = () => {
                 <Link
                   key={term.slug}
                   to={`/wiki/${term.slug}`}
-                  className="group rounded-2xl backdrop-blur-2xl bg-card/40 border border-border/10 p-4 hover:bg-card/60 hover:border-primary/15 hover:scale-[0.98] active:scale-[0.96] transition-all"
-                  style={{ borderWidth: '0.5px' }}
+                  className="group rounded-2xl glass-premium p-4 hover:scale-[0.98] active:scale-[0.96] transition-all"
                 >
                   <h3 className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors mb-1">{term.term}</h3>
                   <p className="text-[10px] text-muted-foreground line-clamp-2">{term.shortDefinition}</p>
