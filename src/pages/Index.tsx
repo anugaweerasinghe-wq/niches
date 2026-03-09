@@ -113,6 +113,9 @@ const Index = () => {
             </nav>
 
             <div className="flex items-center gap-3">
+              <StatusBadge />
+              <MarketPulseTicker />
+              <ZeigarnikRing />
               {/* Mobile Tab Toggle */}
               <div className="md:hidden flex items-center bg-muted/30 backdrop-blur-xl rounded-xl p-1 border border-border/20">
                 {[
