@@ -362,33 +362,6 @@ const Index = () => {
                       <ScorecardGrid scorecard={data.scorecard} />
                     </section>
 
-                    <section className="mb-14" aria-label="Outlier creators">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="p-2 rounded-xl bg-primary/8 border border-primary/12">
-                          <TrendingUp className="w-4 h-4 text-primary" />
-                        </div>
-                        <h3 className="text-lg font-semibold tracking-apple text-foreground">Outlier Creators</h3>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {data.outliers.map((creator, index) => (
-                          <OutlierCard key={creator.name} creator={creator} index={index} />
-                        ))}
-                      </div>
-                    </section>
-
-                    <section className="mb-14" aria-label="Viral content feed">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="p-2 rounded-xl bg-primary/8 border border-primary/12">
-                          <Globe className="w-4 h-4 text-primary" />
-                        </div>
-                        <h3 className="text-lg font-semibold tracking-apple text-foreground">Viral Content Feed</h3>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {data.viralContent.map((video, index) => (
-                          <VideoCard key={video.id} video={video} index={index} />
-                        ))}
-                      </div>
-                    </section>
 
                     <section aria-label="Content blueprint">
                       <div className="flex items-center gap-3 mb-6">
