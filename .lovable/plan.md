@@ -1,128 +1,199 @@
 
 
-# Elite Obsidian Terminal — Logo Integration & Branding Overhaul
+# Implementation Plan: ViralHQ Production Overhaul
 
-## Overview
-Integrate the uploaded "N-Pulse" logo as the primary brand asset (header + favicon), replace the loading spinner with the branded logo, and apply the full Obsidian Terminal theme system (#050505 background, #00FF9D Cyber-Emerald accents).
-
----
-
-## 1. Logo Asset Integration
-
-**Copy the uploaded image into the project twice:**
-- `public/images/logo.png` — for favicon and HTML meta references
-- `src/assets/logo.png` — for React component imports (better bundling)
-
-**Favicon update** in `index.html`:
-- Replace the current `favicon.ico` reference with the new logo
-- Update the Organization schema `logo` field to point to `/images/logo.png`
+This is a large, multi-phase implementation. Below is the full plan organized by priority.
 
 ---
 
-## 2. Header Refactor (`src/components/Logo.tsx`)
+## Phase 1: Technical Fixes
 
-Replace the current SVG + "NichePulse" text with:
-- The N-Pulse logo image (h-8, w-auto) wrapped in a container with `mix-blend-mode: screen` and `filter: brightness(1.1)` to dissolve the black background into the #050505 site background
-- Text "NichePulse" in Inter Tight, font-bold, tracking-tight
-- Flex container with `items-center gap-2.5`
-- Keep the existing framer-motion entrance animation
+### 1A. Domain Migration (sitemap + robots + canonicals)
+- **`public/sitemap.xml`**: Replace all `https://niches.lovable.app` with `https://viralhq.vercel.app`. Deduplicate any repeated URLs. Add new routes for `/blog`, `/tools`, `/trending`, `/vs/nichepulse-vs-vidiq-vs-tubebuddy`.
+- **`public/robots.txt`**: Update sitemap line to `Sitemap: https://viralhq.vercel.app/sitemap.xml`.
+- **`src/components/SEOHead.tsx`**: Change `fullUrl` base from `https://niches.lovable.app` to `https://viralhq.vercel.app`.
+- **All JSON-LD schemas** in `NicheResult.tsx`, `WikiIndex.tsx`, `WikiTerm.tsx`, `index.html`: Find-and-replace `niches.lovable.app` → `viralhq.vercel.app`.
 
----
-
-## 3. Branded Loading State (`src/components/LoadingState.tsx`)
-
-Replace the generic glowing circle spinner (lines 54-63) with:
-- The N-Pulse logo image (w-16, h-16) with `mix-blend-mode: screen`
-- Custom breathing animation: `animate={{ scale: [1, 1.05, 1] }}` with `transition={{ duration: 2, repeat: Infinity }}`
-- Cyber-Emerald outer glow via `box-shadow: 0 0 40px hsl(157 100% 49% / 0.3)`
-- Keep the pulse rings around it (they auto-inherit `--primary` color)
+### 1B. Remove Hallucinated Content
+- **`src/pages/Index.tsx`** (results section): Remove the "Outlier Creators" section (lines 364-376) and "Viral Content Feed" section (lines 378-390) which render `OutlierCard` and `VideoCard` with AI-hallucinated data.
+- Remove imports of `OutlierCard` and `VideoCard` from Index.tsx.
+- Keep the files `OutlierCard.tsx` and `VideoCard.tsx` but they will no longer be rendered.
+- Keep `ScorecardGrid` and `ContentBlueprint` as these show useful analysis data.
 
 ---
 
-## 4. Obsidian Terminal Theme (`src/index.css`)
+## Phase 2: Enhanced 53 Niche Pages
 
-### Dark theme (`.dark` block) — full variable replacement:
-| Variable | Current | New (Obsidian) |
-|----------|---------|----------------|
-| `--background` | `0 0% 2%` | `0 0% 2%` (keep ~#050505) |
-| `--foreground` | `0 0% 98%` | `0 0% 95%` |
-| `--card` | `0 0% 6%` | `0 0% 10%` (~#1A1A1A) |
-| `--primary` | `215 100% 60%` | `157 100% 49%` (#00FF9D) |
-| `--accent` | `215 100% 55%` | `157 100% 49%` |
-| `--ring` | `215 100% 60%` | `157 100% 49%` |
-| `--border` | `0 0% 14%` | `157 20% 12%` (emerald-tinted) |
-| `--input` | `0 0% 14%` | `157 15% 12%` |
-| `--glow-primary` | `215 100% 60%` | `157 100% 49%` |
-| `--glow-secondary` | `270 100% 60%` | `170 100% 40%` |
-| `--glass-border` | `0 0% 100% / 0.08` | `157 100% 49% / 0.10` |
-| `--text-gradient-start` | `0 0% 70%` | `157 60% 60%` |
-| `--text-gradient-end` | `0 0% 100%` | `0 0% 98%` |
+### 2A. Expand Niche Data (`src/data/niches.ts`)
+Add new fields to `NicheData` interface:
+- `whyGrowing: string[]` — 3 bullet points on why this niche is growing
+- `videoIdeas: string[]` — 8 specific clickable video title ideas
+- `platforms: ('YouTube' | 'TikTok' | 'Instagram')[]` — best platforms badge row
 
-### Light theme (`:root` block):
-| Variable | New |
-|----------|-----|
-| `--primary` | `157 100% 35%` (darker emerald for contrast on white) |
-| `--accent` | `157 100% 35%` |
-| `--ring` | `157 100% 35%` |
-| `--glow-primary` | `157 100% 35%` |
+Populate all 53 niches with unique, varied content for each field. Verify the slug list matches exactly: the current database has ~53 entries already; confirm all 53 requested slugs exist, add any missing ones.
 
-### New utility classes:
-- `.micro-glow` — `border: 0.5px solid hsl(157 100% 49% / 0.15); box-shadow: 0 0 12px hsl(157 100% 49% / 0.06);`
-- `::selection` — update to emerald tint
+### 2B. Refactor `NicheResult.tsx`
+Add the following new sections (all using static data from `niches.ts`):
+1. **"Why This Niche is Growing"** — 3 bullet points from `whyGrowing`
+2. **"Top 8 Video Ideas"** — list of 8 specific video titles
+3. **"Best Platforms"** — badge row showing YouTube/TikTok/Instagram icons
+4. **"You Might Also Like"** — 3 related niche links (deterministic, not random) at the bottom
+5. **HowTo JSON-LD schema** on every niche page
+6. Internal CTA button back to `/` (already exists as sticky CTA, keep it)
 
-### Font import:
-- Add `Inter+Tight:wght@400;500;600;700;800` to the Google Fonts import URL
+Reduce related niches from 6 random to 3 deterministic (based on same category).
 
 ---
 
-## 5. Animated Background (`src/components/AnimatedBackground.tsx`)
+## Phase 3: Structured Data
 
-Replace the 3 large framer-motion gradient orbs with:
-- 12 small CSS-only emerald dots (2-4px) using `absolute` positioning with staggered `float` animations (15-40s durations)
-- GPU-accelerated CSS transforms only (no JS computation, <5% CPU)
-- Keep the subtle grid overlay, tint it emerald
-- Each dot: `bg-[#00FF9D]` with varying opacity (0.1-0.3) and blur (1-3px)
+### 3A. Homepage FAQ JSON-LD
+- Add FAQ schema to `Index.tsx` via `SEOHead` using the existing FAQ content from the Footer.
 
----
+### 3B. HowTo Schema on Niche Pages
+- Each niche page gets a HowTo JSON-LD: "How to succeed in [Niche]" with 3 steps derived from the page content.
 
-## 6. Micro-Glow Borders on Key Components
-
-Apply `border border-[hsl(157_100%_49%/0.08)]` (emerald micro-glow) to:
-- **Header** (`Index.tsx` line 81): Add micro-glow to bottom border
-- **SearchInput.tsx** glow effect: Change gradient from blue/purple to emerald
-- **PlatformCard.tsx**, **StyleCard.tsx**: These use `--primary` via CSS vars, so they auto-update
-- **Footer.tsx** FAQ cards: Auto-update via `--border` variable
+### 3C. Article Schema on Blog Posts
+- Each blog post gets Article JSON-LD (implemented in Phase 4).
 
 ---
 
-## 7. `tailwind.config.ts` Updates
+## Phase 4: Blog Section
 
-- Add `'Inter Tight'` before `'Inter'` in the `fontFamily.sans` array
-- Add `particle-float` keyframe for background dots
-- Existing color mappings reference CSS variables, so they auto-propagate
+### 4A. Blog Data File (`src/data/blog.ts`)
+Create a data file with 5 articles, each containing:
+- `slug`, `title`, `metaDescription`, `targetKeyword`, `publishDate`
+- `content`: Full 1500+ word article body with H2 subheadings, stored as structured sections
+- `relatedNiches: string[]` — 3+ niche slugs for internal linking
+- `relatedWikiSlugs: string[]` — wiki page links
+
+Articles:
+1. `best-youtube-niches-2026` — "Best YouTube Niches in 2026 That Are Still Untapped"
+2. `find-youtube-niche-using-ai` — "How to Find Your YouTube Niche Using AI"
+3. `tiktok-niche-ideas-low-competition-2026` — "Top TikTok Niche Ideas With Low Competition in 2026"
+4. `start-faceless-youtube-channel` — "How to Start a Faceless YouTube Channel and Go Viral"
+5. `how-to-go-viral-youtube` — "How to Go Viral on YouTube: What the Algorithm Actually Wants"
+
+### 4B. Blog Pages
+- **`src/pages/BlogIndex.tsx`** (`/blog`): Lists all 5 articles with title, excerpt, date. SEOHead with unique meta.
+- **`src/pages/BlogPost.tsx`** (`/blog/:slug`): Renders full article with H2 structure, internal links to `/niche/` pages, `/tools`, and `/wiki/` pages. Article JSON-LD schema. Breadcrumbs.
+
+### 4C. Routes
+- Add `/blog` and `/blog/:slug` to `App.tsx`.
 
 ---
 
-## 8. Google Verification Tag (`index.html`)
+## Phase 5: Free Tools Section
 
-- Add: `<meta name="google-site-verification" content="srN6VtadGTwoTU5FUVYRLP8X1n8zCjTX872UROAm3wM" />`
-- Keep existing verification tag on line 10
+### 5A. Tools Data & Pages
+- **`src/pages/ToolsIndex.tsx`** (`/tools`): Landing page listing 3 tools with descriptions.
+- **Tool 1: YouTube Niche Score Calculator** — Form input (niche topic) → calls `analyze-niche` edge function → displays scored breakdown (competition, growth, monetization).
+- **Tool 2: Viral Hook Generator** — Form input (niche) → calls `generate-viral-ideas` edge function → displays 5 hook ideas.
+- **Tool 3: Platform Match Quiz** — 5 multiple-choice questions, client-side scoring logic, recommends YouTube/TikTok/Instagram.
+
+All tools live on the `/tools` page as tabbed sections (no separate routes needed). They reuse existing edge functions.
 
 ---
 
-## Files Modified
+## Phase 6: Comparison Page
 
-| File | Type of Change |
-|------|---------------|
-| `public/images/logo.png` | New — copied from upload |
-| `src/assets/logo.png` | New — copied from upload |
-| `index.html` | Favicon update + Google verification tag |
-| `src/components/Logo.tsx` | Replace SVG with logo image + text |
-| `src/components/LoadingState.tsx` | Replace spinner with branded logo |
-| `src/index.css` | Full Obsidian theme variables + Inter Tight font + micro-glow utility |
-| `tailwind.config.ts` | Inter Tight font stack |
-| `src/components/AnimatedBackground.tsx` | Replace orbs with emerald particle dots |
-| `src/components/SearchInput.tsx` | Glow gradient color update (blue to emerald) |
+- **`src/pages/Comparison.tsx`** (`/vs/nichepulse-vs-vidiq-vs-tubebuddy`): Static page with:
+  - SEO title and meta
+  - Feature comparison table (HTML `<table>`)
+  - Pros/cons section for each tool
+  - CTA button to niche finder
+  - Article JSON-LD
 
-**Not modified**: Edge functions, hooks, search logic, API calls, routing, DOM structure.
+---
+
+## Phase 7: Weekly Trending Page
+
+- **`src/pages/Trending.tsx`** (`/trending`): Static page "Top 10 Trending YouTube Niches This Week" with:
+  - Manually curated list of 10 niches (linking to existing `/niche/` pages)
+  - Week date displayed, structured for easy weekly updates
+  - SEOHead with unique meta
+  - Added to sitemap
+
+---
+
+## Phase 8: Email Capture
+
+### 8A. Database
+- Create `subscribers` table via migration: `id uuid PK`, `email text NOT NULL UNIQUE`, `created_at timestamptz DEFAULT now()`, `source text` (tracks which page).
+- RLS: Allow anonymous inserts (public signup), no select/update/delete for anon.
+
+### 8B. Component
+- **`src/components/EmailCapture.tsx`**: Simple form with email input + submit button. Calls `supabase.from('subscribers').insert(...)`. Shows success/error toast.
+- Add to Homepage (above Footer) and every NicheResult page footer.
+
+---
+
+## Phase 9: Navigation & Internal Linking
+
+### 9A. Main Navigation
+- Update the header in `Index.tsx`, `NicheResult.tsx`, `WikiIndex.tsx`, `WikiTerm.tsx` (and all new pages) to include nav links: Blog, Tools, Trending, Wiki.
+- Extract a shared `NavBar` component to avoid duplication.
+
+### 9B. Internal Linking
+- **Niche pages**: "You might also like" section with 3 related niches (deterministic by category).
+- **Homepage**: Add a "Popular Niches" section linking to 6 top niches (highest viral scores).
+- **Blog articles**: Each links to `/tools` and at least one `/wiki/` page (embedded in article content).
+
+### 9C. Footer Updates
+- Add Blog, Tools, Trending to footer nav.
+- Replace `niches.lovable.app` references with `viralhq.vercel.app`.
+
+---
+
+## Files to Create
+| File | Purpose |
+|------|---------|
+| `src/data/blog.ts` | 5 blog articles (1500+ words each) |
+| `src/pages/BlogIndex.tsx` | Blog listing page |
+| `src/pages/BlogPost.tsx` | Individual blog post page |
+| `src/pages/ToolsIndex.tsx` | Free tools page (3 tools) |
+| `src/pages/Comparison.tsx` | vs VidIQ vs TubeBuddy |
+| `src/pages/Trending.tsx` | Weekly trending niches |
+| `src/components/EmailCapture.tsx` | Email signup form |
+| `src/components/NavBar.tsx` | Shared navigation bar |
+
+## Files to Modify
+| File | Changes |
+|------|---------|
+| `src/data/niches.ts` | Add `whyGrowing`, `videoIdeas`, `platforms` fields to all 53 entries |
+| `src/pages/NicheResult.tsx` | Add new sections, HowTo schema, fix domain, remove random linking |
+| `src/pages/Index.tsx` | Remove Outlier/Video sections, add Popular Niches, add FAQ JSON-LD, add EmailCapture |
+| `src/components/SEOHead.tsx` | Change base URL to viralhq.vercel.app |
+| `src/components/Footer.tsx` | Update links, domain references |
+| `src/App.tsx` | Add routes for /blog, /blog/:slug, /tools, /vs/*, /trending |
+| `public/sitemap.xml` | Domain migration + new routes |
+| `public/robots.txt` | Update sitemap URL |
+| `index.html` | Update domain in JSON-LD schemas |
+| `src/pages/WikiIndex.tsx` | Fix domain in JSON-LD |
+| `src/pages/WikiTerm.tsx` | Fix domain in JSON-LD |
+
+## Database Migration
+```sql
+CREATE TABLE public.subscribers (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  email text NOT NULL UNIQUE,
+  created_at timestamptz DEFAULT now(),
+  source text
+);
+ALTER TABLE public.subscribers ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow anonymous inserts" ON public.subscribers FOR INSERT TO anon WITH CHECK (true);
+CREATE POLICY "Allow authenticated inserts" ON public.subscribers FOR INSERT TO authenticated WITH CHECK (true);
+```
+
+---
+
+## Implementation Order
+1. Technical fixes (domain, remove hallucinated sections) — immediate impact, low risk
+2. Niche page enhancements (new fields + sections) — SEO core
+3. Structured data (JSON-LD) — rich snippets
+4. Blog section — long-tail SEO
+5. Tools page — engagement + dwell time
+6. Comparison + Trending pages — competitive SEO
+7. Email capture — conversion
+8. Navigation + internal linking — tie everything together
 
