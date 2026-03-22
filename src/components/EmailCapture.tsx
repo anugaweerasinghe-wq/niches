@@ -21,7 +21,7 @@ const EmailCapture = ({ source = 'homepage' }: EmailCaptureProps) => {
     }
     setLoading(true);
     try {
-      const { error } = await supabase.from('subscribers' as any).insert({ email: trimmed, source } as any);
+      const { error } = await (supabase as any).from('subscribers').insert({ email: trimmed, source });
       if (error) {
         if (error.code === '23505') {
           toast({ title: "You're already subscribed!" });
