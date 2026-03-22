@@ -44,6 +44,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '48,000+',
     avgCPM: '$8.50',
     category: 'Content Creation',
+    whyGrowing: ["AI voiceover tools are now indistinguishable from human narration","Creators can manage multiple channels simultaneously without personal brand bottleneck","Stock footage libraries and AI image generators provide unlimited visual content"],
+    videoIdeas: ["Top 10 AI Tools That Will Replace Your 9-to-5 Job","The Dark Side of Social Media Nobody Talks About","5 Passive Income Streams That Actually Work in 2026","Why 90% of YouTubers Fail (And How to Be in the 10%)","The Most Mysterious Places on Earth Scientists Can't Explain","How to Make $10K/Month Without Showing Your Face","7 Life-Changing Habits Backed by Neuroscience","The Truth About Dropshipping in 2026"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'ai-saas',
@@ -65,6 +68,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '22,000+',
     avgCPM: '$18.40',
     category: 'Technology',
+    whyGrowing: ["New AI tools launching daily creating constant content opportunities","Affiliate commissions of 30-50% recurring revenue","High-intent audience actively seeking tool recommendations"],
+    videoIdeas: ["I Tested 50 AI Tools — These 7 Are Actually Worth It","ChatGPT vs Claude vs Gemini: The REAL Comparison","How I Built a $5K/Month Business Using Only AI Tools","The AI Tool Stack Every Creator Needs in 2026","I Replaced My Entire Team with AI — Here's What Happened","Best Free AI Tools You're Not Using Yet","AI Tools That Will 10x Your Productivity Overnight","The $0 to $10K AI SaaS Blueprint"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'fitness-tech',
@@ -86,6 +92,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '31,000+',
     avgCPM: '$12.20',
     category: 'Health & Tech',
+    whyGrowing: ["Wearable market growing 25% annually with new devices launching quarterly","AI fitness coaches making personalized training accessible","Health data integration creating demand for comparative content"],
+    videoIdeas: ["Apple Watch Ultra 4 vs Garmin Fenix 9: Which is Worth $500+?","I Wore 5 Fitness Trackers for 30 Days — Shocking Results","The Most Accurate Heart Rate Monitor in 2026","AI Personal Trainer vs Real Trainer: 90-Day Challenge","Best Smart Home Gym Equipment Under $1000","How Fitness Tech Improved My Health in 1 Year","Oura Ring 5 Review: Worth the Hype?","The Future of Fitness: AI-Powered Workouts Tested"],
+    platforms: ["YouTube","Instagram"],
   },
   {
     slug: 'cooking-tips',
@@ -107,6 +116,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '185,000+',
     avgCPM: '$6.80',
     category: 'Lifestyle',
+    whyGrowing: ["Short-form recipe content exploding on TikTok and Reels","Science-based cooking explanations creating a new content category","One-pan and minimal-effort meals trending with busy professionals"],
+    videoIdeas: ["5 One-Pan Dinners That Changed My Life","The Science Behind Perfect Crispy Chicken","I Tried 30-Second Meal Hacks from TikTok","5 Desserts You Can Make with 3 Ingredients","Why Restaurant Food Tastes Better (Secrets Revealed)","Meal Prep Sunday: $50 for the Entire Week","Kitchen Hacks Professional Chefs Actually Use","The Perfect Scrambled Eggs: Science Edition"],
+    platforms: ["TikTok","YouTube","Instagram"],
   },
   {
     slug: 'crypto-trading',
@@ -128,6 +140,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '56,000+',
     avgCPM: '$22.10',
     category: 'Finance',
+    whyGrowing: ["2026 bull market cycle driving massive audience interest","DeFi and institutional adoption creating new content angles","Exchange affiliate programs offering premium commissions"],
+    videoIdeas: ["My Crypto Portfolio Reveal: $100K+ Strategy","Bitcoin Price Prediction 2026: Data-Driven Analysis","Top 5 Altcoins That Could 100x This Cycle","How I Made $50K in One Trade (Full Breakdown)","Crypto for Beginners: Start with $100","The Risk Management Strategy That Saved My Portfolio","Best Crypto Exchanges Compared: Fees, Security, Features","Why 95% of Crypto Traders Lose Money"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'personal-finance',
@@ -149,6 +164,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '92,000+',
     avgCPM: '$24.50',
     category: 'Finance',
+    whyGrowing: ["Gen-Z entering workforce creating massive demand for financial literacy","Fintech and banking brands spending record budgets on creator partnerships","Economic uncertainty driving search for investment education"],
+    videoIdeas: ["How I Saved $50K by Age 25 (Exact Budget Breakdown)","The 50/30/20 Rule is Wrong — Here's What Actually Works","Best High-Yield Savings Accounts 2026 (Real Comparison)","Investing $500/Month: What Your Portfolio Looks Like in 10 Years","Credit Cards That Pay YOU: The Ultimate Cash Back Guide","Financial Mistakes I Made in My 20s (Don't Repeat These)","Roth IRA vs Traditional IRA: Which Saves You More?","How to Build an Emergency Fund When You're Broke"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'ai-tools',
@@ -170,6 +188,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '35,000+',
     avgCPM: '$16.90',
     category: 'Technology',
+    whyGrowing: ["Every new AI tool launch creates a content vacuum for first-movers","72% year-over-year search growth for AI productivity content","Enterprise AI adoption driving B2B audience expansion"],
+    videoIdeas: ["10 AI Tools That Will Blow Your Mind in 2026","I Automated My Entire Workflow with AI (Full Setup)","Best AI Writing Tools: Head-to-Head Comparison","Free AI Tools That Replaced $500/Month in Subscriptions","AI Image Generation: Midjourney vs DALL-E vs Stable Diffusion","How to Use AI to Learn Any Skill 10x Faster","The AI Productivity Stack I Use Every Day","ChatGPT Prompts That Feel Like Cheating"],
+    platforms: ["YouTube","TikTok"],
   },
   {
     slug: 'self-improvement',
@@ -191,6 +212,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '120,000+',
     avgCPM: '$9.30',
     category: 'Education',
+    whyGrowing: ["Evidence-based self-improvement gaining traction over anecdotal advice","90-day transformation challenge formats driving engagement","Intersection with mental health creating deeper content opportunities"],
+    videoIdeas: ["I Followed a Billionaire's Morning Routine for 30 Days","5 Habits That Changed My Life (Backed by Science)","The 90-Day Self-Improvement Challenge: Full Results","Why Discipline Beats Motivation Every Time","Books That Will Transform Your Mindset in 2026","How to Wake Up at 5 AM (Without Hating Your Life)","The Pomodoro Technique is Overrated — Try This Instead","I Quit Social Media for 30 Days: What Happened"],
+    platforms: ["YouTube","TikTok"],
   },
   {
     slug: 'gaming-content',
@@ -212,6 +236,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '340,000+',
     avgCPM: '$4.20',
     category: 'Entertainment',
+    whyGrowing: ["Indie game renaissance creating underserved content opportunities","Esports audience crossing into mainstream entertainment","New game releases and franchises creating seasonal spikes"],
+    videoIdeas: ["10 Hidden Indie Games You NEED to Play in 2026","I Speedran This Game and Broke a World Record","The Most Underrated Game of 2026 (Full Review)","Gaming Setup Tour: Everything Under $1500","This AI Changed How I Play Games Forever","The Lore Behind [Game]: Everything You Missed","Best Free-to-Play Games Worth Your Time in 2026","I Played the Hardest Game Ever Made for 100 Hours"],
+    platforms: ["YouTube","TikTok"],
   },
   {
     slug: 'travel-vlogging',
@@ -233,6 +260,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '78,000+',
     avgCPM: '$11.40',
     category: 'Lifestyle',
+    whyGrowing: ["Budget travel content surging as audiences reject luxury travel aesthetics","Digital nomad lifestyle creating intersection with remote work content","Cost-breakdown formats driving exceptional CTR and engagement"],
+    videoIdeas: ["I Spent $500 in Thailand for a Week — Full Breakdown","The Cheapest Countries to Travel in 2026","How I Travel Full-Time and Make Money Online","Japan on a Budget: Everything You Need to Know","Travel Scams to Avoid in Southeast Asia","The Best Travel Credit Cards for Free Flights","Solo Travel Tips I Wish I Knew Before My First Trip","Living in Bali for $1500/Month: Is It Worth It?"],
+    platforms: ["YouTube","Instagram"],
   },
   {
     slug: 'home-workouts',
@@ -254,6 +284,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '95,000+',
     avgCPM: '$7.60',
     category: 'Health & Fitness',
+    whyGrowing: ["Age-specific fitness content (40+, seniors) is the fastest-growing fitness demographic","Follow-along formats create uniquely high repeat viewership","Smart home gym equipment making home workouts more effective"],
+    videoIdeas: ["15-Minute Full Body Workout (No Equipment Needed)","The 4-Week Home Workout Plan That Actually Works","Best Home Workouts for Beginners Over 40","HIIT vs Steady State Cardio: Which Burns More Fat?","I Did 100 Push-Ups a Day for 30 Days — Results","Home Workout Mistakes That Are Wasting Your Time","The 10-Minute Morning Stretch Routine","Build Muscle at Home with Just Dumbbells"],
+    platforms: ["YouTube","Instagram"],
   },
   {
     slug: 'true-crime',
@@ -275,6 +308,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '42,000+',
     avgCPM: '$8.90',
     category: 'Entertainment',
+    whyGrowing: ["Faceless formats performing exceptionally well with minimal production costs","International cold cases opening new content territory","Two-part series formats boosting session watch time significantly"],
+    videoIdeas: ["The Disappearance That Baffled Investigators for 20 Years","5 Cold Cases That Were Finally Solved by DNA","The Most Dangerous Con Artist You've Never Heard Of","Unsolved Mysteries: The Cases That Keep Detectives Awake","The True Story Behind [Famous Case]","International Cold Cases That Need Your Attention","The Psychology of Serial Killers Explained","Missing Person Cases That Defy Explanation"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'dropshipping',
@@ -296,6 +332,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '67,000+',
     avgCPM: '$14.80',
     category: 'Business',
+    whyGrowing: ["Transparency in revenue reporting building audience trust","Post-purchase automation strategies emerging as underserved angle","New e-commerce platforms reducing barriers to entry"],
+    videoIdeas: ["I Started a Dropshipping Store with $0 — 30 Day Results","The Truth About Dropshipping in 2026 (Real Numbers)","How I Found a Product That Made $50K in One Month","Best Shopify Apps for Dropshipping Success","Facebook Ads vs TikTok Ads for E-Commerce: Which Wins?","Customer Retention Strategies Nobody Talks About","How to Scale a Dropshipping Store Past $100K/Month","The Biggest Dropshipping Mistakes I Made"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'stoicism-philosophy',
@@ -317,6 +356,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '15,000+',
     avgCPM: '$7.40',
     category: 'Education',
+    whyGrowing: ["Male 18-35 demographic actively seeking meaning and mental frameworks","Faceless cinematic essay format requiring minimal production investment","Cross-cultural appeal making content globally relevant"],
+    videoIdeas: ["Marcus Aurelius on Social Media Addiction (This Will Change You)","5 Stoic Principles That Will Transform Your Life","The Philosophy That Built Empires (And Why It Still Works)","What Seneca Would Say About Modern Anxiety","How Stoicism Cured My Overthinking","The Daily Routine of a Stoic (Ancient Wisdom, Modern Life)","Eastern vs Western Philosophy: Finding Your Framework","Why the World's Most Successful People Practice Stoicism"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'pet-care',
@@ -338,6 +380,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '58,000+',
     avgCPM: '$8.10',
     category: 'Lifestyle',
+    whyGrowing: ["Exotic pet care content has 10x less competition than dog/cat content","Before/after training transformations driving massive share rates","Pet product affiliate programs expanding with premium brands"],
+    videoIdeas: ["How I Trained My Dog in 7 Days (Full Method)","The Pet Products That Are Actually Worth Buying","Exotic Pet Care Guide: Everything You Need to Know","Why Your Dog Is Misbehaving (And How to Fix It)","Cat Behavior Decoded: What Your Cat Is Really Saying","I Rescued This Pet — 30 Day Transformation","Best Pet Tech Gadgets in 2026","The Cheapest Way to Feed Your Pet Healthy Food"],
+    platforms: ["TikTok","YouTube","Instagram"],
   },
   {
     slug: 'real-estate-investing',
@@ -359,6 +404,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '44,000+',
     avgCPM: '$28.60',
     category: 'Finance',
+    whyGrowing: ["International real estate investing content is vastly underexplored","Premium CPMs from financial advertisers seeking property-intent audiences","Walk-through deal analysis converting viewers at 3x rates"],
+    videoIdeas: ["How I Bought My First Rental Property at 24","The BRRRR Strategy Explained (Real Deal Breakdown)","Real Estate Investing with $10K: Where to Start","I Analyzed 100 Properties — Here's What I Learned","Passive Income from Real Estate: My Monthly Cash Flow","The Best Cities for Real Estate Investment in 2026","House Flipping 101: From Purchase to Profit","Why I Chose Real Estate Over Stocks"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'asmr',
@@ -380,6 +428,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '72,000+',
     avgCPM: '$5.20',
     category: 'Entertainment',
+    whyGrowing: ["Sleep content creating uniquely high watch-time metrics","3+ hour compilations generating 8x more watch hours","ASMR roleplay scenarios with narrative depth are underexplored"],
+    videoIdeas: ["3 Hours of Rain Sounds for Deep Sleep","ASMR Triggers That Give You Instant Tingles","Sci-Fi ASMR Roleplay: Space Station Medical Exam","The Most Relaxing ASMR Video You'll Ever Watch","ASMR for People Who Don't Get ASMR","Whispered Bedtime Story for Adults","ASMR Cooking: Making the Perfect Meal","100 Triggers in 10 Minutes Challenge"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'language-learning',
@@ -401,6 +452,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '38,000+',
     avgCPM: '$10.80',
     category: 'Education',
+    whyGrowing: ["AI-powered language learning workflows creating massive search demand","Street interview formats generating viral shares","Globalization increasing demand for multilingual skills"],
+    videoIdeas: ["I Learned Japanese in 90 Days — Here's How","The Best Free Language Learning Apps in 2026","Speaking [Language] to Strangers on the Street","How AI Changed the Way I Learn Languages","The Polyglot Method: Learn Any Language in 6 Months","Common Mistakes English Speakers Make in Spanish","Language Learning Hacks That Actually Work","I Used ChatGPT to Become Fluent — Full Method"],
+    platforms: ["YouTube","TikTok"],
   },
   {
     slug: 'minimalism',
@@ -422,6 +476,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '19,000+',
     avgCPM: '$8.90',
     category: 'Lifestyle',
+    whyGrowing: ["Digital minimalism emerging as underserved sub-niche","Counter-cultural appeal resonating with overwhelmed audiences","Sustainable living crossover creating dual-audience potential"],
+    videoIdeas: ["I Got Rid of 90% of My Stuff — Here's What Happened","The 30-Day Minimalism Challenge That Changed Everything","Digital Declutter: How to Simplify Your Digital Life","Extreme Minimalist Home Tour (Under 100 Items)","Why Minimalism Saved My Mental Health","The Minimalist Wardrobe: 33 Items for Every Season","How to Declutter Your Home in One Weekend","Minimalism on a Budget: You Don't Need to Be Rich"],
+    platforms: ["YouTube","Instagram"],
   },
   {
     slug: 'cybersecurity',
@@ -443,6 +500,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '12,000+',
     avgCPM: '$32.40',
     category: 'Technology',
+    whyGrowing: ["Major data breaches driving mainstream audience interest","Beginner-friendly content gap is massive — most targets IT pros","B2B advertiser demand pushing CPMs above $30"],
+    videoIdeas: ["I Hacked Into My Own Network (Ethically) — Here's How","5 Ways Hackers Can Steal Your Identity Right Now","The Cybersecurity Career Roadmap: $0 to $150K","How to Protect Yourself Online in 2026","The Biggest Data Breaches of 2026 Explained","Password Managers Compared: Which Is Actually Secure?","Cybersecurity for Beginners: Start Here","How I Became a Cybersecurity Expert (Career Guide)"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'sustainable-living',
@@ -464,6 +524,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '26,000+',
     avgCPM: '$9.70',
     category: 'Lifestyle',
+    whyGrowing: ["Affordable sustainability angle massively underserved","Money-saving sustainability messaging outperforming guilt-based content 4.2x","Brand partnerships with eco-companies creating sustainable revenue"],
+    videoIdeas: ["How I Saved $2K/Year by Going Zero-Waste","Sustainable Swaps That Actually Save Money","The Beginner's Guide to Zero-Waste Living","Fast Fashion vs Sustainable Fashion: The Real Cost","How to Reduce Your Carbon Footprint by 50%","Sustainable Kitchen: Zero-Waste Cooking Tips","Eco-Friendly Products That Are Worth the Switch","My Sustainable Morning Routine"],
+    platforms: ["Instagram","YouTube","TikTok"],
   },
   {
     slug: 'no-code-development',
@@ -485,6 +548,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '8,500+',
     avgCPM: '$19.20',
     category: 'Technology',
+    whyGrowing: ["Non-technical entrepreneurs discovering tools like Lovable and Bubble","61% year-over-year growth with only 28% saturation","Course and template monetization generating six-figure revenue for creators"],
+    videoIdeas: ["I Built a $10K SaaS App Without Writing Code","No-Code vs Traditional Coding: Which Should You Learn?","Build a Full App in 30 Minutes with Lovable","The Best No-Code Tools Compared in 2026","How I Made $5K/Month Selling No-Code Templates","From Idea to Launch: Build Your App This Weekend","No-Code Automation That Runs My Business","The No-Code Stack Every Entrepreneur Needs"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'mental-health',
@@ -506,6 +572,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '52,000+',
     avgCPM: '$6.40',
     category: 'Health & Wellness',
+    whyGrowing: ["Male mental health content is the fastest-growing search category","Personal therapy journey sharing building 3.7x engagement communities","TikTok algorithm favoring authentic vulnerability content"],
+    videoIdeas: ["My Therapy Journey: 1 Year of CBT (Honest Review)","5 Signs You Might Need Therapy (And That's OK)","Anxiety Coping Strategies That Actually Work","Men's Mental Health: Why We Need to Talk About It","How Meditation Changed My Brain (30-Day Experiment)","The Truth About Antidepressants (Personal Experience)","Burnout Recovery: How I Came Back From Rock Bottom","Daily Habits for Better Mental Health"],
+    platforms: ["TikTok","YouTube"],
   },
   {
     slug: 'diy-home-renovation',
@@ -527,6 +596,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '63,000+',
     avgCPM: '$13.50',
     category: 'Lifestyle',
+    whyGrowing: ["Budget renovation under $500/room is massively underserved","Before/after timelapse format driving exceptional share rates","Home improvement retailer partnerships providing strong affiliate revenue"],
+    videoIdeas: ["$500 Room Makeover: Before & After Timelapse","DIY Kitchen Renovation on a Tiny Budget","I Renovated My Entire Bathroom for Under $1000","5 Home Improvements That Add the Most Value","Beginner DIY Mistakes That Cost Me Thousands","The Tool Kit Every Homeowner Needs (Under $200)","Painting Tricks Professional Painters Don't Want You to Know","Weekend Projects That Transform Your Home"],
+    platforms: ["YouTube","Instagram"],
   },
   {
     slug: 'stock-market',
@@ -548,6 +620,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '71,000+',
     avgCPM: '$26.30',
     category: 'Finance',
+    whyGrowing: ["Portfolio transparency videos building trust and loyalty at 4.8x rates","Passive investing audience massively underserved vs active traders","Market volatility driving search spikes and audience retention"],
+    videoIdeas: ["My Full Investment Portfolio Revealed (Every Stock I Own)","ETF vs Individual Stocks: Which Strategy Wins?","How I Built a $500K Portfolio by Age 30","The Best Dividend Stocks for Passive Income in 2026","Stock Market Crash: What to Do When Markets Drop","Investing $100/Month: 10-Year Growth Simulation","Warren Buffett's Strategy Explained Simply","The Truth About Day Trading (Real P&L Revealed)"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'plant-care',
@@ -569,6 +644,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '34,000+',
     avgCPM: '$7.20',
     category: 'Lifestyle',
+    whyGrowing: ["Plant rescue/rehabilitation content generating 3.4x emotional engagement","Apartment gardening filling massive small-space content gap","Instagram's visual format perfect for plant aesthetic content"],
+    videoIdeas: ["I Saved This Dying Plant — 30 Day Recovery","The Best Low-Maintenance Plants for Beginners","Apartment Gardening: Grow Food in Any Space","Plant Care Mistakes That Are Killing Your Plants","My Plant Collection Tour (100+ Plants!)","How to Propagate Any Plant for Free","Best Indoor Plants for Low Light","The Science of Why Plants Die (And How to Stop It)"],
+    platforms: ["Instagram","YouTube","TikTok"],
   },
   {
     slug: 'data-science',
@@ -590,6 +668,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '18,000+',
     avgCPM: '$21.70',
     category: 'Technology',
+    whyGrowing: ["Career-focused content driving 4x subscriber conversion rates","AI/ML creating new data science sub-topics monthly","Premium B2B advertisers and course monetization potential"],
+    videoIdeas: ["How I Got a $150K Data Science Job (Full Roadmap)","Python for Data Science: Complete Beginner Course","Real-World Data Science Project: Messy Data Analysis","The Data Science Skills Companies Actually Hire For","Machine Learning Explained in 10 Minutes","Best Data Science Certifications in 2026","I Analyzed 1 Million Data Points — Here's What I Found","Data Science Portfolio Projects That Get You Hired"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'van-life',
@@ -611,6 +692,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '23,000+',
     avgCPM: '$10.40',
     category: 'Lifestyle',
+    whyGrowing: ["Full van build series generating 7x total watch hours vs single tours","Realistic cost content differentiating from romanticized lifestyle content","Growing remote work adoption making mobile living practical"],
+    videoIdeas: ["My Complete Van Build: From Empty Van to Dream Home","Van Life Costs: How Much I Actually Spend Per Month","The Worst Things About Van Life Nobody Tells You","Van Life with a Dog: Everything You Need to Know","My Van Life Morning Routine","Best Vans for Van Life Conversion in 2026","Van Life Solar Setup: Complete Power Guide","Why I Quit Van Life After 2 Years (Honest Story)"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'meal-prep',
@@ -632,6 +716,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '41,000+',
     avgCPM: '$7.80',
     category: 'Lifestyle',
+    whyGrowing: ["Weekly return viewers creating predictable growth patterns","Grocery receipt thumbnails increasing CTR by 38%","Specialized dietary restriction content creating underserved sub-niches"],
+    videoIdeas: ["$50 Meal Prep for the Entire Week (Step by Step)","High Protein Meal Prep: 150g+ Per Day","Meal Prep for Weight Loss: Calorie-Counted Recipes","Vegan Meal Prep: 5 Days of Plant-Based Meals","The Fastest Meal Prep I've Ever Done (Under 1 Hour)","Meal Prep Mistakes That Ruin Your Food","Freezer Meals: Cook Once, Eat for a Month","Budget Meal Prep: Feed Your Family for $100/Week"],
+    platforms: ["YouTube","TikTok"],
   },
   {
     slug: 'space-exploration',
@@ -653,6 +740,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '14,000+',
     avgCPM: '$8.60',
     category: 'Education',
+    whyGrowing: ["SpaceX Starship missions creating massive search spikes","NASA Artemis program and Mars updates driving sustained interest","Astrophotography tutorials creating underserved educational content"],
+    videoIdeas: ["NASA Just Discovered Something Incredible on Mars","SpaceX Starship Launch: Everything You Need to Know","The Most Stunning Space Images of 2026","Could Humans Really Live on Mars? The Science","James Webb Telescope: The Discoveries That Changed Everything","How to Start Astrophotography (Complete Beginner Guide)","The Future of Space Travel: Next 10 Years","Mysterious Objects in Space Scientists Can't Explain"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'fashion-hauls',
@@ -674,6 +764,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '210,000+',
     avgCPM: '$9.50',
     category: 'Lifestyle',
+    whyGrowing: ["Size-inclusive fashion content creating dedicated underserved audiences","OOTD series with shopping links converting at 5x for affiliates","TikTok algorithm favoring quick outfit transformation content"],
+    videoIdeas: ["$100 vs $1000 Outfit: Can You Tell the Difference?","Building a Capsule Wardrobe on a Budget","Fall Fashion Haul: Everything Under $50","Petite Fashion Guide: Styling Tips for Short People","Thrift Flip: Transforming $5 Thrift Store Finds","Fashion Trends to Avoid in 2026","My Signature Style Formula (Outfit Ideas for Any Occasion)","Sustainable Fashion Haul: Ethical Brands Worth Buying"],
+    platforms: ["TikTok","Instagram","YouTube"],
   },
   {
     slug: 'web3-blockchain',
@@ -695,6 +788,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '28,000+',
     avgCPM: '$20.30',
     category: 'Technology',
+    whyGrowing: ["Non-financial blockchain applications opening mainstream content opportunities","Interactive protocol tutorials generating 3.6x higher retention","DeFi education demand growing with institutional adoption"],
+    videoIdeas: ["Web3 Explained: What It Actually Means for You","How to Use DeFi to Earn Passive Crypto Income","The Best Blockchain Projects to Watch in 2026","NFTs in 2026: Are They Dead or Evolving?","How Smart Contracts Actually Work (Simple Explanation)","Building Your First DApp: Step-by-Step Tutorial","Blockchain Beyond Crypto: Real-World Applications","The Web3 Career Guide: High-Paying Roles You Didn't Know Existed"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'parenting-tips',
@@ -716,6 +812,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '88,000+',
     avgCPM: '$11.20',
     category: 'Family',
+    whyGrowing: ["Neurodivergent parenting content explosively growing with few creators","Honest parenting fail content generating 4.1x shares vs aspirational","TikTok favoring authentic, unpolished parenting moments"],
+    videoIdeas: ["Parenting Hacks That Actually Work (Tested on My Kids)","Day in the Life: Honest Mom/Dad Edition","ADHD Parenting: What They Don't Tell You","Toddler Tantrums: How I Handle Meltdowns","Budget-Friendly Activities for Kids (Under $10)","The Parenting Book That Changed My Approach","Screen Time Rules That Work for Our Family","Honest Parenting Fails (It's Not Always Pretty)"],
+    platforms: ["TikTok","YouTube","Instagram"],
   },
   {
     slug: 'music-production',
@@ -737,6 +836,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '32,000+',
     avgCPM: '$8.40',
     category: 'Creative',
+    whyGrowing: ["AI music tools lowering barriers for aspiring producers","DAW workflow content with visible screens outperforming theory 3.3x","Genre-specific beat-making creating loyal niche audiences"],
+    videoIdeas: ["Making a Beat from Scratch in FL Studio (Full Session)","Best Free VST Plugins Every Producer Needs","I Made a Song with AI — Is It Any Good?","How to Mix and Master Your Music at Home","Music Production for Beginners: Start Here","The $0 Music Production Setup (Free Software Only)","How I Made My First $1000 from Music","Lo-Fi Hip Hop Beat Making: Chill Session"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'street-food',
@@ -758,6 +860,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '21,000+',
     avgCPM: '$9.10',
     category: 'Food & Travel',
+    whyGrowing: ["African and South American street food scenes dramatically underrepresented","Close-up food prep with ambient sound boosting completion rates 2.7x","Cross-cultural appeal making content accessible across language barriers"],
+    videoIdeas: ["Street Food Tour: The Best Food Market in the World","I Tried Every Street Food in Bangkok","$1 Street Food vs $100 Restaurant: Taste Test","The Most Satisfying Street Food Videos","African Street Food You've Never Seen Before","How Street Vendors Make the Perfect [Dish]","Street Food Hygiene: What You Should Know","South American Street Food Tour: Hidden Gems"],
+    platforms: ["YouTube","TikTok"],
   },
   {
     slug: 'book-reviews',
@@ -779,6 +884,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '24,000+',
     avgCPM: '$6.90',
     category: 'Education',
+    whyGrowing: ["Non-fiction book summaries for professionals are underserved","Themed reading lists driving 2.8x higher click-through","Amazon affiliate programs providing consistent monetization"],
+    videoIdeas: ["5 Books That Changed How I Think About Money","My Top 10 Books of 2026 (Worth Your Time)","The Book That Every Entrepreneur Should Read","I Read 52 Books in One Year — Here's What I Learned","Self-Help Books: Which Ones Actually Work?","Book Review: [Latest Bestseller] — Worth the Hype?","The Best Sci-Fi Books You Haven't Read Yet","How to Read More Books (Even If You're Busy)"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'electric-vehicles',
@@ -800,6 +908,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '16,000+',
     avgCPM: '$15.80',
     category: 'Automotive',
+    whyGrowing: ["Global shift to electric transportation driving massive audience growth","1-year ownership reviews generating 2.5x trust signals vs launch reviews","Charging infrastructure content creating practical evergreen value"],
+    videoIdeas: ["Tesla Model Y: 1 Year Later — My Honest Review","Best EVs Under $40K in 2026 (Full Comparison)","EV Road Trip: Can You Really Travel Long Distance?","The Truth About EV Battery Degradation","How Much Does It REALLY Cost to Own an EV?","EV Charging at Home: Complete Setup Guide","Electric vs Gas Car: 5-Year Cost Comparison","The Best Electric SUVs for Families in 2026"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'side-hustles',
@@ -821,6 +932,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '105,000+',
     avgCPM: '$14.20',
     category: 'Business',
+    whyGrowing: ["Economic uncertainty driving record search volume for income diversification","Timed challenge formats generating 5.7x views vs generic advice","Skill-based side hustles creating differentiation from oversaturated passive income content"],
+    videoIdeas: ["I Tried 10 Side Hustles — Here's What Actually Made Money","Side Hustles That Pay $1000+/Month (Realistic)","How I Built a $5K/Month Side Income in 90 Days","The Best Side Hustles for Introverts in 2026","Freelancing vs Side Hustle: Which Path is Right for You?","I Tried [Side Hustle] for 30 Days — My Earnings","Side Hustles You Can Start with $0 Today","Passive Income Myths: What Nobody Tells You"],
+    platforms: ["YouTube","TikTok"],
   },
   {
     slug: 'meditation-mindfulness',
@@ -842,6 +956,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '47,000+',
     avgCPM: '$6.10',
     category: 'Health & Wellness',
+    whyGrowing: ["Workplace micro-meditation for busy professionals massively underserved","Sleep meditation with nature sounds retaining viewers 45% longer","Daily guided sessions creating unmatched repeat view patterns"],
+    videoIdeas: ["10-Minute Guided Meditation for Beginners","Sleep Meditation with Rain Sounds (3 Hours)","2-Minute Micro-Meditation for Work Breaks","How Meditation Changed My Brain (Scientific Evidence)","Morning Meditation Routine for a Productive Day","Meditation for Anxiety: Guided Session","The Best Meditation Apps Compared in 2026","30-Day Meditation Challenge: What I Experienced"],
+    platforms: ["YouTube"],
   },
   {
     slug: '3d-printing',
@@ -863,6 +980,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '11,000+',
     avgCPM: '$11.30',
     category: 'Technology',
+    whyGrowing: ["Consumer 3D printers becoming affordable with dramatic quality improvements","Functional printing solving real problems creating shareable content","Maker community engagement driving strong comment and save rates"],
+    videoIdeas: ["10 Genius Things You Can 3D Print Right Now","Best Budget 3D Printers for Beginners in 2026","I 3D Printed Solutions to Every Problem in My House","3D Printing for Beginners: Complete Start Guide","The Most Amazing 3D Prints You've Ever Seen","How to Design Your Own 3D Models (Free Software)","3D Printed Accessibility Devices That Change Lives","Resin vs FDM 3D Printing: Which Should You Buy?"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'horror-narration',
@@ -884,6 +1004,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '17,000+',
     avgCPM: '$7.80',
     category: 'Entertainment',
+    whyGrowing: ["Perfect faceless niche with minimal production investment","Horror compilation videos generating 6x more watch hours","True horror events differentiating from fiction narration"],
+    videoIdeas: ["3 True Horror Stories That Will Keep You Awake","The Scariest Thing That Happened to Me","Creepypasta Compilation: 2 Hours of Terror","True Haunted House Stories from Reddit","The Most Disturbing Disappearances Never Solved","Horror Stories from Hospital Night Shift Workers","This Abandoned Building Has a Dark Secret","Real 911 Calls That Will Send Chills Down Your Spine"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'interior-design',
@@ -905,6 +1028,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '54,000+',
     avgCPM: '$12.60',
     category: 'Lifestyle',
+    whyGrowing: ["Rental-friendly design hacks addressing growing renter demographic","Budget-capped makeovers outperforming unlimited budgets 3.2x in engagement","Instagram's visual platform perfect for design inspiration content"],
+    videoIdeas: ["$500 Living Room Transformation (Full Makeover)","Interior Design Trends to Avoid in 2026","Small Apartment Design Hacks That Maximize Space","Rental-Friendly Room Makeover (No Damage!)","Cozy Home Aesthetic: Complete Styling Guide","The Best Affordable Furniture Finds Online","How to Make Any Room Look Expensive on a Budget","My Home Tour: Before and After Renovation"],
+    platforms: ["Instagram","YouTube"],
   },
   {
     slug: 'ai-art-generation',
@@ -926,6 +1052,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '20,000+',
     avgCPM: '$13.40',
     category: 'Creative',
+    whyGrowing: ["Every new AI model release creates week-long content spikes","Prompt engineering tutorials attracting both artists and business users","Commercial AI art workflows opening new professional applications"],
+    videoIdeas: ["Midjourney vs DALL-E vs Stable Diffusion: 2026 Comparison","Advanced Prompt Engineering: Create Stunning AI Art","How I Sell AI Art and Make $3K/Month","AI Art for Business: Product Photography Without a Camera","Creating a Children's Book with AI Art (Full Process)","The Ethics of AI Art: What Creators Need to Know","Best Free AI Image Generators in 2026","AI Art Styles Explained: From Photorealistic to Anime"],
+    platforms: ["YouTube","TikTok"],
   },
   {
     slug: 'freelancing-remote',
@@ -947,6 +1076,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '46,000+',
     avgCPM: '$12.90',
     category: 'Business',
+    whyGrowing: ["International freelancing content covering non-US markets barely exists","Client acquisition case studies outperforming generic tips 3.8x","Growing workforce seeking location independence post-pandemic"],
+    videoIdeas: ["How I Landed a $10K Client on Upwork (Full Strategy)","Freelancing Income Reveal: How Much I Make Per Month","The Best Freelance Skills to Learn in 2026","Remote Work Setup Tour: Everything You Need","How to Set Freelance Rates (Stop Undercharging!)","Freelancing vs Full-Time Job: Which is Better?","Finding Clients Without Upwork or Fiverr","The Tax Guide Every Freelancer Needs"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'car-detailing',
@@ -968,6 +1100,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '19,000+',
     avgCPM: '$10.70',
     category: 'Automotive',
+    whyGrowing: ["Extreme transformation reveals triggering massive sharing behavior","Budget detailing with affordable products addressing underserved audience","Oddly satisfying content format performing across all platforms"],
+    videoIdeas: ["Cleaning the Dirtiest Car I've Ever Seen (Satisfying!)","$20 vs $200 Car Detail: Can You Tell the Difference?","How to Detail Your Car Like a Professional","The Most Satisfying Car Wash You'll Ever Watch","Paint Correction: Removing Scratches and Swirl Marks","Budget Car Detailing: Products Under $50","Car Detailing as a Side Hustle: How Much Can You Earn?","Interior Deep Clean: Complete Step-by-Step Guide"],
+    platforms: ["YouTube","TikTok"],
   },
   {
     slug: 'podcast-clips',
@@ -989,6 +1124,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '36,000+',
     avgCPM: '$5.80',
     category: 'Entertainment',
+    whyGrowing: ["Zero original content creation with massive viral reach potential","Subtitles and text overlays increasing TikTok completion rate 52%","Non-English podcast clip channels almost nonexistent despite demand"],
+    videoIdeas: ["The Most Motivational Podcast Clip You'll Hear Today","Joe Rogan's Best Life Advice Moments","Podcast Clips That Changed My Perspective","How to Start a Podcast Clip Channel (Step by Step)","The Funniest Podcast Moments of 2026","Business Advice from Top Entrepreneurs (Podcast Compilation)","Podcast Clips for Your Morning Motivation","The Most Controversial Podcast Takes of the Year"],
+    platforms: ["TikTok","YouTube"],
   },
   {
     slug: 'credit-repair',
@@ -1010,6 +1148,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '15,000+',
     avgCPM: '$35.20',
     category: 'Finance',
+    whyGrowing: ["Audience has immediate financial intent for credit products","Credit building for immigrants creating massive underserved demand","Premium CPMs of $35+ driven by credit card advertiser bidding wars"],
+    videoIdeas: ["How I Went from 500 to 800 Credit Score in 12 Months","The Best Credit Cards for Building Credit in 2026","Credit Repair Secrets Banks Don't Want You to Know","Understanding Your Credit Score: Complete Guide","How to Get Approved for Any Credit Card","Credit Building as an Immigrant: Step-by-Step Guide","The Credit Repair Strategy That Actually Works","Debt Payoff Plan: How I Became Debt Free"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'urban-exploration',
@@ -1031,6 +1172,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '9,500+',
     avgCPM: '$7.90',
     category: 'Adventure',
+    whyGrowing: ["Night-time explorations generating 3.2x more watch time","Historical research combining with exploration for unique differentiation","Growing audience fascination with abandoned locations and hidden histories"],
+    videoIdeas: ["Exploring an Abandoned Hospital at Night (Terrifying)","The History Behind This Abandoned Factory","I Found Something Incredible in an Abandoned Building","Top 10 Most Haunting Abandoned Places","Urban Exploration: Forgotten Shopping Mall Tour","The Scariest Abandoned Location I've Ever Explored","Why Was This Mansion Abandoned? (Investigation)","Exploring Underground Tunnels Beneath the City"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'productivity-systems',
@@ -1052,6 +1196,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '22,000+',
     avgCPM: '$14.50',
     category: 'Technology',
+    whyGrowing: ["Notion template creators earning six figures from digital product sales","Second brain movement going mainstream driving massive search demand","Team/business productivity setups creating underserved B2B content"],
+    videoIdeas: ["My Complete Notion Setup for 2026 (Free Template)","Obsidian vs Notion: Which Is Better for Your Brain?","The Productivity System That Changed My Life","How I Organize My Entire Life in Notion","Building a Second Brain: Complete Guide","The Best Productivity Apps of 2026 (Tested)","Notion Templates That Will 10x Your Productivity","How I Plan My Week: Full Productivity System Tour"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'skincare-routine',
@@ -1073,6 +1220,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '130,000+',
     avgCPM: '$11.80',
     category: 'Beauty',
+    whyGrowing: ["Male skincare growing 5x faster with 10x fewer dedicated creators","Dermatologist reaction formats building trust and purchase intent","TikTok algorithm favoring quick product review and routine content"],
+    videoIdeas: ["Skincare Routine for Beginners: Start Here","The Best Budget Skincare Products Under $20","Dermatologist Reviews Popular Skincare Products","Men's Skincare Routine: Simple and Effective","I Tried the Most Popular Skincare Routine on TikTok","The Truth About Retinol (What Science Actually Says)","My Anti-Aging Skincare Routine at 30","Skincare Ingredients to Avoid in 2026"],
+    platforms: ["TikTok","Instagram","YouTube"],
   },
   {
     slug: 'woodworking',
@@ -1094,6 +1244,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '27,000+',
     avgCPM: '$9.60',
     category: 'Creative',
+    whyGrowing: ["Silent workshop-sound videos retaining viewers 38% longer","Beginner apartment-friendly projects addressing underserved audience","Maker community engagement driving strong save and share rates"],
+    videoIdeas: ["Building a Beautiful Table from Scratch","Beginner Woodworking: 5 Projects with Basic Tools","The Most Satisfying Woodworking Video You'll Watch","Apartment Woodworking: No Workshop Needed","I Built Custom Furniture for My Entire Room","Essential Woodworking Tools for Beginners (Under $200)","Woodworking Mistakes Every Beginner Makes","From Raw Log to Finished Bowl: Complete Process"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'automation-zapier',
@@ -1115,6 +1268,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '6,800+',
     avgCPM: '$22.80',
     category: 'Business',
+    whyGrowing: ["Ultra-high intent audience willing to pay for courses and consulting","Industry-specific automation content wide open as opportunity","Case study format generating 7.2x more consulting leads"],
+    videoIdeas: ["I Automated My Entire Business (Full Zapier Setup)","The Best No-Code Automation Tools Compared in 2026","10 Zapier Automations That Save Me 20 Hours/Week","Make vs Zapier vs n8n: Which Automation Tool Wins?","How I Built a $10K/Month Automation Consulting Business","Automate Your Email Marketing: Complete Guide","The Automation Stack Every Small Business Needs","How to Automate Social Media Posting (Step by Step)"],
+    platforms: ["YouTube"],
   },
   {
     slug: 'documentary-essays',
@@ -1136,6 +1292,9 @@ export const nicheDatabase: NicheData[] = [
     competitorCount: '29,000+',
     avgCPM: '$8.30',
     category: 'Education',
+    whyGrowing: ["25-45 minute format maximizing revenue-per-view with multiple mid-roll ads","Investigative video essays on current events creating massive engagement","Patreon-driven revenue model building sustainable creator income"],
+    videoIdeas: ["The Rise and Fall of [Company/Person]: A Deep Dive","Why This Industry Is Secretly Broken","The Untold Story Behind [Recent Event]","How [Technology] Is Changing the World (Documentary)","The Psychology of Why We Buy Things We Don't Need","The Most Fascinating Conspiracy Theories Debunked","The Hidden History of [Topic]: What Schools Don't Teach","How One Decision Changed an Entire Industry"],
+    platforms: ["YouTube"],
   },
 ];
 
