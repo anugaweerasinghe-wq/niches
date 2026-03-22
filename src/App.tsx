@@ -11,6 +11,11 @@ import WikiTerm from "./pages/WikiTerm";
 import NicheResult from "./pages/NicheResult";
 import SeoAudit from "./pages/SeoAudit";
 import AdminValidator from "./pages/AdminValidator";
+import BlogIndex from "./pages/BlogIndex";
+import BlogPost from "./pages/BlogPost";
+import ToolsIndex from "./pages/ToolsIndex";
+import Comparison from "./pages/Comparison";
+import Trending from "./pages/Trending";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +33,11 @@ const App = () => (
               <Route path="/wiki" element={<WikiIndex />} />
               <Route path="/wiki/:slug" element={<WikiTerm />} />
               <Route path="/niche/:id" element={<NicheResult />} />
+              <Route path="/blog" element={<BlogIndex />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/tools" element={<ToolsIndex />} />
+              <Route path="/vs/nichepulse-vs-vidiq-vs-tubebuddy" element={<Comparison />} />
+              <Route path="/trending" element={<Trending />} />
               <Route path="/admin/seo-audit" element={<SeoAudit />} />
               <Route path="/admin/validator" element={<AdminValidator />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

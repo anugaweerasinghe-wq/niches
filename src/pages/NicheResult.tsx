@@ -43,11 +43,13 @@ const TrendIcon = ({ direction }: { direction: 'rising' | 'stable' | 'declining'
   return <Minus className="w-4 h-4 text-muted-foreground" />;
 };
 
-/** Get 6 random related niches for internal linking */
+/** Get 3 deterministic related niches (same category first) */
 const getRelatedNiches = (currentSlug: string) => {
-  const others = nicheDatabase.filter(n => n.slug !== currentSlug);
-  const shuffled = [...others].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 6);
+  const current = getNicheBySlug(currentSlug);
+  if (!current) return nicheDatabase.filter(n => n.slug !== currentSlug).slice(0, 3);
+  const sameCategory = nicheDatabase.filter(n => n.category === current.category && n.slug !== currentSlug);
+  const others = nicheDatabase.filter(n => n.category !== current.category && n.slug !== currentSlug);
+  return [...sameCategory, ...others].slice(0, 3);
 };
 
 const NicheResult = () => {
@@ -65,18 +67,18 @@ const NicheResult = () => {
       "@type": "Article",
       "headline": `${nicheTitle} Viral Growth Strategy 2026 | Content Blueprint`,
       "description": niche?.heroDescription || `Complete ${nicheTitle} niche analysis and viral content strategy.`,
-      "url": `https://niches.lovable.app/niche/${id}`,
+      "url": `https://viralhq.vercel.app/niche/${id}`,
       "datePublished": "2026-02-01",
       "dateModified": "2026-03-09",
       "author": { "@type": "Person", "name": "Anuga Weerasinghe", "jobTitle": "Lead Systems Architect & Growth Strategist" },
-      "publisher": { "@type": "Organization", "name": "NichePulse AI", "logo": { "@type": "ImageObject", "url": "https://niches.lovable.app/images/logo.png" } },
+      "publisher": { "@type": "Organization", "name": "NichePulse AI", "logo": { "@type": "ImageObject", "url": "https://viralhq.vercel.app/images/logo.png" } },
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://niches.lovable.app/" },
-        { "@type": "ListItem", "position": 2, "name": nicheTitle, "item": `https://niches.lovable.app/niche/${id}` }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://viralhq.vercel.app/" },
+        { "@type": "ListItem", "position": 2, "name": nicheTitle, "item": `https://viralhq.vercel.app/niche/${id}` }
       ]
     },
     {
@@ -247,6 +249,48 @@ const NicheResult = () => {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            </section>
+          )}
+
+          {/* Why This Niche is Growing */}
+          {niche && niche.whyGrowing && (
+            <section className="mb-16" style={{ contentVisibility: 'auto' }}>
+              <h2 className="text-xl font-semibold tracking-tight text-foreground mb-4">Why {nicheTitle} is Growing</h2>
+              <ul className="space-y-3">
+                {niche.whyGrowing.map((point, i) => (
+                  <li key={i} className="flex gap-3 rounded-2xl glass-premium p-4">
+                    <TrendingUp className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-muted-foreground">{point}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {/* Top 8 Video Ideas */}
+          {niche && niche.videoIdeas && (
+            <section className="mb-16" style={{ contentVisibility: 'auto' }}>
+              <h2 className="text-xl font-semibold tracking-tight text-foreground mb-4">Top 8 Video Ideas for {nicheTitle}</h2>
+              <ol className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {niche.videoIdeas.map((idea, i) => (
+                  <li key={i} className="flex gap-3 rounded-2xl glass-premium p-4 hover:scale-[0.98] transition-all">
+                    <span className="text-primary font-bold text-sm">{i + 1}.</span>
+                    <p className="text-sm text-foreground">{idea}</p>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+
+          {/* Best Platforms */}
+          {niche && niche.platforms && (
+            <section className="mb-16" style={{ contentVisibility: 'auto' }}>
+              <h2 className="text-xl font-semibold tracking-tight text-foreground mb-4">Best Platforms</h2>
+              <div className="flex gap-3">
+                {niche.platforms.map(p => (
+                  <span key={p} className="px-4 py-2 rounded-xl text-sm font-medium bg-primary/8 text-primary border border-primary/12">{p}</span>
+                ))}
               </div>
             </section>
           )}

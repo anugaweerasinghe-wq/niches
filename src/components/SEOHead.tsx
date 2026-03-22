@@ -10,7 +10,7 @@ interface SEOHeadProps {
 }
 
 const SEOHead = ({ title, description, canonical, type = 'website', jsonLd, noindex }: SEOHeadProps) => {
-  const fullUrl = `https://niches.lovable.app${canonical}`;
+  const fullUrl = `https://viralhq.vercel.app${canonical}`;
   
   return (
     <Helmet>
