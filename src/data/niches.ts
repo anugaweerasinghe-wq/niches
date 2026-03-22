@@ -18,6 +18,9 @@ export interface NicheData {
   competitorCount: string;
   avgCPM: string;
   category: string;
+  whyGrowing: string[];
+  videoIdeas: string[];
+  platforms: ('YouTube' | 'TikTok' | 'Instagram')[];
 }
 
 export const nicheDatabase: NicheData[] = [
