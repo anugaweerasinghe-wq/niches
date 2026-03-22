@@ -16,15 +16,15 @@ const WikiIndex = () => {
       "@type": "CollectionPage",
       "name": "Content Creator Wiki & Glossary 2026",
       "description": "The definitive glossary of content creation, viral marketing, and niche analysis terms for YouTube, TikTok & Instagram creators.",
-      "url": "https://niches.lovable.app/wiki",
-      "isPartOf": { "@type": "WebSite", "name": "NichePulse AI", "url": "https://niches.lovable.app" }
+      "url": "https://viralhq.vercel.app/wiki",
+      "isPartOf": { "@type": "WebSite", "name": "NichePulse AI", "url": "https://viralhq.vercel.app" }
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://niches.lovable.app/" },
-        { "@type": "ListItem", "position": 2, "name": "Wiki", "item": "https://niches.lovable.app/wiki" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://viralhq.vercel.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Wiki", "item": "https://viralhq.vercel.app/wiki" }
       ]
     }
   ];

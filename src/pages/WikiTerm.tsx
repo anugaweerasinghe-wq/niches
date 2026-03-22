@@ -21,12 +21,12 @@ const WikiTerm = () => {
       "@type": "Article",
       "headline": `${term.term} Strategy 2026: The Ultimate Guide to ${term.term} Dominance`,
       "description": term.shortDefinition,
-      "url": `https://niches.lovable.app/wiki/${term.slug}`,
+      "url": `https://viralhq.vercel.app/wiki/${term.slug}`,
       "datePublished": "2026-01-15",
       "dateModified": "2026-03-03",
       "author": { "@type": "Organization", "name": "NichePulse AI" },
-      "publisher": { "@type": "Organization", "name": "NichePulse AI", "logo": { "@type": "ImageObject", "url": "https://niches.lovable.app/images/logo.png" } },
-      "mainEntityOfPage": { "@type": "WebPage", "@id": `https://niches.lovable.app/wiki/${term.slug}` }
+      "publisher": { "@type": "Organization", "name": "NichePulse AI", "logo": { "@type": "ImageObject", "url": "https://viralhq.vercel.app/images/logo.png" } },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": `https://viralhq.vercel.app/wiki/${term.slug}` }
     },
     {
       "@context": "https://schema.org",
@@ -41,9 +41,9 @@ const WikiTerm = () => {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://niches.lovable.app/" },
-        { "@type": "ListItem", "position": 2, "name": "Wiki", "item": "https://niches.lovable.app/wiki" },
-        { "@type": "ListItem", "position": 3, "name": term.term, "item": `https://niches.lovable.app/wiki/${term.slug}` }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://viralhq.vercel.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Wiki", "item": "https://viralhq.vercel.app/wiki" },
+        { "@type": "ListItem", "position": 3, "name": term.term, "item": `https://viralhq.vercel.app/wiki/${term.slug}` }
       ]
     }
   ];
