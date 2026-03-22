@@ -147,9 +147,9 @@ const Footer = () => {
           </div>
           <nav className="flex items-center gap-6 text-xs text-muted-foreground/50" aria-label="Platform features">
             <Link to="/wiki" className="hover:text-primary transition-colors">Creator Wiki</Link>
-            <span>YouTube Niche Finder</span>
-            <span>TikTok Viral Ideas</span>
-            <span>Instagram Content Strategy</span>
+            <Link to="/blog" className="hover:text-primary transition-colors">Blog</Link>
+            <Link to="/tools" className="hover:text-primary transition-colors">Free Tools</Link>
+            <Link to="/trending" className="hover:text-primary transition-colors">Trending</Link>
           </nav>
         </div>
       </div>

@@ -253,6 +253,48 @@ const NicheResult = () => {
             </section>
           )}
 
+          {/* Why This Niche is Growing */}
+          {niche && niche.whyGrowing && (
+            <section className="mb-16" style={{ contentVisibility: 'auto' }}>
+              <h2 className="text-xl font-semibold tracking-tight text-foreground mb-4">Why {nicheTitle} is Growing</h2>
+              <ul className="space-y-3">
+                {niche.whyGrowing.map((point, i) => (
+                  <li key={i} className="flex gap-3 rounded-2xl glass-premium p-4">
+                    <TrendingUp className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-muted-foreground">{point}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {/* Top 8 Video Ideas */}
+          {niche && niche.videoIdeas && (
+            <section className="mb-16" style={{ contentVisibility: 'auto' }}>
+              <h2 className="text-xl font-semibold tracking-tight text-foreground mb-4">Top 8 Video Ideas for {nicheTitle}</h2>
+              <ol className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {niche.videoIdeas.map((idea, i) => (
+                  <li key={i} className="flex gap-3 rounded-2xl glass-premium p-4 hover:scale-[0.98] transition-all">
+                    <span className="text-primary font-bold text-sm">{i + 1}.</span>
+                    <p className="text-sm text-foreground">{idea}</p>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+
+          {/* Best Platforms */}
+          {niche && niche.platforms && (
+            <section className="mb-16" style={{ contentVisibility: 'auto' }}>
+              <h2 className="text-xl font-semibold tracking-tight text-foreground mb-4">Best Platforms</h2>
+              <div className="flex gap-3">
+                {niche.platforms.map(p => (
+                  <span key={p} className="px-4 py-2 rounded-xl text-sm font-medium bg-primary/8 text-primary border border-primary/12">{p}</span>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Detailed Description (SEO body content) */}
           {niche && (
             <section className="mb-16" style={{ contentVisibility: 'auto' }}>
