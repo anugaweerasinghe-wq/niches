@@ -43,11 +43,13 @@ const TrendIcon = ({ direction }: { direction: 'rising' | 'stable' | 'declining'
   return <Minus className="w-4 h-4 text-muted-foreground" />;
 };
 
-/** Get 6 random related niches for internal linking */
+/** Get 3 deterministic related niches (same category first) */
 const getRelatedNiches = (currentSlug: string) => {
-  const others = nicheDatabase.filter(n => n.slug !== currentSlug);
-  const shuffled = [...others].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 6);
+  const current = getNicheBySlug(currentSlug);
+  if (!current) return nicheDatabase.filter(n => n.slug !== currentSlug).slice(0, 3);
+  const sameCategory = nicheDatabase.filter(n => n.category === current.category && n.slug !== currentSlug);
+  const others = nicheDatabase.filter(n => n.category !== current.category && n.slug !== currentSlug);
+  return [...sameCategory, ...others].slice(0, 3);
 };
 
 const NicheResult = () => {
