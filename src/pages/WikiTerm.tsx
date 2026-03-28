@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { BookOpen, ArrowRight, ChevronRight, Home } from 'lucide-react';
 import { getTermBySlug, getRelatedTerms } from '@/data/glossary';
 import SEOHead from '@/components/SEOHead';
+import { SITE_URL } from '@/lib/site';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import Logo from '@/components/Logo';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -21,12 +22,12 @@ const WikiTerm = () => {
       "@type": "Article",
       "headline": `${term.term} Strategy 2026: The Ultimate Guide to ${term.term} Dominance`,
       "description": term.shortDefinition,
-      "url": `https://niches.lovable.app/wiki/${term.slug}`,
+      "url": `${SITE_URL}/wiki/${term.slug}`,
       "datePublished": "2026-01-15",
       "dateModified": "2026-03-03",
       "author": { "@type": "Organization", "name": "NichePulse AI" },
-      "publisher": { "@type": "Organization", "name": "NichePulse AI", "logo": { "@type": "ImageObject", "url": "https://niches.lovable.app/images/logo.png" } },
-      "mainEntityOfPage": { "@type": "WebPage", "@id": `https://niches.lovable.app/wiki/${term.slug}` }
+      "publisher": { "@type": "Organization", "name": "NichePulse AI", "logo": { "@type": "ImageObject", "url": `${SITE_URL}/images/logo.png` } },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": `${SITE_URL}/wiki/${term.slug}` }
     },
     {
       "@context": "https://schema.org",
@@ -41,9 +42,9 @@ const WikiTerm = () => {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://niches.lovable.app/" },
-        { "@type": "ListItem", "position": 2, "name": "Wiki", "item": "https://niches.lovable.app/wiki" },
-        { "@type": "ListItem", "position": 3, "name": term.term, "item": `https://niches.lovable.app/wiki/${term.slug}` }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": `${SITE_URL}/` },
+        { "@type": "ListItem", "position": 2, "name": "Wiki", "item": `${SITE_URL}/wiki` },
+        { "@type": "ListItem", "position": 3, "name": term.term, "item": `${SITE_URL}/wiki/${term.slug}` }
       ]
     }
   ];
