@@ -1,4 +1,3 @@
-```tsx
 import { motion } from "framer-motion";
 import { BarChart3, FileText, Sparkles } from "lucide-react";
 
@@ -74,5 +73,3 @@ const HeroVisual = () => {
 };
 
 export default HeroVisual;
-
-```
