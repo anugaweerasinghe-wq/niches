@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, ChevronRight, Home, Sparkles, TrendingUp, TrendingDown, Minus, BarChart3 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
+import { SITE_URL } from '@/lib/site';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import Logo from '@/components/Logo';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -65,18 +66,18 @@ const NicheResult = () => {
       "@type": "Article",
       "headline": `${nicheTitle} Viral Growth Strategy 2026 | Content Blueprint`,
       "description": niche?.heroDescription || `Complete ${nicheTitle} niche analysis and viral content strategy.`,
-      "url": `https://niches.lovable.app/niche/${id}`,
+      "url": `${SITE_URL}/niche/${id}`,
       "datePublished": "2026-02-01",
       "dateModified": "2026-03-09",
       "author": { "@type": "Person", "name": "Anuga Weerasinghe", "jobTitle": "Lead Systems Architect & Growth Strategist" },
-      "publisher": { "@type": "Organization", "name": "NichePulse AI", "logo": { "@type": "ImageObject", "url": "https://niches.lovable.app/images/logo.png" } },
+      "publisher": { "@type": "Organization", "name": "NichePulse AI", "logo": { "@type": "ImageObject", "url": `${SITE_URL}/images/logo.png` } },
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://niches.lovable.app/" },
-        { "@type": "ListItem", "position": 2, "name": nicheTitle, "item": `https://niches.lovable.app/niche/${id}` }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": `${SITE_URL}/` },
+        { "@type": "ListItem", "position": 2, "name": nicheTitle, "item": `${SITE_URL}/niche/${id}` }
       ]
     },
     {
