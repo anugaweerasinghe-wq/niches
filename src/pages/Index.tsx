@@ -1,4 +1,3 @@
-```tsx
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -64,6 +63,11 @@ const statCards = [
     value: "3",
     description: "Built for YouTube, TikTok, and Instagram workflows",
   },
+];
+
+const topTabs = [
+  { id: "niche" as const, icon: Search, label: "Niche Finder" },
+  { id: "viral" as const, icon: Flame, label: "Viral Ideas" },
 ];
 
 const stepMotion = {
@@ -212,34 +216,36 @@ const Index = () => {
               className="hidden items-center rounded-2xl border border-white/6 bg-white/[0.03] p-1 md:flex"
               aria-label="Main navigation"
             >
-              {[
-                { id: "niche" as const, icon: Search, label: "Niche Finder" },
-                { id: "viral" as const, icon: Flame, label: "Viral Ideas" },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`relative flex items-center gap-2 rounded-[14px] px-4 py-2.5 text-sm font-medium transition-all duration-300 ${
-                    activeTab === tab.id
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {activeTab === tab.id && (
-                    <motion.div
-                      layoutId="active-desktop-tab"
-                      className="absolute inset-0 rounded-[14px] border border-primary/20 bg-white/[0.04] shadow-[0_10px_30px_hsl(var(--primary)/0.12)]"
-                      transition={{
-                        type: "spring",
-                        bounce: 0.12,
-                        duration: 0.5,
-                      }}
-                    />
-                  )}
-                  <tab.icon className="relative z-10 h-4 w-4" />
-                  <span className="relative z-10">{tab.label}</span>
-                </button>
-              ))}
+              {topTabs.map((tab) => {
+                const isActive = activeTab === tab.id;
+                const Icon = tab.icon;
+
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={
+                      isActive
+                        ? "relative flex items-center gap-2 rounded-[14px] px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-300"
+                        : "relative flex items-center gap-2 rounded-[14px] px-4 py-2.5 text-sm font-medium text-muted-foreground transition-all duration-300 hover:text-foreground"
+                    }
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="active-desktop-tab"
+                        className="absolute inset-0 rounded-[14px] border border-primary/20 bg-white/[0.04] shadow-[0_10px_30px_hsl(var(--primary)/0.12)]"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.12,
+                          duration: 0.5,
+                        }}
+                      />
+                    )}
+                    <Icon className="relative z-10 h-4 w-4" />
+                    <span className="relative z-10">{tab.label}</span>
+                  </button>
+                );
+              })}
             </nav>
 
             <div className="flex items-center gap-2 sm:gap-3">
@@ -254,29 +260,31 @@ const Index = () => {
               </div>
 
               <div className="flex items-center rounded-2xl border border-white/6 bg-white/[0.03] p-1 md:hidden">
-                {[
-                  { id: "niche" as const, icon: Search, label: "Niche Finder" },
-                  { id: "viral" as const, icon: Flame, label: "Viral Ideas" },
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`relative rounded-xl p-2.5 transition-all ${
-                      activeTab === tab.id
-                        ? "text-foreground"
-                        : "text-muted-foreground"
-                    }`}
-                    aria-label={tab.label}
-                  >
-                    {activeTab === tab.id && (
-                      <motion.div
-                        layoutId="active-mobile-tab"
-                        className="absolute inset-0 rounded-xl border border-primary/20 bg-white/[0.05]"
-                      />
-                    )}
-                    <tab.icon className="relative z-10 h-4 w-4" />
-                  </button>
-                ))}
+                {topTabs.map((tab) => {
+                  const isActive = activeTab === tab.id;
+                  const Icon = tab.icon;
+
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={
+                        isActive
+                          ? "relative rounded-xl p-2.5 text-foreground transition-all"
+                          : "relative rounded-xl p-2.5 text-muted-foreground transition-all"
+                      }
+                      aria-label={tab.label}
+                    >
+                      {isActive && (
+                        <motion.div
+                          layoutId="active-mobile-tab"
+                          className="absolute inset-0 rounded-xl border border-primary/20 bg-white/[0.05]"
+                        />
+                      )}
+                      <Icon className="relative z-10 h-4 w-4" />
+                    </button>
+                  );
+                })}
               </div>
 
               {activeTab === "niche" && step === "results" && data && (
@@ -785,5 +793,3 @@ const Index = () => {
 };
 
 export default Index;
-
-```
