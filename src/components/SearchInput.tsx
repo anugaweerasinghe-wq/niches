@@ -1,4 +1,3 @@
-```tsx
 import { motion } from "framer-motion";
 import { ArrowRight, Search, Sparkles } from "lucide-react";
 import { useRef, useState } from "react";
@@ -157,5 +156,3 @@ const SearchInput = ({
 };
 
 export default SearchInput;
-
-```
