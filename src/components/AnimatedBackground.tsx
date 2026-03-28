@@ -1,4 +1,3 @@
-```tsx
 const particles = [
   {
     top: "8%",
@@ -88,5 +87,3 @@ const AnimatedBackground = () => {
 };
 
 export default AnimatedBackground;
-
-```
