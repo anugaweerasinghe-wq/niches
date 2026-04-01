@@ -386,175 +386,176 @@ const Index = () => {
               transition={{ duration: 0.3 }}
             >
               <AnimatePresence mode="wait">
-                {step === "search" && (
-                  <motion.section
-                    key="search"
-                    className="container px-6 pb-10 pt-4 md:pt-6"
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -18 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <div
-                      ref={heroRef}
-                      onMouseMove={handleHeroMove}
-                      className="relative overflow-hidden rounded-[38px] border border-white/8 bg-[#040814]/90 shadow-[0_40px_140px_rgba(0,0,0,0.45)]"
-                    >
-                      <div
-                        className="pointer-events-none absolute inset-0"
-                        style={{
-                          background: `
-                            radial-gradient(circle at ${heroGlow.x}% ${heroGlow.y}%, rgba(0,255,214,0.16), transparent 18%),
-                            radial-gradient(circle at 80% 12%, rgba(113,88,255,0.18), transparent 20%),
-                            linear-gradient(180deg, rgba(8,12,24,0.97), rgba(3,6,14,0.98))
-                          `,
-                        }}
-                      />
-                      <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:72px_72px]" />
-                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+{step === "search" && (
+  <motion.section
+    key="search"
+    className="container px-6 pb-20 pt-8 md:pt-12"
+    initial={{ opacity: 0, y: 18 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -18 }}
+    transition={{ duration: 0.4 }}
+  >
+    <div
+      ref={heroRef}
+      onMouseMove={handleHeroMove}
+      className="relative overflow-visible"
+    >
+      <div
+        className="pointer-events-none absolute left-1/2 top-[-180px] h-[520px] w-[820px] -translate-x-1/2 rounded-full blur-3xl"
+        style={{
+          background: `radial-gradient(circle at ${heroGlow.x}% ${heroGlow.y}%, rgba(0,255,214,0.14), transparent 22%), radial-gradient(circle at 70% 20%, rgba(120,90,255,0.14), transparent 28%)`,
+        }}
+      />
+      <div className="pointer-events-none absolute inset-x-0 top-[-60px] h-[1px] bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+      <div className="pointer-events-none absolute left-1/2 top-[140px] h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-primary/10 blur-[130px]" />
+      <div className="pointer-events-none absolute right-[8%] top-[80px] h-[260px] w-[260px] rounded-full bg-violet-500/10 blur-[110px]" />
+      <div className="pointer-events-none absolute left-[10%] top-[220px] h-[220px] w-[220px] rounded-full bg-cyan-400/10 blur-[110px]" />
 
-                      <div className="relative flex min-h-[78vh] flex-col justify-center px-5 py-12 sm:px-8 md:px-12 lg:px-16">
-                        <div className="mx-auto w-full max-w-5xl text-center">
-                          <motion.div
-                            className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.26em] text-primary"
-                            initial={{ opacity: 0, y: 14 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.05 }}
-                          >
-                            <Zap className="h-3.5 w-3.5" />
-                            AI-powered niche intelligence
-                          </motion.div>
+      <div className="relative flex min-h-[82vh] flex-col items-center justify-center">
+        <div className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
+          <motion.div
+            className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.26em] text-primary backdrop-blur-xl"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 }}
+          >
+            <Zap className="h-3.5 w-3.5" />
+            AI-powered niche intelligence
+          </motion.div>
 
-                          <motion.h1
-                            className="mx-auto mt-6 max-w-5xl text-5xl font-black leading-[0.9] tracking-[-0.06em] text-foreground sm:text-6xl lg:text-7xl xl:text-[5.7rem]"
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                          >
-                            Find the niche that can
-                            <span className="block bg-gradient-to-r from-cyan-300 via-primary to-violet-300 bg-clip-text pb-1 text-transparent">
-                              actually break through.
-                            </span>
-                          </motion.h1>
+          <motion.h1
+            className="mx-auto mt-8 max-w-5xl text-5xl font-black leading-[0.9] tracking-[-0.065em] text-foreground sm:text-6xl lg:text-7xl xl:text-[5.8rem]"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            Find the niche that can
+            <span className="block bg-gradient-to-r from-cyan-300 via-primary to-violet-300 bg-clip-text pb-1 text-transparent">
+              actually break through.
+            </span>
+          </motion.h1>
 
-                          <motion.p
-                            className="mx-auto mt-6 max-w-3xl text-base leading-8 text-muted-foreground md:text-xl"
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.16 }}
-                          >
-                            Analyze competition, demand, creator momentum, and
-                            monetization signals across YouTube, TikTok, and
-                            Instagram before you lock in your next content bet.
-                          </motion.p>
+          <motion.p
+            className="mx-auto mt-7 max-w-3xl text-base leading-8 text-muted-foreground md:text-xl"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.16 }}
+          >
+            Analyze competition, demand, creator momentum, and monetization
+            signals across YouTube, TikTok, and Instagram before you lock in
+            your next content bet.
+          </motion.p>
 
-                          <motion.div
-                            className="mx-auto mt-9 max-w-3xl"
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.22 }}
-                          >
-                            <SearchInput
-                              value={query}
-                              onChange={setQuery}
-                              onSubmit={handleSearch}
-                            />
-                          </motion.div>
+          <motion.div
+            className="mx-auto mt-12 w-full max-w-4xl"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.22 }}
+          >
+            <div className="rounded-[30px] border border-white/10 bg-white/[0.035] p-3 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-2xl">
+              <SearchInput
+                value={query}
+                onChange={setQuery}
+                onSubmit={handleSearch}
+              />
+            </div>
+          </motion.div>
 
-                          <motion.div
-                            className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row"
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.28 }}
-                          >
-                            <button
-                              type="button"
-                              onClick={handleSearch}
-                              className={primaryButton}
-                            >
-                              <Sparkles className="h-4 w-4" />
-                              Discover my niche
-                            </button>
+          <motion.p
+            className="mt-5 text-sm text-muted-foreground"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.28 }}
+          >
+            Natural language search. Describe what you like and NichePulse will
+            do the research.
+          </motion.p>
 
-                            <button
-                              type="button"
-                              onClick={() => setActiveTab("viral")}
-                              className={secondaryButton}
-                            >
-                              <Flame className="h-4 w-4" />
-                              Open viral ideas
-                            </button>
+          <motion.div
+            className="mt-7 flex flex-wrap items-center justify-center gap-3"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.34 }}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveTab("viral")}
+              className={secondaryButton}
+            >
+              <Flame className="h-4 w-4" />
+              Open viral ideas
+            </button>
 
-                            <Link to="/wiki" className={secondaryButton}>
-                              <Globe className="h-4 w-4" />
-                              Explore creator wiki
-                            </Link>
-                          </motion.div>
+            <Link to="/wiki" className={secondaryButton}>
+              <Globe className="h-4 w-4" />
+              Explore creator wiki
+            </Link>
+          </motion.div>
 
-                          <motion.p
-                            className="mt-5 text-sm text-muted-foreground"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.34 }}
-                          >
-                            No signup required · Free forever · Built for serious
-                            creators
-                          </motion.p>
+          <motion.p
+            className="mt-5 text-sm text-muted-foreground"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            No signup required · Free forever · Built for serious creators
+          </motion.p>
 
-                          <motion.div
-                            className="mt-7 flex flex-wrap items-center justify-center gap-2.5"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
-                          >
-                            {heroChips.map((chip) => (
-                              <span
-                                key={chip}
-                                className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-xs font-medium text-muted-foreground backdrop-blur-xl"
-                              >
-                                {chip}
-                              </span>
-                            ))}
-                          </motion.div>
-                        </div>
+          <motion.div
+            className="mt-8 flex flex-wrap items-center justify-center gap-2.5"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.46 }}
+          >
+            {heroChips.map((chip) => (
+              <span
+                key={chip}
+                className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-xs font-medium text-muted-foreground backdrop-blur-xl"
+              >
+                {chip}
+              </span>
+            ))}
+          </motion.div>
+        </div>
 
-                        <motion.div
-                          className="mx-auto mt-14 grid w-full max-w-6xl gap-4 md:grid-cols-3"
-                          initial={{ opacity: 0, y: 22 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.44 }}
-                        >
-                          {statCards.map((card) => {
-                            const Icon = card.icon;
+        <motion.div
+          className="mx-auto mt-20 grid w-full max-w-6xl gap-5 md:grid-cols-3"
+          initial={{ opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.52 }}
+        >
+          {statCards.map((card) => {
+            const Icon = card.icon;
 
-                            return (
-                              <div
-                                key={card.label}
-                                className="rounded-[26px] border border-white/8 bg-white/[0.04] p-5 text-left shadow-[0_18px_55px_rgba(0,0,0,0.22)] backdrop-blur-2xl"
-                              >
-                                <div className="flex items-center gap-3">
-                                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary">
-                                    <Icon className="h-5 w-5" />
-                                  </div>
-                                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/90">
-                                    {card.label}
-                                  </div>
-                                </div>
+            return (
+              <div
+                key={card.label}
+                className="rounded-[28px] border border-white/8 bg-white/[0.035] p-6 text-left shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1 hover:border-white/14 hover:bg-white/[0.05]"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/90">
+                    {card.label}
+                  </div>
+                </div>
 
-                                <div className="mt-5 text-3xl font-black tracking-[-0.05em] text-foreground">
-                                  {card.value}
-                                </div>
-                                <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                                  {card.description}
-                                </p>
-                              </div>
-                            );
-                          })}
-                        </motion.div>
-                      </div>
-                    </div>
-                  </motion.section>
-                )}
+                <div className="mt-6 text-3xl font-black tracking-[-0.05em] text-foreground">
+                  {card.value}
+                </div>
+
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {card.description}
+                </p>
+              </div>
+            );
+          })}
+        </motion.div>
+      </div>
+    </div>
+  </motion.section>
+)}
 
                 {step === "platform" && (
                   <motion.section
