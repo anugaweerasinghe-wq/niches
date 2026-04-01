@@ -94,19 +94,7 @@ const NicheResult = () => {
     <div className="min-h-screen bg-background relative">
       <AnimatedBackground />
 
-      <header className="fixed top-0 left-0 right-0 z-50 glass micro-glow border-b border-border/30">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between h-16">
-            <Link to="/"><Logo /></Link>
-            <div className="flex items-center gap-3">
-              <StatusBadge />
-              <MarketPulseTicker />
-              <ZeigarnikRing />
-              <ThemeToggle />
-            </div>
-          </div>
-        </div>
-      </header>
+      <NavBar />
 
       <SEOHead
         title={`${nicheTitle} Viral Growth Strategy 2026 | Content Blueprint | NichePulse AI`}
