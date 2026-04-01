@@ -3,14 +3,10 @@ import { motion } from 'framer-motion';
 import { ArrowRight, ChevronRight, Home, Sparkles, TrendingUp, TrendingDown, Minus, BarChart3 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import AnimatedBackground from '@/components/AnimatedBackground';
-import Logo from '@/components/Logo';
-import ThemeToggle from '@/components/ThemeToggle';
+import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
-import MarketPulseTicker from '@/components/MarketPulseTicker';
-import ZeigarnikRing from '@/components/ZeigarnikRing';
 import { glossaryTerms } from '@/data/glossary';
 import { getNicheBySlug, getComparisonNiches, nicheDatabase } from '@/data/niches';
-import StatusBadge from '@/components/StatusBadge';
 
 const ViralScoreGauge = ({ score }: { score: number }) => {
   const radius = 54;
