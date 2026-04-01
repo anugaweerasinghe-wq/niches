@@ -6,8 +6,8 @@ import { Shield, CheckCircle } from 'lucide-react';
 /** SEO-rich footer with Hub & Spoke internal linking + E-E-A-T signals */
 const Footer = () => {
   return (
-    <footer className="border-t border-border/30 mt-24">
-      <div className="container mx-auto px-6 py-16 md:py-20">
+    <footer className="border-t border-border/20 mt-16">
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
         {/* Founder E-E-A-T Signal */}
         <section className="mb-16 rounded-2xl glass-premium p-6 md:p-8">
           <div className="flex flex-col md:flex-row gap-6 items-start">
