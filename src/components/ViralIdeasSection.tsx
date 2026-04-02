@@ -108,16 +108,16 @@ const ViralIdeasSection = () => {
   };
 
   return (
-    <section className="container mx-auto px-6 py-12 md:py-20">
+    <section className="container mx-auto px-6 pt-12 pb-20 md:pt-20">
       {/* Hero Header */}
       <motion.div
-        className="text-center mb-14 md:mb-20"
+        className="text-center mb-16 md:mb-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <motion.div
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 backdrop-blur-sm border border-primary/15 text-primary text-sm font-medium mb-8"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/6 backdrop-blur-sm border border-primary/10 text-primary text-xs font-semibold uppercase tracking-widest mb-8"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
@@ -127,15 +127,17 @@ const ViralIdeasSection = () => {
         </motion.div>
 
         <motion.h2
-          className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-apple-tight mb-5 text-gradient leading-[1.1]"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-apple-tight mb-6 text-gradient leading-[1.05]"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.5 }}
         >
-          Find Your Next Viral Video
+          Find Your Next
+          <br className="hidden sm:block" />
+          <span className="text-gradient-horizontal"> Viral Video</span>
         </motion.h2>
         <motion.p
-          className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto tracking-apple leading-relaxed"
+          className="text-base md:text-lg text-muted-foreground max-w-lg mx-auto tracking-apple leading-relaxed"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.5 }}
@@ -146,21 +148,21 @@ const ViralIdeasSection = () => {
 
       {/* Search Interface */}
       <motion.div
-        className="max-w-2xl mx-auto mb-14 md:mb-20"
+        className="max-w-2xl mx-auto mb-16 md:mb-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
         {/* Platform Selector */}
-        <div className="flex justify-center gap-1.5 mb-5">
+        <div className="flex justify-center gap-2 mb-6">
           {platforms.map((p) => (
             <button
               key={p.id}
               onClick={() => setSelectedPlatform(p.id)}
-              className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
                 selectedPlatform === p.id
                   ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
-                  : 'bg-muted/40 backdrop-blur-sm text-muted-foreground hover:text-foreground hover:bg-muted/60 border border-border/30'
+                  : 'bg-card/40 backdrop-blur-sm text-muted-foreground hover:text-foreground hover:bg-card/60 border border-border/20'
               }`}
             >
               <span className="mr-1.5">{p.icon}</span>
@@ -171,37 +173,39 @@ const ViralIdeasSection = () => {
 
         {/* Search Input */}
         <div className="relative">
-          <div className="relative rounded-2xl bg-card/40 backdrop-blur-xl border border-border/50 p-2 flex items-center gap-2 shadow-lg shadow-background/50">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-primary/[0.02] to-transparent pointer-events-none" />
-            <div className="flex-1 relative">
-              <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/60 pointer-events-none" />
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Enter your niche (e.g., fitness tech, cooking tips, crypto)"
-                className="w-full bg-transparent pl-12 pr-4 py-3.5 text-foreground placeholder:text-muted-foreground/50 outline-none text-base tracking-apple"
-                disabled={isLoading}
-              />
+          <div className="glass-card overflow-hidden p-2.5 shadow-lg shadow-background/30">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-primary/[0.01] to-transparent pointer-events-none" />
+            <div className="flex items-center gap-3 relative">
+              <div className="flex-1 relative">
+                <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/40 pointer-events-none" />
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Enter your niche (e.g., fitness tech, cooking tips, crypto)"
+                  className="w-full bg-transparent pl-12 pr-4 py-3.5 text-foreground placeholder:text-muted-foreground/40 outline-none text-base tracking-apple"
+                  disabled={isLoading}
+                />
+              </div>
+              <button
+                onClick={handleGenerate}
+                disabled={!query.trim() || isLoading}
+                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:brightness-110 shadow-md shadow-primary/15"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Analyzing...
+                  </>
+                ) : (
+                  <>
+                    Generate
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
             </div>
-            <button
-              onClick={handleGenerate}
-              disabled={!query.trim() || isLoading}
-              className="relative flex items-center gap-2 px-5 py-3 rounded-xl bg-primary text-primary-foreground font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:brightness-110"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Analyzing...
-                </>
-              ) : (
-                <>
-                  Generate
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
           </div>
         </div>
       </motion.div>
@@ -215,26 +219,24 @@ const ViralIdeasSection = () => {
             exit={{ opacity: 0 }}
             className="max-w-3xl mx-auto"
           >
-            {/* Loading label */}
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-8">
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <p className="text-sm text-muted-foreground">Analyzing niche data and predicting viral potential...</p>
+              <p className="text-sm text-muted-foreground tracking-apple">Analyzing niche data and predicting viral potential...</p>
             </div>
             <div className="space-y-3">
               {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} className="rounded-2xl bg-card/30 backdrop-blur-sm border border-border/30 p-6 animate-pulse" style={{ animationDelay: `${i * 100}ms` }}>
+                <div key={i} className="rounded-2xl glass-card p-6 animate-pulse" style={{ animationDelay: `${i * 100}ms` }}>
                   <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-2xl bg-muted/50" />
+                    <div className="w-12 h-12 rounded-2xl bg-muted/30" />
                     <div className="flex-1 space-y-3">
                       <div className="flex gap-2">
-                        <div className="h-5 w-16 bg-muted/40 rounded-full" />
-                        <div className="h-5 w-20 bg-muted/40 rounded-full" />
+                        <div className="h-5 w-16 bg-muted/30 rounded-full" />
+                        <div className="h-5 w-20 bg-muted/30 rounded-full" />
                       </div>
-                      <div className="h-5 w-3/4 bg-muted/40 rounded-lg" />
+                      <div className="h-5 w-3/4 bg-muted/30 rounded-lg" />
                       <div className="flex gap-4">
-                        <div className="h-4 w-16 bg-muted/30 rounded" />
-                        <div className="h-4 w-20 bg-muted/30 rounded" />
-                        <div className="h-4 w-14 bg-muted/30 rounded" />
+                        <div className="h-4 w-16 bg-muted/20 rounded" />
+                        <div className="h-4 w-20 bg-muted/20 rounded" />
                       </div>
                     </div>
                   </div>
@@ -252,15 +254,15 @@ const ViralIdeasSection = () => {
           animate={{ opacity: 1, y: 0 }}
           className="max-w-3xl mx-auto"
         >
-          <div className="rounded-2xl bg-destructive/5 backdrop-blur-sm border border-destructive/20 p-5 flex items-center gap-4">
+          <div className="rounded-2xl bg-destructive/5 backdrop-blur-sm border border-destructive/15 p-6 flex items-center gap-4">
             <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0" />
             <div className="flex-1">
               <p className="text-sm font-medium text-foreground">Something went wrong</p>
-              <p className="text-sm text-muted-foreground mt-0.5">{error}</p>
+              <p className="text-sm text-muted-foreground mt-1">{error}</p>
             </div>
             <button
               onClick={handleGenerate}
-              className="px-4 py-2 rounded-xl bg-muted/50 backdrop-blur-sm text-sm font-medium text-foreground hover:bg-muted/70 transition-colors border border-border/30"
+              className="px-4 py-2 rounded-xl bg-card/60 backdrop-blur-sm text-sm font-medium text-foreground hover:bg-card/80 transition-colors border border-border/20"
             >
               Retry
             </button>
@@ -277,35 +279,35 @@ const ViralIdeasSection = () => {
           className="max-w-6xl mx-auto"
         >
           {/* Results Header */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-10">
             <div>
-              <h3 className="text-xl font-semibold tracking-apple text-foreground">
+              <h3 className="text-2xl font-bold tracking-apple-tight text-foreground">
                 {ideas.length} Viral Ideas
               </h3>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-sm text-muted-foreground mt-1.5 tracking-apple">
                 Ranked by virality probability · Click to expand for deep analysis
               </p>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={handleDownload}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-card/40 border border-border/20 hover:border-border/40 transition-all"
               >
                 <Download className="w-4 h-4" />
-                Download
+                <span className="hidden sm:inline">Download</span>
               </button>
               <button
                 onClick={handleReset}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-card/40 border border-border/20 hover:border-border/40 transition-all"
               >
                 <RotateCcw className="w-4 h-4" />
-                New Search
+                <span className="hidden sm:inline">New Search</span>
               </button>
             </div>
           </div>
 
           {/* Ideas Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {ideas.map((idea, index) => (
               <ViralIdeaCard
                 key={idea.id}
@@ -324,12 +326,12 @@ const ViralIdeasSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="text-center py-16"
+          className="text-center py-20"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-muted/30 backdrop-blur-sm border border-border/30 mb-5">
-            <Flame className="w-7 h-7 text-muted-foreground/50" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-card/30 backdrop-blur-sm border border-border/20 mb-6">
+            <Flame className="w-7 h-7 text-muted-foreground/40" />
           </div>
-          <p className="text-muted-foreground/70 text-sm tracking-apple">
+          <p className="text-muted-foreground/50 text-sm tracking-apple">
             Enter your niche above to discover viral video opportunities
           </p>
         </motion.div>

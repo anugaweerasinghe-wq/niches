@@ -44,14 +44,14 @@ const ScorecardGrid = ({ scorecard }: ScorecardGridProps) => {
       {cards.map((card, index) => (
         <motion.div
           key={card.label}
-          className="relative overflow-hidden rounded-2xl backdrop-blur-xl bg-card/50 border border-border/40 p-6 hover:bg-card/70 hover:border-border/60 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500"
+          className="relative overflow-hidden glass-card p-7 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-0.5 transition-all duration-500"
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-transparent pointer-events-none rounded-2xl" />
           
           <div className="relative">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="p-2 rounded-xl bg-muted/40 backdrop-blur-sm border border-border/30">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2.5 rounded-xl bg-muted/30 border border-border/20">
                 {card.icon}
               </div>
               <span className="text-sm font-medium text-muted-foreground tracking-apple">
@@ -59,16 +59,16 @@ const ScorecardGrid = ({ scorecard }: ScorecardGridProps) => {
               </span>
             </div>
             
-            <div className="flex items-end gap-2 mb-2">
-              <span className={`text-5xl font-bold tracking-apple-tight ${card.color}`}>
+            <div className="flex items-end gap-2 mb-3">
+              <span className={`text-5xl font-extrabold tracking-apple-tight ${card.color}`}>
                 {card.value}
               </span>
-              <span className="text-muted-foreground text-sm mb-1.5">/100</span>
+              <span className="text-muted-foreground text-sm mb-2">/100</span>
             </div>
             
-            <p className="text-sm text-muted-foreground mb-4">{card.description}</p>
+            <p className="text-sm text-muted-foreground mb-5">{card.description}</p>
             
-            <div className="h-1.5 bg-muted/40 rounded-full overflow-hidden">
+            <div className="h-1.5 bg-muted/30 rounded-full overflow-hidden">
               <motion.div
                 className={`h-full rounded-full ${card.barColor}`}
                 initial={{ width: 0 }}
