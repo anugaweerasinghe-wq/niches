@@ -1,22 +1,28 @@
 const particles = [
-  { top: '10%', left: '15%', size: 2, opacity: 0.12, blur: 1, duration: 22, color: 'hsl(var(--glow-primary))' },
-  { top: '25%', left: '80%', size: 2, opacity: 0.08, blur: 1, duration: 28, color: 'hsl(var(--glow-secondary))' },
-  { top: '50%', left: '8%', size: 3, opacity: 0.06, blur: 2, duration: 35, color: 'hsl(var(--glow-primary))' },
-  { top: '65%', left: '90%', size: 2, opacity: 0.1, blur: 1, duration: 24, color: 'hsl(var(--glow-secondary))' },
-  { top: '80%', left: '40%', size: 2, opacity: 0.08, blur: 1, duration: 30, color: 'hsl(var(--glow-primary))' },
-  { top: '15%', left: '55%', size: 2, opacity: 0.1, blur: 1, duration: 26, color: 'hsl(var(--glow-secondary))' },
-  { top: '90%', left: '20%', size: 2, opacity: 0.06, blur: 1, duration: 38, color: 'hsl(var(--glow-primary))' },
-  { top: '40%', left: '85%', size: 2, opacity: 0.08, blur: 1, duration: 20, color: 'hsl(var(--glow-secondary))' },
+  { top: '8%', left: '12%', size: 2, opacity: 0.1, blur: 1, duration: 24, color: 'hsl(var(--glow-primary))' },
+  { top: '22%', left: '82%', size: 2, opacity: 0.06, blur: 1, duration: 30, color: 'hsl(var(--glow-secondary))' },
+  { top: '48%', left: '6%', size: 2.5, opacity: 0.05, blur: 2, duration: 36, color: 'hsl(var(--glow-primary))' },
+  { top: '68%', left: '92%', size: 2, opacity: 0.08, blur: 1, duration: 26, color: 'hsl(var(--glow-secondary))' },
+  { top: '82%', left: '38%', size: 2, opacity: 0.06, blur: 1, duration: 32, color: 'hsl(var(--glow-primary))' },
+  { top: '12%', left: '58%', size: 2, opacity: 0.08, blur: 1, duration: 28, color: 'hsl(var(--glow-secondary))' },
 ];
 
 const AnimatedBackground = () => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-      {/* Radial gradient overlay for depth */}
+      {/* Subtle top gradient */}
       <div
-        className="absolute inset-0 opacity-40"
+        className="absolute inset-0 opacity-30"
         style={{
-          background: 'radial-gradient(ellipse 80% 60% at 50% 0%, hsl(var(--glow-primary) / 0.04) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 70% 50% at 50% 0%, hsl(var(--glow-primary) / 0.04) 0%, transparent 70%)',
+        }}
+      />
+
+      {/* Bottom corner accent */}
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          background: 'radial-gradient(ellipse 50% 40% at 80% 100%, hsl(var(--glow-secondary) / 0.03) 0%, transparent 70%)',
         }}
       />
 
@@ -34,7 +40,7 @@ const AnimatedBackground = () => {
             filter: `blur(${p.blur}px)`,
             background: p.color,
             animationDuration: `${p.duration}s`,
-            animationDelay: `${i * -3}s`,
+            animationDelay: `${i * -4}s`,
           }}
         />
       ))}

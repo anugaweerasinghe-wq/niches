@@ -9,12 +9,12 @@ interface StyleCardProps {
 
 const styleConfig = {
   faceless: {
-    icon: <Bot className="w-8 h-8" />,
+    icon: <Bot className="w-7 h-7" />,
     label: 'Faceless / AI-Driven',
     description: 'Automated content with voiceovers and AI-generated visuals'
   },
   persona: {
-    icon: <User className="w-8 h-8" />,
+    icon: <User className="w-7 h-7" />,
     label: 'Persona-Led',
     description: 'Build a personal brand with on-camera presence'
   }
@@ -26,8 +26,10 @@ const StyleCard = ({ style, isSelected, onClick }: StyleCardProps) => {
   return (
     <motion.button
       onClick={onClick}
-      className={`relative p-6 rounded-2xl text-left glow-border transition-all duration-300 ${
-        isSelected ? 'active bg-secondary' : 'bg-card hover:bg-secondary/50'
+      className={`relative p-6 rounded-2xl text-left transition-all duration-300 border ${
+        isSelected 
+          ? 'glass-card border-primary/20 shadow-lg shadow-primary/5' 
+          : 'glass-card hover:border-border/40 hover:shadow-lg hover:shadow-background/50'
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -37,17 +39,17 @@ const StyleCard = ({ style, isSelected, onClick }: StyleCardProps) => {
       <div className="flex items-start gap-4">
         <div 
           className={`p-3 rounded-xl transition-colors duration-300 ${
-            isSelected ? 'bg-primary/20 text-primary' : 'bg-muted text-muted-foreground'
+            isSelected ? 'bg-primary/10 text-primary' : 'bg-muted/30 text-muted-foreground'
           }`}
         >
           {config.icon}
         </div>
         
         <div className="flex-1">
-          <h3 className={`font-semibold tracking-apple mb-1 ${isSelected ? 'text-foreground' : 'text-muted-foreground'}`}>
+          <h3 className={`font-semibold tracking-apple mb-1.5 text-sm ${isSelected ? 'text-foreground' : 'text-muted-foreground'}`}>
             {config.label}
           </h3>
-          <p className="text-sm text-muted-foreground leading-relaxed">
+          <p className="text-sm text-muted-foreground/70 leading-relaxed">
             {config.description}
           </p>
         </div>
@@ -55,7 +57,7 @@ const StyleCard = ({ style, isSelected, onClick }: StyleCardProps) => {
       
       {isSelected && (
         <motion.div
-          className="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary"
+          className="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary shadow-sm shadow-primary/50"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 500, damping: 25 }}
